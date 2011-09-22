@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="Pika Calendar" author_email="admin@mcplusa-dev.com" author="Michael Cizmar/MC+A" height="125" >
+	<Require feature="dynamic-height"/>
+    <Require feature="locked-domain"/>
+    <Require feature="setprefs"/>
+	<Require feature="google.calendar-0.5.read" />
+	<OAuth>
+		<Service name="PikaCalendar">
+			<Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
+			<Request url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/m8/feeds/%20http://www.google.com/calendar/feeds/" method="GET" />
+			<Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+		</Service>
+	</OAuth>
+	</ModulePrefs>
+<Content type="html">
+<![CDATA[
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>	 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>	  
+<script type="text/javascript">Array.prototype.toJSON = null;</script>
+<script type="text/javascript" src="http://yourdomain.com/google_gadgets/js/html_funcs.min.js"></script>
+<script type="text/javascript" src="http://yourdomain.com/google_gadgets/js/shindig_popup.js"></script>
+<script type="text/javascript">
+	var MAX_HEIGHT = 600;	
+   	var APP_NAME = 'PikaCalendar';	
+	var FEED_URL='https://www.google.com/calendar/feeds/default/private/full/';
+	var CALENDAR_FEED_URL_FULL = 'http://www.google.com/calendar/feeds/default/private/full';
+	var ADD_TICKLER_URL = 'http://yourdomain.com/pika/activity.php?screen=compose&act_type=K';	
+	var VERSION_PARAMETER = 'v';
+	var CALENDAR_VERSION_NUMBER = '2.0';  	
+	
+	var calendarService;
+	var postURL;
+	var pikaJson;
+	var calendarList = new Array();
+	var eventList = new Array();
+	var eventID;	
+	var states = {setup:{}, fingroups:{}, fincalendars:{}, fincontacts:{}, finevents:{}, started:{}, canceled:{}, finished:{}};
+	var statemachine = states.setup;
+	
+	function pika_popup(url) {
+		window.open (url,"LSNCPika","width=800,height=600,status=1,scrollbars=1");	
+	}
+	
+	function setupService(){
+		calendarService = new google.gdata.calendar.CalendarService(APP_NAME);
+		var params = {};		
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+		calendarService.useOAuth(APP_NAME,params);
+	}
+
+    function queryEvents(calendarURL){
+      printConsole('QUERY Events calendarURL=' + calendarURL);
+      calendarURL = cleanupURL(calendarURL);
+      var query = new google.gdata.calendar.CalendarEventQuery(calendarURL);
+      calendarService.getEventsFeed(query, handleEventsFeed, handleError);
+    }
+	
+	function getEvents(eventURL){
+		printConsole('GET Events eventURL=' + eventURL);
+		calendarService.getEventsFeed(eventURL, handleEventsFeed, handleError);
+	}	
+	
+	function handleEventsFeed(response){
+		if (response.oauthApprovalUrl) {
+			handleOAuth(response.oauthApprovalUrl);
+		} else {
+			var eventFeed = response.feed;
+			var events = eventFeed.entry;
+			var eventsLen = events.length;
+		
+			for (var ie = 0; ie < eventsLen; ie++) {
+				var event = events[ie];
+				eventList.push(event);							
+			}		
+		
+	  		printEvents();
+		}
+	}
+
+	function printEvents(){
+		// write to javascript console
+		var levlist = eventList;
+		var len = levlist.length;
+		for (var ie = 0; ie < len; ie++) {
+			printConsole('Event: ' + levlist[ie].getTitle().getText() +"| event uri=" + levlist[ie].getLink().getHref());
+			if (levlist[ie].getLink().getHref() == EVENT_URI) {
+				event=levlist[ie];
+				break;
+			}
+		}
+		
+		// generate html for gadget
+		if (event) {
+			displayTickler(event);
+		} else {
+			showOneSection('main');	
+			$('main').innerHTML = '<div class="row instructions">ERROR: EVENT NOT FOUND</div>';
+			adjustHeight();	
+		}
+	}
+	
+	function displayTickler(event) {
+ 		showOneSection('main');	
+		var pikaData = event.getExtendedProperties();
+		var params = pikaData;
+		var len = params.length;
+		if (len > 0) {
+			var pika = new Array();
+			for (var x = 0; x < len; x++) {		
+				pika[params[x].name]=params[x].value;			
+			}
+			var html = "<div class=\"case\">";
+	    	html += "<div class=\"subhead\">CASE</div>";
+	    	html += '<div class="details"><span>Number:</span><a href="#" onclick=\'javascript:pika_popup("' + pika['pika_url'] + '/case.php?case_id=' + pika['pika_case_id']  + '");\'>' + pika['pika_case_number'] + '</a></div>';
+	    	html += "<div class=\"details\"><span>Type:</span>" + pika['pika_client_label'] + "</div>";
+	    	html += "<div class=\"details\"><span>Notes:</span>" + pika['pika_notes'] + "</div>";
+	    	
+	   		html += "<div class=\"subhead\">CLIENT</div>";
+	    	html += "<div class=\"details\">" + pika['pika_client_name'] + "</div>";
+	    	html += "<div class=\"details\">" + pika['pika_client_address'] + "</div>";
+	    	html += "<div class=\"details\">" + pika['pika_client_citystate'] + "</div>";
+	    	html += "<div class=\"details\">" + pika['pika_client_phone'] + "</div>";
+	    	
+	    	html += "</div>";
+	    	html += '<div class="row"><a href="#" onclick=\'javascript:pika_popup("' + pika['pika_url'] + 'activity.php?act_id=' + pika['pika_act_id'] + '&screen=edit&case_id=' + pika['pika_case_id'] + '");\'>Edit Tickler</a>';
+	    	html += '<a style="float:right;margin-right:15px;" href="#" onclick=\'javascript:pika_popup("' + pika['pika_url'] + 'activity.php?screen=compose&act_type=K");\'>Add Tickler</a></div>';
+	    	
+	    } else {
+	    	var html = "<div class=\"case\">";
+	    	html += "<div class=\"subhead\">NOT PIKA EVENT</div>";
+	    	html += "</div>";
+	    }    	
+		$('main').innerHTML = html;
+		adjustHeight();	
+	}
+
+	function cleanupURL(url) {
+		return url.replace(/\?.*/gi,'');
+	}
+
+	function nodeHeight(element) {
+		if (element.ownerDocument) {
+			var box = element.getBoundingClientRect();
+			return box.height;
+		} else {
+			return element.offsetHeight;
+		}
+	}
+
+	function handleError(e){
+		var warn = false;
+		
+		// Warnings
+		if (undefined != e.message) {
+			if (-1 != e.message.search(/Invalid JSON format/gi)) {
+				// Query is not interrupted!
+				warn = true;
+				printWarn('Warning: ' + e.message);
+			}
+		}
+		
+		// Errors
+		if (!warn) {
+			var textArray = new Array();
+			textArray[0] = 'handleError';
+			textArray[1] = 'Error message:    ' + e.message;
+			textArray[2] = 'Error fileName:   ' + e.fileName;
+			textArray[3] = 'Error lineNumber: ' + e.lineNumber;
+			textArray[4] = 'Error cause:      ' + (e.cause!=undefined ? e.cause.statusText : '');
+			//textArray[5] = 'Error stack:      ' + e.stack;
+			printErrorGroup(textArray);
+		}
+	}
+
+	function printConsole(text){
+		printLog(text);
+	}
+
+	function printDebug(text){
+		try {
+			console.debug(text);
+		} catch(err) {}
+	}
+
+	function printLog(text){
+		try {
+			console.log(text);
+		} catch(err) {}
+	}
+
+	function printInfo(text){
+		try {
+			console.info(text);
+		} catch(err) {}
+	}
+	
+	function printWarn(text){
+		try {
+			console.warn(text);
+		} catch(err) {}
+	}
+
+	function printError(text){
+		try {
+		console.error(text);
+		} catch(err) {}
+	}
+
+	function printErrorGroup(textArray){
+		try {
+			console.group(textArray[0]);
+			var len = textArray.length;
+			for (var i = 1; i < len; i++) {
+				console.error(textArray[i]);
+			}
+			console.groupEnd();
+		} catch(err) {}
+	}	
+</script>
+	
+<script type="text/javascript">
+
+	gadgets.util.registerOnLoadHandler(initGadget);
+
+	function initGadget() {
+		google.load("gdata", "2.x", {packages: ['contacts', 'calendar']});
+		google.setOnLoadCallback(setupGadget);
+	}
+
+	function setupGadget(){
+		setupService();		
+		showOneSection('main');
+		google.calendar.read.subscribeToEvents(subscribeEventsCallback);
+	};
+	
+	function adjustHeight() {
+		var height = $('gadget').offsetHeight;
+		gadgets.window.adjustHeight(height);
+	}
+
+	function handleOAuth(oauthApprovalUrl){
+		printConsole('OAuthApprovalUrl: ' + oauthApprovalUrl);
+		
+		var popup = shindig.oauth.popup({
+			destination: oauthApprovalUrl,
+			windowOptions: 'height=600,width=800,status=no,depent=yes',
+			onOpen: function() { showOneSection('waiting'); },
+			onClose: function() { showSettings(); }
+		});
+		
+		$('personalize').onclick = popup.createOpenerOnClick();
+		showOneSection('approval');
+	}
+
+	function showSettings(){		
+		showOneSection('busyloader');
+		getEvents(FEED_URL);
+	}
+
+	function getPreferences(){
+		var prefs = new gadgets.Prefs();         		
+	}
+
+	function showOneSection(toshow){
+		var sections = [ 'main', 'approval', 'waiting', 'busyloader', 'settings' ];
+		printConsole('Show section: ' + toshow);
+		for (var i=0; i < sections.length; ++i) {
+			var s = sections[i];
+			var el = $(s);
+			if (s === toshow) {
+				if (s === 'settings') {
+					// load always preferences before showing settings
+					getPreferences();
+				}
+				el.style.display = "block";
+			} else {
+				el.style.display = "none";
+			}
+		}		
+	}
+	
+	function subscribeEventsCallback(e) {	
+		if (e) {					
+			FEED_URL='https://www.google.com/calendar/feeds/' + e.calendar.email + '/private/full/';		
+			EVENT_URI='https://www.google.com/calendar/event?eid=' + e.id;
+			getEvents(FEED_URL);
+		} else {
+			$('main').innerHTML = '<div class="row">No event selected</div>';
+		}
+	} 
+</script>
+
+<style type="text/css">	
+	div {	
+		font-size:11px;
+		float:left;
+		clear:both;
+		display:block;
+	}
+
+	div.details span,div.details a {
+		float:left;
+		display:block;
+	}
+	
+	div.details span {
+		margin-right:5px;
+	}
+	
+	#logo {
+		width:100px;
+		height:19px;
+	}
+	div#busyloader {
+		width:66px;
+		height:66px;
+		display:block;
+		float:left;
+		clear:both;
+		margin:20px 0px 0px 40px;
+	}
+	.case {
+		width:auto;
+		height:auto;
+		float:left;
+		display:block;
+		clear:both;
+		margin-bottom:5px;
+	}
+	
+	.case span {
+		font-weight:bold;
+	}	
+
+	div.details {
+		font-size:11px;
+		line-height:15px;
+		float:left;
+		display:block;
+		clear:both;
+		margin:0px;
+		padding:0px 2px;
+	}
+	
+	div.subhead {
+		width:100%;
+		height:14px;
+		float:left;
+		display:block;
+		clear:both;
+		text-align:center;
+		font-size:12px;
+		background-color:#B9DFF4;
+		font-weight:700;
+		margin-top:5px;
+	}
+	
+	div#approval a#personalize {
+		height:18px;
+		padding:3px 20px;
+		margin:0px 40px;
+		font-size:14px;
+		font-weight:500;
+		line-height:14px;
+		text-decoration:none;
+		border:1px solid #999;
+		background-color:#ddd;
+		background-repeat:no-repeat;
+		color:#000;
+		-webkit-border-radius:3px;
+		-moz-border-radius:3px;
+		border-radius:3px;
+		position:absolute;
+		bottom: 20px;
+		left:0px;
+	}
+		
+	div.row {
+		width:100%;
+		height:auto;
+		float:left;
+		clear:both;
+		display:block;
+		padding:0px 8px;
+		margin-bottom:2px;
+		line-height:14px;
+	}
+	
+	div.row a {
+		display:block;
+		float:left;
+		margin:0px;
+		padding:0px 5px;
+		font-weight:500;
+		line-height:14px;
+		text-decoration:none;
+		border:1px solid #999;
+		background-color:#ddd;
+		color:#000;
+		-webkit-border-radius:3px;
+		-moz-border-radius:3px;
+		border-radius:3px;
+		position:relative;
+	}
+	
+	div.row a:hover, div#approval a#personalize:hover {
+		border:1px solid #000;
+		background-color:#000;
+		color:#fff;
+	}
+	div.instructions {
+		width:145px;
+		margin-top:15px;
+		padding:8px;
+		font-style:italic;
+	}
+</style>
+<div id="gadget">
+	<div class="row"><img id="logo" src="http://yourdomain.com/google_gadgets/images/logo.png" alt="MC+A Logo"/></div>
+	<div id="sections">
+		<div id="main" style="display:none">			
+			<div class="row instructions">Click on and view event to see Pika extended properties</div>		
+		</div>
+	
+		<div id="approval" style="display:none">
+			<a href="#" id="personalize">Login</a>
+		</div>
+	
+		<div id="waiting" style="display:none">
+			<div class="row instructions">Please authorize access to your Google account by clicking on the "Grant Access" button in the popup window.</div>
+		</div>
+	
+		<div id="busyloader" style="display:none">
+			<img src="http:////yourdomain.com/google_gadgets/images/busyLoader.gif" alt="BusyLoader Image">
+		</div>
+	
+		<div id="settings" style="display:none">
+			
+		</div>
+	</div>
+</div> ]]>
+</Content>
+</Module>

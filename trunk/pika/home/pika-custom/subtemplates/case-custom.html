@@ -1,0 +1,108 @@
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+
+<div id="seniors-tab">
+
+    <form action="%%[base_url]%%/ops/update_case.php" method="post" name="ws" onSubmit="return Require(this,'rural,disabledcase,low_income,senior_ethnicity')";>
+
+    <div class="seniors">
+
+        <!-- Seniors case data -->
+    
+        <h2>Seniors Case Demographics</h2>
+
+            <ul id="senior-ethnicity">
+            <li><label>Senior Ethnicity:</label> %%[senior_ethnicity,senior_ethnicity]%%</li>
+            </ul>
+            
+            <ul>
+            
+                <li><label>Rural:</label> %%[rural,yes_no]%%</li>
+                <li><label>Disabled:</label> %%[disabledcase,yes_no]%%</li>
+                <li><label>Low Income:</label> %%[low_income,yes_no]%%</li>
+                <li><label>Forms Completion:</label> %%[formcompletion,yes_no]%%</li>
+                <li><label>Lives Alone:</label> %%[lives_alone,yes_no]%%</li>
+                <li><label>Repeat Client:</label> %%[repeat_client,yes_no]%%</li>
+                <li><label>Functional Impairment:</label> %%[functionally_impaired,yes_no]%%</li>
+                
+            </ul>
+            
+            <ul>
+            
+                <li><label>Grandparent Case:</label> %%[grandparent_case,yes_no]%%</li>
+                <li><label>Good Story:</label> %%[good_story,yes_no]%%</li>
+                <li><label>SETA:</label> %%[seta,yes_no]%%</li>
+                <li><label>Senior Representation:</label> %%[senior_rep,yes_no]%%</li>
+                <li><label>Homebound:</label> %%[homebound,yes_no]%%</li>
+                <li><label>Institutionalized:</label> %%[institutionalized,yes_no]%%</li>
+                <li><label>Elder Victim:</label> %%[elder_victim,yes_no]%%</li>
+                
+
+            </ul>
+
+    </div> <!-- /.seniors -->
+        
+    <div class="seniors">
+    
+        <h2>Senior Hotline HUD Program</h2>
+
+        <dl>
+
+            <dt><label>Pre-Purchase Counseling</label></dt>
+        	<dd>%%[hud_7a,hud_7a]%%</dd>
+    
+            <dt><label>Resolving or Preventing Mortgage Delinquency</label></dt>
+        	<dd>%%[hud_7b,hud_7b]%%</dd>
+    
+            <dt><label>Homeowner Maintanence or Financial Management</label></dt>
+        	<dd>%%[hud_7c,hud_7c]%%</dd>
+    
+            <dt><label>Locating or Securing or Maintaining Rental Housing</label></dt>
+        	<dd>%%[hud_7d,hud_7d]%%</dd>
+    
+            <dt><label>Homeless Shelter or Services</label></dt>
+        	<dd>%%[hud_7e,hud_7e]%%</dd>
+    
+        </dl>     
+
+        <input type="hidden" name="screen" value="custom"/>
+        <input type="hidden" name="case_id" value="%%[case_id]%%"/>
+        <input type="hidden" name="office" value="%%[office]%%"/>
+        <input type="hidden" name="seniors_checked" value="1"/>
+    
+    </div> <!-- /.seniors -->
+    
+    <ul id="save-seniors">
+    <li><input type="submit" value="Save" name="update_case" tabindex="1"onSubmit="return Require(this,'rural,disabledcase,low_income,senior_ethnicity')"; /></li>
+    </ul>
+    
+    </form>
+
+</div> <!-- /#seniors tab -->
+
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+<!--
+
+
+
+function Require(obForm,szFields)
+    {
+      var fields = szFields.split(",")
+      var szMissing= new Array();
+      for (x=0;x<fields.length;x++) {
+        if (obForm.elements[fields[x]].value.length==0) {
+           szMissing[szMissing.length]=new String(fields[x]);
+        }
+      }
+      if ((szMissing.length)&&(document.ws.office.value!=="80")&&(document.ws.office.value!=="10")&&(document.ws.office.value!=="95")) {
+        alert("The field"+((szMissing.length>1)?"s ":" ")+szMissing.join(",")+" must be filled in first");
+        return false
+      }
+      return true;
+    }
+
+
+//-->
+</script>

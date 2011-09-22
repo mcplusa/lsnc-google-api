@@ -1,0 +1,69 @@
+<form action=dataops.php method=POST name=form1>
+
+<h2>Add New Pro Bono Attorney</h2>
+
+<div id="add-pba">
+
+<dl>
+
+	<dt><label>First Name</label></dt>
+	<dd><input class="input160" type="text" name="first_name" value="%%[first_name]%%" tabindex="1" /></dd>
+	
+    <dt><label>Middle Name</label></dt>
+	<dd><input type="text" name=middle_name value="%%[middle_name]%%" size=20 tabindex="1" /></dd>
+    
+    <dt><label>Last Name</label></dt>
+	<dd><input class="input160" type="text" name="last_name" value="%%[last_name]%%" tabindex="1" /></dd>
+    
+    <dt><label>Phone</label></dt>
+	<dd><input class="input160" type="text" name="phone_notes" value="%%[phone_notes]%%" tabindex="1" /></dd>
+    
+    <dt><label>Email</label></dt>
+	<dd><input class="input160" type="text' name=email value="%%[email]%%" tabindex="1" /></dd>
+    
+</dl>
+
+<dl>
+
+    <dt><label>Firm</label></dt>
+    <dd><input class="input160" type="text" name="firm" value="%%[firm]%%" tabindex="1" /></dd>
+    
+    <dt><label>Address</label></dt>
+    <dd><input class="input160" type="text" name="address" value="%%[address]%%" tabindex="1" /></dd>
+    <dd><input class="input160" type="text" name="address2" value="%%[address2]%%" tabindex="1" /></dd>
+    
+    <dt><label>City</label></dt>
+    <dd><input class="input160" type="text" name="city" value="%%[city]%%" tabindex="1" /></dd>
+    
+    <dt><label>State + Zip</label></dt>
+    <dd><input class="input30" type="text" name="state" value="%%[state]%%" tabindex="1" /> <input class="input100" type="text" name="zip" value="%%[zip]%%" tabindex="1" /></dd>
+
+</dl>
+
+<dl>
+
+    <dt><label>Practice Areas</label></dt>
+	<dd><input class="input160" type="text" name="practice_areas" value="%%[practice_areas]%%" tabindex="1" /></dd>
+
+    <dt><label>County</label></dt>
+    <dd><input class="input160" type="text" name="county" value="%%[county]%%" tabindex="1"></dd>
+
+    <dt><label>Languages</label></dt>
+	<dd><input class="input160" type="text" name=languages value="%%[languages]%%" tabindex="1" /></dd>
+    
+    <dt><label>Note</label></dt>
+	<dd><input class="input160" type="text" name="notes" value="%%[notes]%%" tabindex="1" /></dd>
+    
+</dl>
+
+</div> <!-- /#add-pba -->   
+
+<input type=hidden name=action value="%%[form_action]%%">
+<input type=hidden name="pba_id" value="%%[pba_id]%%">
+<ul class="submit">
+<li><input type="submit" value="Save" name="submit" tabindex="1" /></li>
+</ul>
+
+</form>
+
+%%[case_list]%%

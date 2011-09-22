@@ -1,0 +1,227 @@
+%%[begin:timer]%%
+
+<form action="%%[base_url]%%/timer.php" name="clock" method="get">
+
+<div id="pop-timer">
+
+    <h2>Pop-up Timer</h2>
+
+    <div id="activity">
+
+        <dl>
+	
+            <dt><label>Work Type</label><dt>
+            <dd>%%[category,category]%%</dd>
+        
+            <dt><label>Case Record</label><dt>
+            <dd id="case-record-select">%%[new_case_menu]%%</dd>
+        
+            <dt><label>Summary | Title</label></dt>
+            <dd>%%[summary,input_textarea,rows=1,cols=44]%%</dd>
+        
+            <dt><label>Notes</label></dt>
+            <dd>%%[notes,input_textarea,rows=10,cols=44]%%</dd>
+        
+        </dl>
+        
+        <dl>
+
+            <dt><label>Start Time</label></dt>
+            <dd>%%[start,input_text]%%</dd>
+    	
+            <dt><label>Current Time</label></dt>
+	    	<dd>%%[current,input_text]%%</dd>
+		
+            <dt><label>Total Minutes</label></dt>
+    		<dd>%%[elapsed_mins,input_text]%%</dd>
+
+        </dl>
+        
+        <ul id="ts-checks">
+        <li>%%[paitime,yes_no,checkbox]%% <label>PAI Time?</label></li>
+        <li>%%[senior_cc,yes_no,checkbox]%% <label>Client Contact?</label></li>
+        <li>%%[senior_ce,yes_no,checkbox]%% <label>Client Education?</label></li>
+        </ul>
+        
+        <dl id="funds">        
+        
+            <dt><label>Funding 01</label></dt>
+            <dd>%%[funding,funding]%%</dd>
+        
+            <dt><label>Funding 02</label></dt>
+            <dd>%%[funding1,funding]%%</dd>
+        
+            <dt><label>Funding 03</label></dt>
+            <dd>%%[funding2,funding]%%</dd>
+        
+            <dt><label>Funding 04</label></dt>
+            <dd>%%[funding3,funding]%%</dd>
+        
+        </dl>
+        
+        
+    	%%[act_time,input_hidden]%%
+		%%[elapsed_secs,input_hidden]%%
+		%%[action,input_hidden]%%
+
+        <ul class="submit">
+		<li><input type="submit" name="end" value="We're Done Here!" tabindex="1" onClick="return testfields(this)";/></li>
+		
+        </ul>		
+
+    </div> <!-- /#time-slip -->
+    
+</div> <!-- /#pop-timer -->           
+        
+</form>
+
+<!-- BEGIN: code from http://www.visonet.com/javascript/clock.html -->
+<script language="JavaScript" type="text/javascript">
+
+var timerID = null;
+var timerRunning = false;
+
+function round_extra(number,X) 
+{
+	// rounds number to X decimal places, defaults to 2
+    X = (!X ? 2 : X);
+	return Math.round(number*Math.pow(10,X))/Math.pow(10,X);
+}
+
+function stopclock() 
+{
+	if(timerRunning)
+		clearTimeout(timerID);
+    timerRunning = false;
+}
+
+function startclock() 
+{
+	stopclock();
+	showtime();
+}
+
+function showtime () 
+{
+	var now = new Date();
+	var hours = now.getHours();
+	var minutes = now.getMinutes();
+    var seconds = now.getSeconds()
+    var timeValue = "" + ((hours >12) ? hours -12 :hours)
+	var elapsedValue = document.clock.elapsed_secs.value++;
+	
+    timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+	//timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+    timeValue += (hours >= 12) ? " PM" : " AM"
+    
+	document.clock.current.value = timeValue;
+	document.clock.elapsed_mins.value = Math.round(elapsedValue/60);
+	
+    timerID = setTimeout("showtime()",1000);
+    timerRunning = true;
+}
+
+function currenttime () 
+{
+	var now = new Date();
+	var hours = now.getHours();
+	var minutes = now.getMinutes();
+    var seconds = now.getSeconds()
+    var timeValue = "" + ((hours >12) ? hours -12 :hours)
+	
+    timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+	// timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+    timeValue += (hours >= 12) ? " PM" : " AM"
+    
+	return timeValue;
+}
+
+</script>
+
+<!-- END: code from http://www.visonet.com/javascript/clock.html -->
+
+<script language="JavaScript" type="text/javascript">
+<!--
+document.clock.category.focus();
+function testfields(what) {
+  if((document.clock.funding.value=="")  || (document.clock.category.value=="")){
+
+alert("Funding code, and Work Type are required to save this record");
+return false;
+  }
+  return true;
+ }
+
+startclock();
+document.clock.start.value = currenttime();
+//--> 
+</script>
+
+%%[textFormat.js,javascript]%%
+%%[ajax_init.js,javascript]%%
+%%[setFunding.js,javascript,parse]%%
+%%[end:timer]%%
+
+%%[begin:timer-pause]%%
+<form action="%%[base_url]%%/timer.php" name="clock" method="GET">
+<table>
+	<tr valign="top" class="de">
+    	<td>
+    	Summary (public):<br/>
+		%%[summary,input_textarea,rows=1,cols=30]%%<br/>
+		Notes (private):<br/>
+		%%[notes,input_textarea,rows=10,cols=30]%%<br/>
+		<img src="%%[base_url]%%/images/point.gif">
+		<a href="javascript:toggleBox('demodiv',1);">Text Highlighting</a>
+		%%[textFormat]%%	
+    	</td>
+    	<td>
+    	Start Time:<br/>
+		%%[start,input_text]%%<br/>
+    	Current Time:<br/>
+		%%[current,input_text]%%<br/>
+		Minutes Elapsed:<br/>
+		%%[elapsed_mins,input_text]%%<br/>
+		Type of Activity:<br/>
+		%%[category,category]%%<br/>
+		Case: %%[number]%%<br/>
+		%%[new_case_menu]%%<br/>
+		Funding Source:<br/>
+		%%[funding,funding]%%<br/>
+		</td>
+	</tr>
+	<tr class="de">
+		<td colspan="2">
+		%%[act_time,input_hidden]%%
+		%%[elapsed_secs,input_hidden]%%
+		%%[action,input_hidden]%%
+		<input type=submit name="end" value="End" tabindex="1" class="save" accesskey="s">
+		<input type=submit name="unpause" value="Resume" tabindex="1" class="save" accesskey="r">	
+		</td>
+	</tr>
+</table>
+
+</form>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+document.clock.category.focus();
+
+
+//--> 
+</script>
+
+%%[textFormat.js,javascript]%%
+%%[ajax_init.js,javascript]%%
+%%[setFunding.js,javascript,parse]%%
+%%[end:timer-pause]%%
+
+
+%%[begin:timer-close]%%
+
+<html>
+<body onload="self.close();" />
+<html>
+
+%%[end:timer-close]%%

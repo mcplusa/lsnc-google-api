@@ -1,0 +1,45 @@
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+<div id="preferences">
+
+<h2>Pika Account Preferences</h2>
+
+<form action="ops/update_prefs.php" method="post" name="form1">
+
+    <dl>
+<dt><a href="https://www.google.com/calendar/render?gadgeturl=https://openpika.com/google-gadgets/pika.xml">Add Google Calendar Gadget</a></dt>
+        <dt><label>Default Office</label></dt>
+        <dd>%%[def_office,office]%%</dd>
+    
+        <dt><label>Default Intake Type</label></dt>
+        <dd>%%[def_intake_type,intake_type,menu_no_blank]%%</dd>
+
+        <dt><label>Default Add Contact</label></dt>
+        <dd>%%[def_relation_code,relation_codes,menu_no_blank]%%</dd>
+    
+        <dt><label>Default iCal Interval</label></dt>
+        <dd>%%[def_ical_interval,ical_interval,menu_no_blank]%%</dd>
+    
+        <dt><label>Default RSS Interval</label></dt>
+        <dd>%%[def_rss_interval,rss_interval,menu_no_blank]%%</dd>
+	
+	<dt><label>User Pin **4 Digits, Letters, or combination**</label></dt>
+        <dd class="input40" id="def_pin"><input  type="password" value="%%[def_pin]%%" name="def_pin"  maxlength="4"  tabindex="1"  onchange="def_pin.value = calcMD5(def_pin.value);"/></dd>
+
+
+        <dt><label>Case List Length</label></dt>
+        <dd><input class="input40" type="text" name="paging" value="%%[paging]%%" maxlength="3" tabindex="1"></dd>
+    
+    </dl>
+
+    <ul>
+    <li>%%[popup,yes_no,checkbox]%% <label for="popup">Open Case Links in New Window</label></li>
+    </ul>
+    
+    <ul>
+	
+    <li><input type="submit" value="Save" tabindex="1" class="save" accesskey="s"></li>
+    </ul>
+<input type=hidden name="def_group" value="%%[def_group]%%" maxlength="10" tabindex="1"> 
+</form>
+
+</div> <!-- #preferences -->

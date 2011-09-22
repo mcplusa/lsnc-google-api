@@ -1,0 +1,59 @@
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+
+<div id="pro-bono-tab">
+
+    <h2>Pro Bono Referrals and Assignments</h2>
+
+    <form action="%%[base_url]%%/ops/update_case.php" method="post" name="ws">
+
+        <dl>
+
+            <dt><label>Referral date</label></dt>
+
+                <dd><input id="datepicker" type="text" name="referral_date" value="%%[referral_date]%%" onkeydown="pika_date(this);" onchange="return checkDate(this);" maxlength="10" tabindex="1"></dd>
+                <dd>%%[thank_you_sent,yes_no,checkbox]%% <label>Thank you sent?</label></dd>
+
+            <dt><label>Date thank you sent</label></dt>
+
+                <dd><input id="datepicker02" type="text" name="date_sent" value="%%[date_sent]%%" onkeydown="pika_date(this);" onchange="return checkDate(this);" maxlength="10" tabindex="1"></dd>
+                <dd>%%[payment_received,yes_no,checkbox]%% Payment received?</dd>
+    
+                <dd>%%[pbacocounsel,yes_no,checkbox]%% Private Attorney Co-Counsel?</dd>
+    
+            <dt>&nbsp;&nbsp;</dt>
+
+                <input type="hidden" name="screen" value="pb">
+                <input type="hidden" name="case_id" value="%%[case_id]%%">
+                <dd><input id="save" class="button" type="submit" value="Save" tabindex="1" accesskey="s" title="Save" onmouseover="this.className='button button-hover'" onmouseout="this.className='button'" /></dd>
+
+        </dl>
+
+    </form>
+
+</div> <!-- #pro-bono-tab -->
+
+<!-- Scripts -->
+
+<script type="text/javascript"><!--
+var ac_autotab_on = 1;
+
+var old_dob_length = 0;
+
+function pika_date(what)
+{
+	if (what.value.length == 2 && old_dob_length == 1)
+	{
+		what.value += '/';
+	}
+
+	if (what.value.length == 5 && old_dob_length == 4)
+	{
+		what.value += '/';
+	}
+
+	old_dob_length = what.value.length;
+}
+
+var ac_autotab_on = 1;
+
+//--></script>

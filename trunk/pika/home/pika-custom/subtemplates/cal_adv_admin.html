@@ -1,0 +1,65 @@
+<div id="advanced-calendar-wrapper">
+
+    <h2>Calendar Views</h2>
+
+   
+    
+    <h3>Advanced Calendar Filters</h3>
+    
+    <div id="advanced-calendar-fields">
+    
+        <form method="post" action="cal_adv_admin.php">
+
+            <dl>
+        
+                <dt><label>Staff</label></dt>
+                <dd class="user-list">%%[user_list]%%</dd>
+    
+            </dl>
+
+            <dl id="filters-01">
+
+                <dt><label>Start Date</label></dt>
+                <dd id="start"><input id="datepicker" type="text" name="start_date" value="%%[start_date]%%" tabindex="1" /></dd>
+    
+                <dt><label>End Date</label></dt>
+                <dd id="end"><input id="datepicker02" type="text" name="end_date" value="%%[end_date]%%" tabindex="1" /></dd>
+                
+                <dt><label>Record Type</label></dt>
+                <dd>%%[act_type,act_type]%%</dd>
+
+                <dt><label>Case Number</label></dt>
+                <dd><input type="text" name="number" value="%%[number]%%" tabindex="1" /></dd>
+                
+                <dt><label>Completed</label></dt>
+                <dd>%%[completed,yes_no]%%</dd>
+                
+            </dl>
+
+            <dl id="filters-02">
+
+                <dt><label>Office</label></dt>
+                <dd>%%[office,office]%%</dd>
+
+                <dt><label>Work Type</label></dt>
+                <dd>%%[category,category]%%</dd>
+
+                <dt><label>Funding</label></dt>
+                <dd>%%[funding,funding]%%</dd>
+                
+                <dt><label>Max Rows</label></dt>
+                <dd><input class="input30" type="text" name="row_limit" value="%%[row_limit]%%" tabindex="1" /></dd>
+
+                <dt><label>Sorting Order</label></dt>
+                <dd>%%[sort_order,sort_order,radio]%%</dd>
+
+                <input type="hidden" name="action" value="1" />
+                <dd><input id="view" type="submit" value="View" /></dd>
+        
+            </dl>                
+
+        </form>
+
+    </div> <!-- /advanced-calendar-fields -->
+
+</div> <!-- /advanced-calendar-wrapper -->

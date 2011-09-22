@@ -1,0 +1,203 @@
+/* IE8 tweaks */
+
+/*
+intake flow
+----------- */
+
+p#following {
+	margin-top: 0;
+	}
+#household li,
+#wage li {
+	margin-bottom: 0;
+	}
+#wage input {
+	width: 60px;
+	}
+#send-decline {
+	text-align: left;	
+	}
+#send-decline input,
+#organization {
+	padding: 0;
+	vertical-align: top;
+	}
+.eligibility-grid td {
+	padding: 0;
+	}
+.eligibility-grid td input {
+	margin: 0;
+	}	
+#main-content #poverty dl {
+	padding-bottom: 2px;
+	}
+#main-content #poverty #calculate {
+	padding: 0;
+	}		
+#main-content #prospects {
+	clear: left;
+	margin: 0.50em 0 1.0em 0;	
+	}	
+#main-content #intake-notes label {
+	white-space: nowrap;
+	}
+#main-content #submit-info {
+	margin-top: -1.0em;
+	}
+#main-content #submit-info input {
+	padding: 0;
+	}
+
+
+/* contact page */
+
+#contact-info-status {
+	padding-bottom: 10px;
+	}	
+#ethnicity div {
+	margin-top: -1.0em;
+	}
+
+/* activity screens */
+
+#time-slip #funds {
+	/*width: 320px;*/
+	}
+#osr02 #staff {
+	margin-top: 0px;
+	}	
+#activity #owner #staff-member {	
+	margin-top: 4px; 
+	}
+ul.submit li {
+	margin-top: -10px;
+	}	
+
+/* search options */
+
+#search-filters {
+	padding-top: 12px;
+	}
+dl.report #generate-time {
+	margin-top: 5px;
+	}
+#search-contacts-screen h3 {
+	margin-top: -10px;
+	}
+#search-contacts-screen table {
+	margin-top: -0.60em;
+	}
+	
+/* case list mode */
+	
+.case-list-options #search-again input {
+	width: 120px;
+	}	
+
+/* calendar views */
+
+#calendar-wrapper #funding-table {
+	margin-top: -1.0em;
+	}
+#calendar-wrapper #weekly-calendar {
+	margin-top: -0.50em;
+	}
+#calendar-wrapper .next {
+	margin-top: 18px;
+	}
+#go-to {
+	margin-top: 5px;
+	}
+#go-to input {
+	vertical-align: -6px;
+	}
+#cal_tabs {
+	padding: 4px 20px 6px 20px;
+	}
+#content .total-advanced-view {
+	margin: -1.0em 0 1.50em 0;
+	}
+
+/* case notes tab */
+
+#case-notes-for h2 {
+	/*margin-top: -2.0em;*/
+	}
+#case-notes .notes textarea {
+	height: 21em;
+	}	
+#save-case-note input {
+	margin-top: -30px;
+	}
+	
+/* case info tab */
+
+#case-info-submit input {
+	margin-top: -30px;
+	}
+	
+/* conflicts tab */
+
+#case-conflicts #search-list {
+	margin-top: 1.10em;	
+	}			
+
+/* documents */
+
+#documents .pika_files .directory {
+	padding-left: 5px;
+	}
+#documents .pika_files li.file { 
+	padding-left: 5px;
+  	}	
+#documents .pika_files li.file { 
+	margin-bottom: -1.0em;
+  	}
+#documents .pika_files li.description div {
+	margin-bottom: 1.30em;
+  	}
+h2#doc-storage {
+	margin-top: -0.50em;
+	}
+input#create-new-doc {
+	width: 180px;
+	}
+input#generate-report {
+	width: 140px;	
+	}
+dl#select-file dd {
+	margin-bottom: 30px;
+	}
+
+/* special tabs */
+
+#seniors-tab .seniors li label  {
+	vertical-align: 4px;
+	}
+#main-content #seniors-tab h2.seniors-hud {
+	margin-top: 0;
+	}	
+#hrh-tab .hrh-data select {
+	width: 300px;
+	}
+	
+/* mega report */	
+
+#mega-report #field-order {
+	width: 240px;
+	}
+#mega-report .parameter-text {
+	padding: 1px 0 1px 3px;
+	}
+#mega-report input.mega {
+	width: 100px;
+	}		
+		
+
+	
+	
+/* footer */						
+
+#footer {
+	padding: 1.0em 0;
+	}

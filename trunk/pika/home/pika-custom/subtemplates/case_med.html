@@ -1,0 +1,193 @@
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+<script type="text/javascript" src="/pika/js/mediation.js"></script>
+
+<div id="mediation">
+
+    <form action="%%[base_url]%%/ops/update_case.php" method="post" name="ws";>
+
+        <h2>Section 1: Second Party Information</h2>
+
+        <dl class="section01">
+
+    	    <dt><label>Name of Second Party</label></dt>
+        	<dd><input type="text" name="med_2partyname" value="%%[med_2partyname]%%" /></dd>
+
+    	    <dt><label>Address</label></dt>
+        	<dd><input type="text" name="med_2partyaddress" value="%%[med_2partyaddress]%%" /></dd>
+    
+            <dt><label>City</label></dt>
+        	<dd><input type="text" name="med_2partycity" value="%%[med_2partycity]%%" /></dd>
+            
+            <dt><label>State, Zip</label></dt>
+        	<dd><input class="state" type="text" name="med_2partystate" value="%%[med_2partystate]%%" size="3" />
+                <input class="zip" type="text" name="med_2partyzip" value="%%[med_2partyzip]%%" /></dd>
+            
+        </dl>
+    
+        <dl class="section01">
+
+		<dt><label>Phone</label></dt>
+           	<dd><input class="area-code" type="text" name="med_2partyareacode" value="%%[med_2partyareacode]%%" onkeyup="pika_area_code(this, 3, 'med_2partyphone');" 			maxlength="3" tabindex="1" /> <input class="phone-number" type="text" name="med_2partyphone" value="%%[med_2partyphone]%%" onkeyup="pika_phone(this);" 			maxlength="8" tabindex="1" /></dd>
+    
+     <!--       <dt><label>Phone</label></dt>
+	        <dd><input class="area-code" type="text" name="med_2partyareacode" value="%%[med_2partyareacode]%%" maxlength="3" />
+            <input class="phone-number" type="text" name="med_2partyphone" value="%%[med_2partyphone]%%" maxlength="10" /></dd> -->
+
+         <!--     <dt><label>Mobile</label></dt>
+	       <dd><input type="text" name="med_2partymobile" value="%%[med_2partymobile]%%" maxlength="14" /></dd> 
+            <dd><input class="area-code" type="text" name="" value="%%[med_2partyareacode]%%" maxlength="3" />
+            <input class="phone-number" type="text" name="" value="%%[med_2partyphone]%%" maxlength="10" /></dd>-->
+
+		<dt><label>Mobile</label></dt>
+           	<dd><input class="area-code" type="text" name="med_2partymobileareacode" value="%%[med_2partymobileareacode]%%" onkeyup="pika_area_code(this, 3, 'med_2partymobile');"maxlength="3" tabindex="1" /> <input class="phone-number" type="text" name="med_2partymobile" value="%%[med_2partymobile]%%" onkeyup="pika_phone(this);" 			maxlength="8" tabindex="1" /></dd>
+
+            <dt><label>Phone Note</label></dt>
+    	    <dd><input type="text" name="med_2partyphoneref" value="%%[med_2partyphoneref]%%"  maxlength="40 /></dd>
+
+        </dl>
+        
+        <dl class="section01">
+
+            <dd>%%[med_2partysenior,yes_no,checkbox]%% <label>Senior</label> 
+                %%[med_2partyfamily,yes_no,checkbox]%% <label>Family Member</label>
+                %%[med_2partybusinessmerch,yes_no,checkbox]%% <label>Business/Merchant</label></dd> 
+
+        </dl>
+    
+        <h2>Section 2: Dispute Information</h2>
+
+        <dl class="section02">
+	
+            <dt><label>Type Of Dispute</label></dt>
+	        <dd>%%[med_dispute,med_dispute]%%</dd>
+    
+            <dt><label>Primary Mediator</label></dt>
+	        <dd>%%[med_user_id,user_id]%%</dd>
+    
+            <dt><label>Secondary Mediator</label></dt>
+	        <dd>%%[med_user_id2,user_id]%%</dd>
+            
+        </dl>
+        
+        <dl class="section02">
+    
+            <dt><label>Case Notes</label></dt>
+            <dd><textarea name="med_notes" rows="4" tabindex="1">%%[med_notes]%%</textarea></dd>
+            
+            <dd><strong>Letter to second party was...</strong> %%[med_2partysent,yes_no,checkbox]%% <label>Sent</label> 
+            %%[med_2partyacknow,yes_no,checkbox]%% <label>Acknowledged</label></dd>
+    
+        </dl>
+        
+        <h2>Section 3: Outcome</h2>
+
+        <dl class="section03">
+	
+            <dt><label>Date Completed</label></dt>
+        	<!-- <dd><input type="text" name="med_closed" value="%%[med_closed]%%" maxlength="10"  tabindex="1"onkeydown="pika_date(this);" onchange="return checkDate(this);" />
+            <a id="enter-today" onclick="set_close()" href="#dc" tabindex="1">[Today]</a>
+            <a id="clear-date" onclick="set_reopen()" href="#dc" tabindex="1">[Clear Date]</a></dd> -->
+            
+            <dd><input id="datepicker" type="text" name="med_closed" value="%%[med_closed]%%" maxlength="10" 			  	  tabindex="1" />
+
+            <dt><label>Outcome</label></dt>
+	        <dd>%%[med_outcome,med_outcome]%%</dd>
+
+        </dl>
+        
+        <dl class="section03">
+                    
+            <dd>
+            <ul>
+            <li>%%[med_agreeattached,yes_no,checkbox]%% <label>Settlment agreement attached?</label></li>
+            <li>%%[med_outmediaprogram,yes_no,checkbox]%% <label>Mediation was referred to an outside mediation program? </label></li>
+            <li>%%[med_surveysent,yes_no,checkbox]%% <label>Survey has been sent?</label></li>
+            </ul>
+            </dd>
+        
+        </dl>
+   <ul>    
+   <li><a  href="%%[base_url]%%/activity.php?screen=compose&amp;act_type=T&case_id=%%[case_id]%%">Add Time Slip</a></li>
+ 
+
+</ul>
+
+
+        <input type="hidden" name="screen" value="med"/>
+        <input type="hidden" name="case_id" value="%%[case_id]%%"/>
+        <input type="hidden" name="office" value="%%[office]%%"/>
+        <input type="hidden" name="mediation_check" value="1"/>
+
+        <ul id="save-seniors">
+        <li><input type="submit" value="Save" name="update_case" tabindex="1" /></li>
+        </ul>
+        
+    </form>
+
+</div> <!-- /#mediation -->
+
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+<!--
+
+
+
+function Require(obForm,szFields)
+  {
+   var fields = szFields.split(",")
+   var szMissing= new Array();
+   for (x=0;x<fields.length;x++) {
+    if (obForm.elements[fields[x]].value.length==0) {
+      szMissing[szMissing.length]=new String(fields[x]);
+    }
+   }
+   if ((szMissing.length)&&(document.ws.office.value!=="80")&&(document.ws.office.value!=="10")) {
+    alert("The field"+((szMissing.length>1)?"s ":" ")+szMissing.join(",")+" must be filled in first");
+    return false
+   }
+   return true;
+  }
+
+
+//-->
+</script>
+
+<!-- Scripts -->
+<script type="text/javascript">
+var ac_autotab_on = 1;
+
+var old_dob_length = 0;
+
+function pika_date(what)
+{
+	if (what.value.length == 2 && old_dob_length == 1)
+	{
+		what.value += '/';
+	}
+
+	if (what.value.length == 5 && old_dob_length == 4)
+	{
+		what.value += '/';
+	}
+
+	old_dob_length = what.value.length;
+}
+
+var ac_autotab_on = 1;
+
+
+function set_close()
+{
+  document.ws.med_closed.value = "%%[current_date]%%";
+  return false;
+}
+
+function set_reopen()
+{
+  document.ws.med_closed.value = "";
+  return false;
+}
+//-->
+</script>

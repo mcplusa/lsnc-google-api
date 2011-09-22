@@ -1,0 +1,26 @@
+/* print reports */
+
+#report {
+	background: #FFF;
+	font-family: verdana, sans-serif;
+	}
+#report div {
+	
+	}	
+#report h2 {
+	font-family: calibri, verdana, sans-serif;
+	font-size: 36px;
+	margin: 0;
+	}	
+#report table {
+	width: auto;
+	}
+#report table th,
+#report table td {
+	border-bottom: 1px solid #000;
+	font-size: 11px;	
+	padding: 6px;
+	}
+#report a {
+	text-decoration: none;
+	}	

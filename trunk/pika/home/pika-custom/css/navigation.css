@@ -1,0 +1,132 @@
+/* mega drop-down menus for Pika 4.0 */
+
+#nav li {
+    display: inline;
+    position: relative;
+	}
+#nav li a.cursor {
+	/* cursor: default; */
+	}	
+#nav li div {
+	background-color: #F8FCFF;
+	display: none;
+	}
+#nav li.mega div.drop-wrapper { 
+	/*  */
+	position: absolute; 
+	top: 1.50em;
+	left: -1.0em;
+	/*  */
+	border: 3px solid #E0E0E0;
+	line-height: 1.0;
+	z-index: 500;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#nav li.hovering div { 
+	 display: block;
+	 }
+#nav li div.drop-wrapper div {
+	/*  */
+	position: relative;
+	top: 0;
+	/*  */
+	border: 0;
+	float: left;
+	font-family: calibri, sans-serif;
+	margin: 0;
+	padding-bottom: 0.60em;
+	}
+#nav div h5  {
+	position: relative;
+	background: #466472; /* pika */
+	/*background: #658ACA;*/ /* portal */
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	/*margin: 0 0 0px 0;*/
+	padding: 3px 0 5px 6px;
+	width: auto;
+	}
+#nav li.mega div div ul {
+	float: left;
+	margin-left: -4px;
+	}
+#nav li.mega div div li {
+	float: none;	
+	}	
+#nav li.mega div div li a {
+	border: 1px solid transparent;
+	color: #333;
+	font-size: 14px;
+	margin-right: 2px;
+	padding: 3px 6px 3px 6px;
+	}
+#nav li.mega div div li a:hover {
+	background: #F0F0F0;
+	border: 1px solid #658ACA;
+	color: #00F;
+	}
+#nav li ul {
+	padding: 2px 0 0 3px;
+	}	
+
+/* Pika */	
+
+#nav li.mega #drop-wrapper01 {
+	width: 382px;	
+	}
+#nav li #add-pika ul {
+	width: 108px;
+	}
+#nav li #my-pika ul {
+	width: 140px;
+	}	
+#nav li #more-pika ul {
+	margin-right: 3px;
+	width: 134px;
+	}
+#nav li #more-pika h5 {
+	width: 130px;
+	}
+	
+/* Sites | SPN */	
+
+#nav li.mega #drop-wrapper02 {
+	left: -6.0em;
+	width: 456px;	
+	}
+#nav li #finance ul {
+	width: 158px;
+	}
+#nav li #office ul {
+	width: 150px;
+	}	
+#nav li #resources ul {
+	width: 148px;
+	}
+#nav li #resources h5 {
+	width: 144px;
+	}
+#nav li #resources ul li.more {
+	font-style: italic;
+	padding-right: 10px;
+	text-align: right;
+	}	
+	
+/* LSNC Web */	
+
+#nav li.mega #drop-wrapper03 {
+	left: -6.0em;
+	width: 361px;	
+	}
+#nav li #lsnc-web ul {
+	width: 168px;
+	}	
+#nav li #project-web ul {
+	width: 192px;
+	}
+#nav li #project-web h5 {
+	width: 187px;
+	}

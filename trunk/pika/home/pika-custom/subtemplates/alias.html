@@ -1,0 +1,37 @@
+<div id="alias-new">
+
+<form action="dataops.php" method="post" name="forms1">
+
+    <dl>
+
+        <dt><label>First Name</label></dt>
+        <dd><input type="text" name="first_name" tabindex="1" /></dd>
+        
+        <dt><label>Middle Name</label></dt>
+        <dd><input type="text" name="middle_name" tabindex="1" /></dd>
+        
+        <dt><label>Last | Org. Name</label></dt>
+        <dd><input type="text" name="last_name" tabindex="1" /></dd>
+        
+        <dt><label>Jr., Sr., etc.</label></dt>
+        <dd><input type="text" name="extra_name" tabindex="1" /></dd>
+        
+        <dt><label>SSN</label></dt>
+        <dd><input type="text" name="ssn" tabindex="1" /></dd>
+        
+        <input type="hidden" name=action value="new_alias" />
+        <input type="hidden" name="contact_id" value="%%[contact_id]%%" />
+
+        <dd>
+        <ul><li><input type="submit" value="Continue" tabindex="1" /></li></ul>
+        </dd>
+
+    </dl>
+
+<script language="javascript" type="text/javascript"><!--
+document.forms1.first_name.focus();
+//--></script>
+
+</form>
+
+</div> <!-- #alias-new -->

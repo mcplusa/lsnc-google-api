@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Pika: %%[page_title]%%</title>
+<!-- css hub -->
+<link rel="stylesheet" href="%%[base_url]%%/css/hub.css" type="text/css" media="screen" />
+<!-- IE conditional comments -->
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="%%[base_url]%%/css/ie.css" />
+<![endif]-->
+
+<script type="text/javascript">
+<!--
+function setParentFolder(folder) {
+	if (parent.document.add_folder.parent_folder) {
+		parent.document.add_folder.parent_folder.value = folder;
+	}
+	if (parent.document.add_document.parent_folder) {
+		parent.document.add_document.parent_folder.value = folder;
+	}
+}
+
+function setForm(val) {
+		parent.document.docgen.form_id.value = val;
+}
+
+function setDescription(filename) {
+	
+	var items = document.getElementsByName(filename + "_pointer");
+	for (var i=0;i<items.length;i++) {
+		var str = items[i].src;
+		if (str.search(/pointer.gif/) > -1) {
+			items[i].src = 'images/pointer_down.gif';
+		}else {
+			items[i].src = 'images/pointer.gif';
+		}
+	}
+	
+	var files = document.getElementsByName(filename + "_description");
+	//alert(items.length);
+	for (var i=0;i<files.length;i++) {
+		if (files[i].style.display == 'block') {
+			files[i].style.display = 'none';
+		}else {
+			files[i].style.display = 'block';
+		}
+		
+		
+		
+	}
+}
+
+
+
+//-->
+</script>
+
+</head>
+
+<body id="documents">
+
+%%[content]%%
+
+</body>
+
+</html>
+
+%%[begin:edit_folder]%%
+<h3>Edit Folder Properties</h3>
+<form action="%%[base_url]%%/documents.php" method="get">
+<p>Name: <input type="text" name="doc_name" value="%%[doc_name]%%"/></p>
+<input type="submit" name="submit" value="Update"/>
+<input type="submit" name="cancel" value="Cancel"/>
+<input type="hidden" name="action" value="update_folder"/>
+%%[doc_type,input_hidden]%%
+%%[display_type,input_hidden]%%
+%%[doc_id,input_hidden]%%
+%%[folder_ptr,input_hidden]%%
+%%[case_id,input_hidden]%%
+</form>
+%%[end:edit_folder]%%
+
+%%[begin:confirm_delete_folder]%%
+<h3>Delete Folder</h3>
+<form action="%%[base_url]%%/documents.php" method="get">
+<p>Are you sure you would like to delete:<br />
+<strong>%%[doc_name]%%</strong></p>
+<ul id="submit-info">
+<li><input type="submit" name="submit" value="Delete" />
+<input type="submit" name="cancel" value="Cancel" /></li>
+</ul>
+<input type="hidden" name="action" value="delete_folder" />
+%%[doc_type,input_hidden]%%
+%%[display_type,input_hidden]%%
+%%[doc_id,input_hidden]%%
+%%[folder_ptr,input_hidden]%%
+%%[case_id,input_hidden]%%
+</form>
+%%[end:confirm_delete_folder]%%
+
+
+%%[begin:edit_file]%%
+<h3>Edit File Properties</h3>
+<form action="%%[base_url]%%/documents.php" method="get">
+<p>Name: <input type="text" name="doc_name" value="%%[doc_name]%%"/></p>
+<p>Description:<br/>
+<textarea name="description" cols="25">%%[description]%%</textarea></p>
+<p>Folder: %%[folder_ptr,folder_menu]%%</p>
+<input type="submit" name="submit" value="Update"/>
+<input type="submit" name="cancel" value="Cancel"/>
+<input type="hidden" name="action" value="update_file"/>
+%%[doc_type,input_hidden]%%
+%%[display_type,input_hidden]%%
+%%[doc_id,input_hidden]%%
+%%[case_id,input_hidden]%%
+</form>
+%%[end:edit_file]%%
+
+%%[begin:confirm_delete_file]%%
+<h2>Delete File</h2>
+<form action="%%[base_url]%%/documents.php" method="get">
+<p>Are you sure you would like to delete:<br />
+<strong>%%[doc_name]%%</strong></p>
+<input type="submit" name="submit" value="Delete"/>
+<input type="submit" name="cancel" value="Cancel"/>
+<input type="hidden" name="action" value="delete_file"/>
+%%[doc_type,input_hidden]%%
+%%[display_type,input_hidden]%%
+%%[doc_id,input_hidden]%%
+%%[folder_ptr,input_hidden]%%
+%%[case_id,input_hidden]%%
+</form>
+%%[end:confirm_delete_file]%%

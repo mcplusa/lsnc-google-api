@@ -1,0 +1,446 @@
+/* case record pages for Pika 4.0 */
+
+
+/* flags */
+
+#warning-flags a {
+	color: #333;
+	}
+#warning-flags a:hover {
+	color: #00F;
+	}
+#warning-flags p {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	border-top: 0;
+	float: left;
+	margin-top: -1.70em;
+	padding: 8px 10px 8px 10px;
+	width: 898px;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#warning-flags p img {
+	margin-right: 1px;
+	vertical-align: top;
+	}
+#warning-flags p span {
+	margin-right: 6px;
+	white-space: nowrap;
+	}
+#side-column a {
+	line-height: 1;
+	}	
+#side-column .case-contact a {
+	font-family: calibri, verdana, sans-serif;
+	font-size: 1.50em;
+	}
+#content #side-column .no-style {
+	list-style: none;
+	margin-left: 0;
+	}
+#side-column dl {
+	margin: 0;
+	}
+#side-column dt {
+	font-weight: bold;
+	}
+#content #side-column ul {
+	margin: 0.50em 0 0.50em 18px;
+	}
+#side-column #ssn input {
+	width: 110px;
+	}
+#side-column #dob input,
+#side-column #suffix input {
+	width: 90px;
+	}
+#side-column #add {
+	margin: 1.0em 0;
+	width: auto;
+	}
+	
+/* case tabs */
+
+#main-content #case-tabs {
+	margin-top: -0.50em;
+	width: 900px;
+	}
+#case-tabs li {
+	display: inline;
+	line-height: 2.5;
+	}
+#case-tabs a {
+	border: 1px solid #E0E0E0;
+	color: #333;
+	font-family: calibri, verdana, sans-serif;
+	font-size: 19px;
+	padding: 4px 8px 5px 8px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#case-tabs a:hover {
+	background: #F8FCFF;
+	color: #00F;
+	border: 1px solid #0000FF;
+	}
+#case-tabs #current a {
+	border: 2px solid #C0C0C0;
+	font-size: 22px;
+	}
+	
+/* main content */
+
+#content h2 {
+	margin: 0 0 -0.25em 0;
+	}
+#content h2.alternate {
+	clear: left;
+	margin-bottom: 0.50em;
+	}
+#content #main-content h2 {
+	margin-top: -0.50em;
+	}
+	
+#main-content #number {
+	width: 100px;
+	}
+#main-content #date input {
+	width: 90px;
+	}
+#main-content input,
+#main-content select {
+	max-width: 300px;
+	}
+#main-content #funds {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	margin: 0;
+	padding: 6px 10px;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;			
+	}
+#submit-info {
+	clear: both;
+	}
+#submit-info-02 {
+	clear: both;
+	margin-top: 0;
+	}
+#submit-info-03 input {
+	margin-top: 1.0em;
+	}		
+#main-content #packet,
+#main-content #mediation_check,
+#main-content .document-options-01 input,
+#main-content #poverty input {
+	width: auto;
+	}
+#main-content #poverty #percentage {
+	width: 60px;
+	}
+#main-content #close-options input {
+	vertical-align: top;
+	}
+
+/* document tab */
+
+#intake-report {
+	margin-top: 1.0em;
+	}
+#intake-report input,
+#main-content .document-options input {
+	vertical-align: top;
+	}
+#intake-report label {
+	margin-right: 6px;
+	}		
+#intake-report #generate-report {
+	/*vertical-align: top;*/
+	}	
+.document-options {
+	clear: left;
+	margin: 1.0em 0;
+	}
+#system-forms .document-options h2 {
+	margin: 1.0em 0 0 0;
+	}
+#system-forms .document-options h2.alternate {
+	margin: -0.50em 0 0.50em 0;
+	}	
+.document-options iframe,
+.document-options input,
+.document-options dl,
+.document-options h3 {
+	float: left;
+	width: auto;
+	}
+.document-options input[type="file"] {
+	background: #FFF;
+	}	
+#system-forms #upload-files {
+	float: left;
+	width: 300px;
+	}
+form #folder-name {
+	width: 150px;
+	}
+form #add-folder {
+	width: 100px;
+	}	
+h3#upload {
+	float: left;
+	width: 200px;
+	}
+#file-description {
+	clear: left;
+	margin-top: 4px;
+	white-space: nowrap;
+	}		
+.document-options dl {
+	margin-top: 0;
+	}
+.document-options select {
+	width: 150px;
+	}
+#upload-files ul {
+	margin-top: 0;
+	}
+#main-content #upload-files input {
+	width: auto;
+	}				
+.document-options iframe {
+	border: 1px solid #82CAFA;
+	height: 14em;
+	margin: 0 20px 1.0em 0;
+	width: 300px;
+	}
+.document-options iframe#storage {
+	height: 20em;
+	width: 390px;
+	}
+.document-options h2#doc-storage {
+	margin-bottom: 1px;
+	}
+.document-options iframe#storage-docs {
+	height: 19em;
+	width: 300px;
+	}	
+.document-options #autosave {
+	width: auto;
+	}
+#system-forms .document-options textarea {
+	margin: 0;
+	width: 230px;
+	}	
+
+
+/* pika document file folders */	
+
+body#documents {
+	background: #FFFFF6;
+	font-size: 13px;
+	padding: 4px 0 0 10px;
+	}
+#documents .pika_files {
+	font-size: 13px;
+	line-height: 1.6;
+	}
+#documents .pika_files .directory {
+	list-style-image: url(/pika/images/folder-shut.gif);
+	margin-left: 30px;
+	vertical-align: bottom;
+	}
+#documents .pika_files .directory_open {
+	list-style-image: url(/pika/images/folder-open.gif);
+	margin-left: 30px;
+	}
+#documents .pika_files li.file { 
+	list-style-image: url(/pika/images/file.png);
+	margin-left: 40px;
+	vertical-align: bottom; 
+  	}
+#documents .pika_files label {
+	font-size: 13px;
+	font-weight: normal;
+	color: #000;
+	}
+#documents .pika_files li.file img {
+	vertical-align: middle;
+	}
+#documents .pika_files li.description {
+	color: #666;
+	font-size: 11px;
+	list-style-image: none;
+	margin-left: 0;
+  	}
+#documents .pika_files span a {
+	background: #FFF;
+	border: 1px solid #E0E0E0;
+	color: #808080;	
+	margin-right: 1px;
+	padding: 0 3px 1px 3px;
+	font-size: 11px;
+  	}
+#documents .pika_files span a:hover {
+	border-color: #00F;
+	color: #00F;	
+  	}
+html #documents h3 {
+	color: #333;
+	font-family: calibri, verdana, sans-serif;
+	font-size: 20px;
+	}
+html #documents form p {
+	margin: 0.50em 0 1.0em 0;
+	}
+	
+/* conflicts */	
+
+#conflict-list li {
+	/*margin-top: 1.0em;*/
+	}
+#conflict-list li,
+#reverse-order li {
+	list-style: circle;
+	margin-left: 20px;
+	}
+#case-conflicts #search-list {
+	margin-top: 1.0em;	
+	}
+#case-conflicts #search-list td {
+	padding: 0 6px;
+	}		
+	
+/* case notes */
+
+#activity .top {
+	margin: 0;	
+	margin-bottom: 1.0em;
+	}
+#case-notes textarea {
+	width: 300px;
+	}
+#case-notes .notes textarea {
+	height: 22em;
+	}
+#save-case-note input {
+	float: left;
+	margin: -30px 0 0 248px;
+	}
+#case-notes-for h2 {
+	clear: left;
+	padding-top: 1.0em;
+	}
+#case-notes-for span {
+	color: #808080;
+	}
+#case-notes-for p {
+	font-size: 12px;
+	margin: 1.0em 0 1.25em 0;
+	}
+#case-notes-for span.summary {
+	color: #6E6E6E;
+	font-family: calibri, verdana, sans-serif;
+	font-size: 19px;
+	font-weight: bold;
+	}
+#case-notes-for hr {
+	background: #82CAFA;
+	border: 0;
+	border-bottom: 1px solid #82CAFA;
+	height: 1px;
+	}
+#funds select {
+	width: 300px;
+	}
+	
+/* case info */
+
+dl #lsc-code {
+	margin-top: 5px;
+	}
+#case-info-submit {
+	clear: left;
+	}
+	
+/* mediation tab */
+
+#mediation h2 {
+	clear: left;
+	}
+#mediation dl {
+	float: left;
+	width: auto;
+	}
+.section01 input {
+	width: 180px;
+	}
+.section02 dd strong {
+	vertical-align: top;
+	}	
+#mediation dl input.plcheck {
+	vertical-align: top;
+	width: auto;
+	}
+#mediation .section02 textarea {
+	width: 400px;
+	}
+#mediation #save-seniors {
+	clear: left;
+	width: auto;
+	}
+	
+/* special tab */
+
+#seniors-tab .seniors {
+	clear: left;
+	}
+#seniors-tab ul {
+	float: left;
+	margin: 1.0em 50px 1.0em 0;
+	text-align: right;
+	width: auto;	
+	}
+#seniors-tab .seniors select {
+	margin-bottom: 3px;
+	max-width: 100%;
+	}	
+#seniors-tab ul#senior-ethnicity {
+	margin-bottom: 0;
+	text-align: left;
+	width: 100%;
+	}
+#main-content #seniors-tab h2.seniors-hud {
+	margin-top: 1.0em;
+	}	
+#seniors-tab #save-seniors {
+	clear: left;
+	margin-top: 0;
+	width: auto;
+	}
+#hrh-tab .hrh-issue {
+	margin-top: 2.0em;
+	}
+#hrh-tab .hrh-data textarea {
+	width: 300px;
+	}
+#hrh-tab .hrh-data #save-hrh {
+	width: auto;
+	}
+#save-hrh-seniors {
+	clear: left;
+	width: 600px;
+	}
+	
+/* pro bono tab */
+
+#pro-bono-tab dl input {
+	vertical-align: middle;
+	width: auto;
+	}
+table#assigned {
+	width: 400px;
+	}	

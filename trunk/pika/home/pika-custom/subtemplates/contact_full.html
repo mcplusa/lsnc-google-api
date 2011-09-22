@@ -1,0 +1,543 @@
+
+
+%%[begin:contact]%%
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+<!-- contact details -->
+
+<div id="main-content" >
+
+    <h2>Contact Details</h2>
+
+    <form action="%%[form_action]%%" name=fc method="post"onSubmit="return institutional(this)";>
+
+        %%[preamble]%%
+
+        %%[aliases]%%
+
+        <dl>
+
+            <dt><label>First Name</label>*</dt>
+            <dd class="required"><input type="text" name="first_name" value="%%[first_name]%%" size="22" tabindex="1" /></dd>
+
+	    <dt><label>Middle Name</label></dt>
+            <dd><input type="text" name="middle_name" value="%%[middle_name]%%" size="22" tabindex="1" /></dd>
+
+            <dt><label>Last | Org. Name</label>*</dt>
+            <dd class="required"><input type="text" name="last_name" value="%%[last_name]%%" size="22" tabindex="1" /></dd>
+
+            <dt><label>Jr., Sr., etc.</label></dt>
+            <dd id="suffix"><input type="text" name="extra_name" value="%%[extra_name]%%" size="22" tabindex="1" /></dd>
+
+            <dt><label>DOB</label>*</dt>
+      <!--      <dd id="dob"><input id="datepicker" type="text" name="birth_date" onkeydown="pika_dob(this);"value="%%[birth_date]%%" size="22" maxlength="10"tabindex="1"onblur="set_age();" /></dd> -->
+            <dd id="dob"><input type="text" name="birth_date" onkeydown="pika_dob(this);"value="%%[birth_date]%%" size="22" maxlength="10"tabindex="1"onblur="return checkDate(this),set_age();"  /></dd>
+
+            <dt><label>Age</label>*</dt>
+    	    <dd id="age"><input type="text" name="age" value="%%[age]%%" maxlength="3" tabindex="1" /><a id="calc_age" onclick="set_age()" href="#dc" tabindex="1"><span>[Calculate]</span></a></dd>
+
+            <dt><label>SSN</label></dt>
+            <dd id="ssn"><input type="text" name="ssn" onkeyup="pika_ssn(this);" value="%%[ssn]%%" maxlength="11" size="22" tabindex="1" /></dd>
+
+        </dl>
+
+
+
+        <dl>
+
+            <dt><label>Phone</label></dt>
+            <dd><input class="area-code" type="text" name="area_code" value="%%[area_code]%%" onkeyup="pika_area_code(this, 3, 'phone');" maxlength="3" tabindex="1" /> <input class="phone-number" type="text" name="phone" value="%%[phone]%%" onkeyup="pika_phone(this);" maxlength="8" tabindex="1" /></dd>
+
+            <dt><label>Alternate Phone</label></dt>
+            <dd><input class="area-code" type="text" name="area_code_alt" value="%%[area_code_alt]%%" onkeyup="pika_area_code(this, 3, 'phone_alt');" maxlength="3" tabindex="1" /> <input class="phone-number" type="text" name="phone_alt" value="%%[phone_alt]%%" onkeyup="pika_phone(this);" maxlength="8" tabindex="1" /></dd>
+
+            <dt><label>Phone Note</label></dt>
+            <dd id="phone-note"><input type="text" name="phone_notes" value="%%[phone_notes]%%" size="22" tabindex="1" /></dd>
+
+            <dt><label>Email</label></dt>
+            <dd id="email"><input type="text" name="email" value="%%[email]%%" size="26" tabindex="1" /></dd>
+
+        </dl>
+
+        <dl>
+
+            <dt><label>ZIP Code | County</label>*</dt>
+            <dd class="required">%%[zip,input_text,onblur=zipcode_lookup(this.value),class=zip]%%
+            %%[county,input_text,class=county]%%</dd>
+
+            <dt><label>Address (line 1)</label></dt>
+            <dd class="address"><input type="text" name="address" value="%%[address]%%" size="26" tabindex="1" /></dd>
+
+            <dt><label>Address (line 2)</label></dt>
+            <dd class="address"><input type="text" name="address2" value="%%[address2]%%" size="26" tabindex=1 /></dd>
+
+            <dt><label>City | State</label>*</dt>
+            <dd>%%[city,input_text,class=city]%% %%[state,input_text,size=3,class=state]%% %%[r_zip,input_text,size=3,class=rural]%%</dd>
+
+        </dl>
+
+        <div id="contact-info-status">
+
+            <dl>
+
+                <dt><label>Language</label></dt>
+                <dd class="required">%%[language,language]%%</dd>
+
+                <dt><label>Disability</label></dt>
+                <dd>%%[disabled,disabled]%%</dd>
+
+                <dt><label>Gender Identity</label>*</dt>
+                <dd>%%[gender,gender]%%</dd>
+                <dd>%%[organization,yes_no,checkbox]%% <label>Organization | Group</label>*</dd>
+
+            </dl>
+
+            <dl>
+
+                <dt><label>Marital Status</label></dt>
+                <dd>%%[marital,marital]%%</dd>
+
+                <dt><label>Residence</label></dt>
+                <dd>%%[residence,residence]%%</dd>
+
+                <dt><label>Knows about LSNC</label></dt>
+                <dd>%%[know_about,referred_by]%%</dd>
+
+            </dl>
+
+        </div> <!-- /#contact-info-status -->
+
+        <!-- hispanice ethnicity / racial identity -->
+
+        <div id="ethnicity">
+
+            <h3>Hispanic Ethnicity | Racial Identity*</h3>
+
+            <div>
+
+                <h4>Select: One Only</h4>
+
+                %%[hispanic,hispanic,radio]%%
+
+            </div>
+
+            <div>
+
+                <h4>Select: One or More</h4>
+
+                %%[amernative,yes_no,checkbox]%% <label>American Indian | Alaska Native</label><br />
+                %%[asian,yes_no,checkbox]%% <label>Asian</label><br />
+                %%[africanamer,yes_no,checkbox]%% <label>Black | African-American</label><br />
+                %%[hiwaiianpinative,yes_no,checkbox]%% <label>Native Hawaiian | Other Pacific Islander</label><br />
+                %%[white,yes_no,checkbox]%% <label>White</label><br />
+                %%[otherrace,yes_no,checkbox]%% <label>Other Race</label><br />
+                %%[racedeclined,yes_no,checkbox]%% <label>Declined to provide</label>
+
+            </div>
+
+        </div> <!-- /#ethnicity -->
+
+        <dl id="notes">
+
+            <dt><label>Notes</label></dt>
+            <dd><textarea id="contact-notes" name="notes" tabindex=1>%%[notes]%%</textarea></dd>
+
+        </dl>
+
+</div> <!-- /#main-content -->
+<iframe style="display: none" name="ageframe" src="%%[base_url]%%/services/age-server.php"></iframe>
+<!-- Scripts -->
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+<!--
+
+
+var old_ssn_length = 0;
+var old_phone_length = 0;
+var ac_autotab_on = 1;
+var old_dob_length = 0;
+var old_zip_length = 0;
+
+function pika_area_code(what, max, field_name)
+{
+    if (max > 0 && what.value.length >= max && ac_autotab_on == 1)
+    {
+        eval('document.fc.' + field_name + '.focus()');
+    }
+
+    if (what.value.length >= 3)
+    {
+        ac_autotab_on = 0;
+    }
+
+    else if (what.value.length == 0)
+    {
+        ac_autotab_on = 1;
+    }
+
+    return;
+}
+
+
+
+
+
+
+
+function pika_ssn(what)
+{
+    if (what.value.length == 3 && old_ssn_length == 2)
+    {
+        what.value += '-';
+    }
+
+    if (what.value.length == 6 && old_ssn_length == 5)
+    {
+        what.value += '-';
+    }
+
+    old_ssn_length = what.value.length;
+}
+
+function pika_zip(what)
+{
+    if (what.value.length == 5 && old_zip_length == 4)
+    {
+        what.value += '-';
+    }
+
+
+    old_zip_length = what.value.length;
+}
+
+function pika_dob(what)
+{
+    if (what.value.length == 2 && old_dob_length == 1)
+    {
+        what.value += '/';
+    }
+
+    if (what.value.length == 5 && old_dob_length == 4)
+    {
+        what.value += '/';
+    }
+
+    old_dob_length = what.value.length;
+}
+
+var ac_autotab_on = 1;
+
+function pika_phone(what)
+{
+    if (what.value.length == 3 && old_phone_length == 2)
+    {
+        what.value += '-';
+    }
+
+    old_phone_length = what.value.length;
+}
+function checkEmail() {
+if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.fc.email.value)){
+return (true)
+}
+
+alert("Invalid E-mail Address! Please re-enter.")
+return (true)
+}
+
+function testfields(what) {
+  if(document.fc.gender.value!==""){
+
+alert("You have made a gender selection. Organizational client are gender neutral");
+return false;
+  }
+  return true;
+ }
+
+function Require(obForm,szFields)
+    {
+    var fields = szFields.split(",")
+    var szMissing= new Array();
+        for (x=0;x<fields.length;x++) {
+            if (obForm.elements[fields[x]].value.length==0) {
+            szMissing[szMissing.length]=new String(fields[x]);
+        }
+    }
+    if ((szMissing.length) && (document.fc.relation_code.value < 2)) {
+        alert("The field"+((szMissing.length>1)?"s ":" ")+szMissing.join(",")+" must be filled in first");
+        return false
+        }
+ return  testfields(this);
+    }
+
+function Requireall(obForm,szFields)
+    {
+    var fields = szFields.split(",")
+    var szMissing= new Array();
+        for (x=0;x<fields.length;x++) {
+            if (obForm.elements[fields[x]].value.length==0) {
+            szMissing[szMissing.length]=new String(fields[x]);
+        }
+    }
+    if ((szMissing.length) && (document.fc.relation_code.value < 2)) {
+        alert("The field"+((szMissing.length>1)?"s ":" ")+szMissing.join(",")+" must be filled in first");
+        return false
+        }
+      return isdeclined();
+    }
+
+
+function radio_button_checker()
+{
+// set var radio_choice to false
+var radio_choice = false;
+
+// Loop from zero to the one minus the number of radio button selections
+for (counter = 0; counter < document.fc.hispanic.length; counter++)
+{
+// If a radio button has been selected it will return true
+// (If not it will return false)
+if (document.fc.hispanic[counter].checked)
+radio_choice = true;
+
+}
+
+if ((!radio_choice) && (document.fc.relation_code.value <2))
+{
+// If there were no selections made display an alert box
+alert("Please select Hispanic/Non Hispanic.")
+return (false);
+}
+return isChecked();
+}
+function isChecked(fieldname) {
+	var myform = document.fc;
+	if (myform) {
+		loop = 0;
+		while (loop < myform.elements.length) {
+			if (myform.elements[loop].name == fieldname && myform.elements[loop].type == 'checkbox') {
+				return(myform.elements[loop].checked);
+			}
+		loop++;
+		}
+	}
+if (!isChecked('amernative') && !isChecked('asian') && !isChecked('africanamer') && !isChecked('hiwaiianpinative') && !isChecked('white') && !isChecked('otherrace') && !isChecked('racedeclined') && (document.fc.relation_code.value <2)) {
+	window.alert('Please select one or more ethnic categories')
+return (false);
+}
+return true;
+}
+
+function isdeclined(fieldname) {
+	var myform = document.fc;
+	if (myform) {
+		loop = 0;
+		while (loop < myform.elements.length) {
+			if (myform.elements[loop].name == fieldname && myform.elements[loop].type == 'checkbox') {
+				return(myform.elements[loop].checked);
+			}
+		loop++;
+		}
+	}
+if (isChecked('amernative') && isChecked('racedeclined') && (document.fc.relation_code.value <2) ||
+   isChecked('asian') && isChecked('racedeclined') && (document.fc.relation_code.value <2)
+||
+   isChecked('africanamer') && isChecked('racedeclined') && (document.fc.relation_code.value <2)
+||
+   isChecked('hiwaiianpinative') && isChecked('racedeclined') && (document.fc.relation_code.value <2)
+||
+   isChecked('white') && isChecked('racedeclined') && (document.fc.relation_code.value <2)
+||
+   isChecked('otherrace') && isChecked('racedeclined') && (document.fc.relation_code.value <2)
+
+) {
+	window.alert('When Declined is selected no other racial categories apply')
+return (false);
+}
+return radio_button_checker();
+}
+
+
+
+
+function institutional(fieldname) {
+	var myform = document.fc;
+	if (myform) {
+		loop = 0;
+		while (loop < myform.elements.length) {
+			if (myform.elements[loop].name == fieldname && myform.elements[loop].type == 'checkbox') {
+				return(myform.elements[loop].checked);
+			}
+		loop++;
+		}
+	}
+if (institutional('organization')) {
+	window.alert('NOTICE You have selected an Organization most field validation is now off')
+return Require(document.fc,'last_name,county,state');
+}
+return Requireall(document.fc,'first_name,last_name,language,gender,county,state,birth_date');
+}
+
+
+
+
+function set_age()
+{
+    document.fc.age.value = "";
+    return update_age();
+}
+
+function update_age()
+{
+    parent.ageframe.location.href = '%%[base_url]%%/services/age-server.php?birth_date=' + document.fc.birth_date.value;
+
+    return;
+}
+
+
+
+//-->
+</script>
+
+<!-- side column -->
+
+<div id="side-column">
+
+    <h3>Aliases</h3>
+
+    <div id="alias-list">
+    %%[alias_list]%%
+    </div>
+
+    <ul>
+    <li><a href="%%[base_url]%%/alias.php?contact_id=%%[contact_id]%%">Add a New Alias</a></li>
+    </ul>
+
+    <h3>Actions</h3>
+
+    <ul>
+    <li><a href="#case-list">List of Cases | Intakes</a></li>
+    <li><a href="%%[base_url]%%/merge_contacts.php?contact_id=%%[contact_id]%%">Merge Duplicate Records for this Contact</a></li>
+    <li><a href="%%[base_url]%%/ops/new_case.php?thiscon=%%[contact_id]%%">Create a New Case for this Contact</a></li>
+    </ul>
+
+</div> <!-- /side-column -->
+
+%%[contact_id,input_hidden]%%
+%%[case_id,input_hidden]%%
+%%[screen_id,input_hidden]%%
+%%[intake_id,input_hidden]%%
+%%[relation_code,input_hidden]%%
+%%[con_url,input_hidden]%%
+
+<input type="hidden" name="action" value="%%[action_name]%%" />
+
+<ul id="submit-contact">
+<li><input type="submit" value="%%[submit_label]%%" tabindex="1" name="submit2" /></li>
+</ul>
+
+</form>
+
+<!-- case list for...  -->
+
+<h3 id="case-list">Case list for %%[full_name]%%</h3>
+
+%%[case_list]%%
+
+<h2>Intake List for %%[full_name]%%</h2>
+
+%%[intake_list]%%
+
+%%[ajax_init.js,javascript]%%
+%%[zip-server-ajax.js,javascript,parse]%%
+%%[contact_full.js,javascript]%%
+
+%%[end:contact]%%
+
+%%[begin:alias]%%
+
+    <strong>Name:</strong> %%[full_name]%%</li>
+    <li><strong>SSN:</strong> %%[ssn]%%</li>
+    %%[end:alias]%%
+
+%%[begin:flex_header]%%
+
+    <table id="search-list" cellspacing="0" summary="">
+
+	    <tr>
+
+    		<th class="first">Role</th>
+	    	<th>Case No.</th>
+		    <th>Advocate</th>
+    		<th>Office</th>
+	    	<th>Open Date</th>
+		    <th>Close Date</th>
+    		<th>Closing Code</th>
+	    	<th>Status</th>
+		    <th class="last">LSC Code</th>
+
+    	</tr>
+
+	%%[end:flex_header]%%
+
+	%%[begin:flex_row]%%
+
+    	<tr class="%%[css_class]%%">
+
+    		<td>%%[role]%%</td>
+	    	<td><a href="%%[base_url]%%/case.php?case_id=%%[case_id]%%">%%[number]%%</a></td>
+		    <td>%%[atty_name]%%</td>
+    		<td>%%[office text]%%</td>
+	    	<td>%%[open_date]%%</td>
+    		<td>%%[close_date]%%</td>
+    		<td>%%[close_code text]%%</td>
+	    	<td>%%[status text source=case_status]%%</td>
+    		<td>%%[problem]%%</td>
+
+	    </tr>
+
+	%%[end:flex_row]%%
+
+	%%[begin:flex_footer]%%
+
+</table>
+
+%%[end:flex_footer]%%
+
+%%[begin:intake_header]%%
+
+<table id="search-list" cellspacing="0" summary="">
+
+	<tr>
+
+		<th class="first">Intake ID</th>
+		<th>Income</th>
+		<th>Assets</th>
+		<th>% of Poverty</th>
+		<th class="last">Citizenship</th>
+
+	</tr>
+
+%%[end:intake_header]%%
+
+%%[begin:intake_row]%%
+
+	<tr class="%%[css_class]%%">
+
+		<td><a href="%%[base_url]%%/intakes.php/%%[intake_id]%%/">%%[intake_id]%%</a></td>
+		<td>$%%[income]%%</td>
+		<td>$%%[assets]%%</td>
+		<td>%%[poverty]%% %</td>
+		<td>%%[citizen text]%%</td>
+
+	</tr>
+
+%%[end:intake_row]%%
+
+%%[begin:intake_footer]%%
+
+</table>
+
+%%[end:intake_footer]%%
+

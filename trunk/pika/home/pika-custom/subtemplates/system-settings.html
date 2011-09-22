@@ -1,0 +1,100 @@
+<form action="%%[base_url]%%/ops/save_settings.php" name="form1" method="post">
+
+<div class="settings">
+
+<h2>Site Settings</h2>
+
+<dl>
+
+    <dt><label>Program Name</label></dt>
+    <dd><input type="text' name="owner_name" value="%%[owner_name]%%" tabindex="1" /></dd>
+
+    <dt><label>Administrator Email</label></dt>
+    <dd><input type="text' name="admin_email" value="%%[admin_email]%%" tabindex="1" /></dd>
+    
+    <dt><label>Authentication Label</label></dt>
+    <dd><input type="text' name="cookie_prefix" value="%%[cookie_prefix]%%" tabindex="1" /></dd>
+    
+    <dt><label>Time Keeping Round-off Interval (Minutes)</label></dt>
+    <dd><input type="text' name="act_interval" value="%%[act_interval]%%" tabindex="1"/></dd>
+    
+    <dt><label>Hours Ahead / Behind Server's Time Zone</label></dt>
+    <dd>%%[time_zone_offset,time_zone_offset]%%</dd>
+    
+    <dt><label>Time Zone (Calendar)</label></dt>
+    <dd>%%[time_zone,time_zone]%%</dd>
+    
+    <dd>%%[enable_system,yes_no,checkbox]%% Enable Logins</dd>
+    
+    <dd>%%[autonumber_on_new_case,yes_no,checkbox]%% Autonumber Each New Case</dd>
+    
+    <dd>%%[enable_compression,yes_no,checkbox]%% Web Accelerator</dd>
+    
+    <dd>%%[enable_benchmark,yes_no,checkbox]%% Benchmark</dd>
+    
+    <!-- %%[enable_html_tidy,yes_no,checkbox]%% Web Standards Compliance Report -->
+    
+</dl>
+
+</div> <!-- /.settings -->
+
+<div class="settings">
+
+<h2>Install Settings</h2>
+
+<dl>
+
+    <dt><label>Web Site Base Path</label></dt>
+    <dd><!-- <a href="#" onclick="document.form1.base_url.value='%%[base_url_guess]%%';">guess</a> -->
+    <input type="text' name="base_url" value="%%[base_url]%%" tabindex="1" /></dd>
+    
+    <dt><label>Base Directory for Pika Files</label></dt>
+    <dd><!-- <a href="#" onclick="document.form1.base_directory.value='%%[base_directory_guess]%%';">guess</a> --><input type="text" name="base_directory" value="%%[base_directory]%%" tabindex="1" /></dd>
+    
+    <dt><label>Directory for Doc. Mgmt. Storage</label></dt>
+    <dd><!-- <a href="#" onclick="document.form1.docs_directory.value='%%[docs_directory_guess]%%';">guess</a> --><input type="text" name="docs_directory" value="%%[docs_directory]%%" tabindex="1" /></dd>
+    
+    <dt><label>Directory for MS Exchange Access</label></dt>
+    <dd><input type="text" name="xchg_directory" value="%%[xchg_directory]%%" tabindex="1" /></dd>
+    
+    <dt><label>URL for MS Exchange Access</label></dt>
+    <dd><input type="text" name="xchg_url" value="%%[xchg_url]%%" tabindex="1" /></dd>
+
+</dl>
+
+</div> <!-- /.settings -->
+
+<div class="settings">
+
+<h2>Database Settings</h2>
+
+<input type=hidden name="db_type" value="mysql"/>
+
+<dl>
+
+    <dt><label>Server Name</label></dt>
+    <dd><!-- <a href="#" onclick="document.form1.db_host.value='%%[db_host_guess]%%';">guess</a> -->
+    <input type="text" name="db_host" value="%%[db_host]%%" tabindex="1" /></dd>
+    
+    <dt><label>Database Name</label></dt>
+    <dd><!-- <a href="#" onclick="document.form1.db_name.value='%%[db_name_guess]%%';">guess</a> -->
+    <input type="text" name="db_name" value="%%[db_name]%%" tabindex="1" /></dd>
+    
+    <dt><label>Username</label></dt>
+    <dd><!-- <a href="#" onclick="document.form1.db_user.value='%%[db_user_guess]%%';">guess</a> -->
+    <input type="text" name="db_user" value="%%[db_user]%%" tabindex="1" /></dd>
+    
+    <dt><label>Password</label></dt>
+    <dd><input type="password" name="db_password" value="%%[db_password]%%" tabindex="1" /></dd>
+    
+    <dt></dt>
+    <dd></dd>
+
+</dl>
+
+</div> <!-- /.settings -->
+				
+<!-- <input type=submit name="submit" value="Save" tabindex="1" accesskey="s" /> -->
+
+</form>
+

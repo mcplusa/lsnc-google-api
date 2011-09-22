@@ -1,0 +1,109 @@
+﻿<Module>
+  <ModulePrefs title="Pika Events" author_email="support@mcplusa.com" author="Michael Cizmar/MC+A" height="100" >
+    <Require feature="google.calendar-0.5.read" />
+    <Require feature="dynamic-height"/>
+    <Require feature="locked-domain"/>
+    <Require feature="setprefs"/>
+    <UserPref 
+    name="hostname" 
+    default_value="" 
+    datatype="hidden"/>
+  </ModulePrefs>
+  <UserPref 
+    name="pikaToken" 
+    default_value="" 
+    datatype="hidden"/>
+  <Content type="html">
+    <![CDATA[
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd"> 
+  <html>
+  <div id="wrapper">
+     <div id="out">event info here</div> 
+     <div id="gadgetMessage"></div>
+  </div>
+<script> 
+var hostName;
+var securityToken;
+
+/**
+ * Adjusts the height of the gadget
+ */
+function adjustHeight() {
+  var height = document.getElementById('wrapper').offsetHeight;
+  gadgets.window.adjustHeight(height);
+}
+
+function showPrefs() {
+	var gadgetMessage='<div>host:<input id="hostName" ';
+	if (hostName != null) {
+	 gadgetMessage+=' value="' + hostName + '" ';
+	}
+	gadgetMessage +='/></div><br/>';
+	gadgetMessage+='<div>token:<input id="token" ';
+	if (securityToken !=null) {
+		gadgetMessage+=' value="' + securityToken + '" ';
+	}
+	gadgetMessage +='/></div>';
+	gadgetMessage+='<div><input type="button" onclick="setPref()" value="Save"/></div>';
+	document.getElementById('gadgetMessage').innerHTML = gadgetMessage;
+	adjustHeight();
+}
+
+function setPref() {
+	hostName = document.getElementById('hostName').value;
+	securityToken = document.getElementById('token').value;
+	var prefs = new gadgets.Prefs();
+    prefs.set('hostname',hostName);
+    prefs.set('pikaToken',securityToken);
+    document.getElementById('gadgetMessage').innerHTML='<a href="#" onclick="showPrefs();">Edit Prefs</a>';
+    adjustHeight();
+}
+function preferenceCallback(prefs) {
+   var prefs = new gadgets.Prefs();
+   // Retrieve the hostname of the pika server
+   if (prefs.getString('hostname')!=null) {
+     hostName = prefs.getString('hostname');
+   }
+   
+ 
+   // Retrieve the pika security token
+   if (prefs.getString('pikaToken')) {
+     securityToken = prefs.getString('pikaToken');
+   }
+ 
+   //set the message if necessary
+   if((hostName==null) || (securityToken == null)) {
+     document.getElementById('gadgetMessage').innerHTML = '<b><a href="#" onclick="showPrefs();">Set Preferences</a></b>';
+   } else {
+     document.getElementById('gadgetMessage').innerHTML='<a href="#" onclick="showPrefs();">Edit Prefs</a>';
+   }
+}
+
+function subscribeEventsCallback(e) {
+  var html = 'No event';
+  if (e) {
+    //check for pika property
+    if (e.pika_act_group != null) {
+      //pika event
+      html = "Tickler event";
+    } else {
+      html = "Not a tickler";
+    }
+    //html = gadgets.json.stringify(e);
+  }
+  document.getElementById('out').innerHTML = gadgets.util.escapeString(html);
+  adjustHeight();
+}
+ 
+// The gadget containers request that we do NOT run any JS inline.
+// Instead, register a callback handler.
+gadgets.util.registerOnLoadHandler(function() {
+  google.calendar.read.subscribeToEvents(subscribeEventsCallback);
+  google.calendar.getPreferences(preferenceCallback);
+});
+ 
+</script>
+ 
+</body> </html>  ]]></Content> 
+</Module>

@@ -1,0 +1,96 @@
+/* Webdogs 2.0 default global resets */
+
+/*
+global resets based on Eric Meyer’s "Reset Reload" at
+http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/
+------------------------------------------------------------ */
+
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, pre,
+a, code, em, font, img, strong, sub, sup,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;	
+    margin: 0;
+    outline: 0;	
+    padding: 0;
+    vertical-align: baseline;
+    }
+/* remember to define focus styles */
+:focus {
+    outline: 0;
+    }
+body {
+    background: #FFFFFF;
+    color: #000000;
+    line-height: 1;
+    }
+ol, ul {
+    list-style: none;
+    }
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+caption, th, td {
+    font-weight: normal;
+    text-align: left;
+    }
+
+/*
+global resets per Webdogs defaults;
+font-size set per Clagnut's "How to size text using ems" at
+http://clagnut.com/blog/348
+----------------------------------------------------------- */
+
+body {
+    color: #333333; /* reduced contrast black */
+    font-family: verdana, arial, sans-serif;
+    font-size: 62.50%; /* resets 1.0em = 10px */
+    line-height: 1.40; /* reset leading for readability */
+    }
+a:link,
+a:visited {
+    background: transparent;
+    color: #00F; /* blue */
+    font-weight: bold;
+    text-decoration: none;
+    }
+a:hover,
+a:active {
+    color: #00F; /* blue */
+    }
+strong {
+	font-weight: bold;
+	}
+em {
+	font-style: italic;
+	}		
+
+/*
+prevents inherited shrinkage in Firefox per Clagnut at:
+http://clagnut.com/blog/348/
+------------------------------------------------------- */
+li li,
+li p,
+td p {
+    font-size: 1.0em
+    }
+
+/*
+for Firefox where page content < viewport height,
+per Zoe Gillenwater's "Create Pages that Fill the Browser with CSS" at
+http://www.communitymx.com/content/article.cfm?cid=BAD95
+---------------------------------------------------------------------- */
+html,
+body {
+    height: 100%;
+	margin-bottom: 1px;
+    min-height: 100%;
+    }

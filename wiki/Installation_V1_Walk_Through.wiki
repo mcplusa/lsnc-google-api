@@ -1,0 +1,1753 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="icon" type="image/vnd.microsoft.icon" href="http://www.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = "7b47841ff39e51f1b38f3b9f47e848d2";
+ 
+ 
+ var CS_env = {"profileUrl":["/u/@UBBfRl1WBBVGWQh8GQ%3D%3D/"],"token":"7b47841ff39e51f1b38f3b9f47e848d2","assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/274877064420089206","projectHomeUrl":"/p/lsnc-google-api","relativeBaseUrl":"","projectName":"lsnc-google-api","loggedInUserEmail":"michael.cizmar@mcplusa.com"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ _gaq.push(
+ ['projectTracker._setAccount', 'UA-19271393-4'],
+ ['projectTracker._trackPageview']);
+ 
+ 
+ </script>
+ 
+ 
+ <title>Installation_V1_Walk_Through.wiki - 
+ lsnc-google-api -
+ 
+ 
+ Code models for integrating core Google Apps with the Pika case management system. - Google Project Hosting
+ </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/274877064420089206/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/274877064420089206/css/ph_detail.css" >
+ 
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/274877064420089206/css/d_sb.css" >
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/274877064420089206/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ 
+  tr.inline_comment {
+ background: #fff;
+ vertical-align: top;
+ }
+ div.draft, div.published {
+ padding: .3em;
+ border: 1px solid #999; 
+ margin-bottom: .1em;
+ font-family: arial, sans-serif;
+ max-width: 60em;
+ }
+ div.draft {
+ background: #ffa;
+ } 
+ div.published {
+ background: #e5ecf9;
+ }
+ div.published .body, div.draft .body {
+ padding: .5em .1em .1em .1em;
+ max-width: 60em;
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap;
+ white-space: -pre-wrap;
+ white-space: -o-pre-wrap;
+ word-wrap: break-word;
+ font-size: 1em;
+ }
+ div.draft .actions {
+ margin-left: 1em;
+ font-size: 90%;
+ }
+ div.draft form {
+ padding: .5em .5em .5em 0;
+ }
+ div.draft textarea, div.published textarea {
+ width: 95%;
+ height: 10em;
+ font-family: arial, sans-serif;
+ margin-bottom: .5em;
+ }
+
+ 
+ .nocursor, .nocursor td, .cursor_hidden, .cursor_hidden td {
+ background-color: white;
+ height: 2px;
+ }
+ .cursor, .cursor td {
+ background-color: darkblue;
+ height: 2px;
+ display: '';
+ }
+ 
+ 
+.list {
+ border: 1px solid white;
+ border-bottom: 0;
+}
+
+ 
+ </style>
+</head>
+<body class="t4">
+<script type="text/javascript">
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ <b>michael.cizmar@mcplusa.com</b>
+ 
+ 
+ | <a href="/u/@UBBfRl1WBBVGWQh8GQ%3D%3D/" id="projects-dropdown" onclick="return false;"
+ ><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="/u/@UBBfRl1WBBVGWQh8GQ%3D%3D/" onclick="_CS_click('/gb/ph/profile');"
+ title="Profile, Updates, and Settings"
+ ><u>Profile</u></a>
+ | <a href="https://www.google.com/accounts/Logout?continue=http%3A%2F%2Fcode.google.com%2Fp%2Flsnc-google-api%2Fsource%2Fbrowse%2Fwiki%2FInstallation_V1_Walk_Through.wiki" 
+ onclick="_CS_click('/gb/ph/signout');"
+ ><u>Sign out</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/lsnc-google-api">
+ <a href="/p/lsnc-google-api/">
+ 
+ 
+ <img src="/p/lsnc-google-api/logo?cct=1316232115"
+ alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/lsnc-google-api/"><span itemprop="name">lsnc-google-api</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/lsnc-google-api/"><span itemprop="description">Code models for integrating core Google Apps with the Pika case management system.</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/lsnc-google-api/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ <a href="/p/lsnc-google-api/downloads/list" class="tab ">Downloads</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/lsnc-google-api/w/list" class="tab ">Wiki</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/lsnc-google-api/issues/list"
+ class="tab ">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/lsnc-google-api/source/checkout"
+ class="tab active">Source</a>
+ 
+ 
+ <a href="/p/lsnc-google-api/admin"
+ class="tab inactive">Administer</a>
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="st2">
+ <div class="isf">
+ 
+ 
+
+
+ <span class="inst1"><a href="/p/lsnc-google-api/source/checkout">Checkout</a></span> &nbsp;
+ <span class="inst2"><a href="/p/lsnc-google-api/source/browse/">Browse</a></span> &nbsp;
+ <span class="inst3"><a href="/p/lsnc-google-api/source/list">Changes</a></span> &nbsp;
+ 
+ <form action="http://www.google.com/codesearch" method="get" style="display:inline"
+ onsubmit="document.getElementById('codesearchq').value = document.getElementById('origq').value + ' package:http://lsnc-google-api\\.googlecode\\.com'">
+ <input type="hidden" name="q" id="codesearchq" value="">
+ <input type="text" maxlength="2048" size="38" id="origq" name="origq" value="" title="Google Code Search" style="font-size:92%">&nbsp;<input type="submit" value="Search Trunk" name="btnG" style="font-size:92%">
+ 
+  &nbsp;
+ <a href="/p/lsnc-google-api/issues/entry?show=review&former=sourcelist">Request code review</a>
+ 
+ 
+ </form>
+ </div>
+</div>
+
+ </td>
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+<!-- IE -->
+
+
+
+
+<div class="expand">
+<div id="colcontrol">
+<style type="text/css">
+ #file_flipper { white-space: nowrap; padding-right: 2em; }
+ #file_flipper.hidden { display: none; }
+ #file_flipper .pagelink { color: #0000CC; text-decoration: underline; }
+ #file_flipper #visiblefiles { padding-left: 0.5em; padding-right: 0.5em; }
+</style>
+<table id="nav_and_rev" class="list"
+ cellpadding="0" cellspacing="0" width="100%">
+ <tr>
+ 
+ <td nowrap="nowrap" class="src_crumbs src_nav" width="33%">
+ <strong class="src_nav">Source path:&nbsp;</strong>
+ <span id="crumb_root">
+ 
+ <a href="/p/lsnc-google-api/source/browse/">svn</a>/&nbsp;</span>
+ <span id="crumb_links" class="ifClosed"><a href="/p/lsnc-google-api/source/browse/wiki/">wiki</a><span class="sp">/&nbsp;</span>Installation_V1_Walk_Through.wiki</span>
+ 
+ 
+
+ </td>
+ 
+ 
+ <td nowrap="nowrap" width="33%" align="center">
+ <a href="/p/lsnc-google-api/source/browse/wiki/Installation_V1_Walk_Through.wiki?edit=1"
+ ><img src="http://www.gstatic.com/codesite/ph/images/pencil-y14.png"
+ class="edit_icon">Edit file</a>
+ </td>
+ 
+ 
+ <td nowrap="nowrap" width="33%" align="right">
+ <table cellpadding="0" cellspacing="0" style="font-size: 100%"><tr>
+ 
+ 
+ <td class="flipper">
+ <ul class="leftside">
+ 
+ <li><a href="/p/lsnc-google-api/source/browse/wiki/Installation_V1_Walk_Through.wiki?r=8" title="Previous">&lsaquo;r8</a></li>
+ 
+ </ul>
+ </td>
+ 
+ <td class="flipper"><b>r15</b></td>
+ 
+ </tr></table>
+ </td> 
+ </tr>
+</table>
+
+<div class="fc">
+ 
+ 
+ 
+<style type="text/css">
+.undermouse span {
+ background-image: url(http://www.gstatic.com/codesite/ph/images/comments.gif); }
+</style>
+<table class="opened" id="review_comment_area"
+onmouseout="gutterOut()"><tr>
+<td id="nums">
+<pre><table width="100%"><tr class="nocursor"><td></td></tr></table></pre>
+<pre><table width="100%" id="nums_table_0"><tr id="gr_svn15_1"
+
+ onmouseover="gutterOver(1)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',1);">&nbsp;</span
+></td><td id="1"><a href="#1">1</a></td></tr
+><tr id="gr_svn15_2"
+
+ onmouseover="gutterOver(2)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',2);">&nbsp;</span
+></td><td id="2"><a href="#2">2</a></td></tr
+><tr id="gr_svn15_3"
+
+ onmouseover="gutterOver(3)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',3);">&nbsp;</span
+></td><td id="3"><a href="#3">3</a></td></tr
+><tr id="gr_svn15_4"
+
+ onmouseover="gutterOver(4)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',4);">&nbsp;</span
+></td><td id="4"><a href="#4">4</a></td></tr
+><tr id="gr_svn15_5"
+
+ onmouseover="gutterOver(5)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',5);">&nbsp;</span
+></td><td id="5"><a href="#5">5</a></td></tr
+><tr id="gr_svn15_6"
+
+ onmouseover="gutterOver(6)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',6);">&nbsp;</span
+></td><td id="6"><a href="#6">6</a></td></tr
+><tr id="gr_svn15_7"
+
+ onmouseover="gutterOver(7)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',7);">&nbsp;</span
+></td><td id="7"><a href="#7">7</a></td></tr
+><tr id="gr_svn15_8"
+
+ onmouseover="gutterOver(8)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',8);">&nbsp;</span
+></td><td id="8"><a href="#8">8</a></td></tr
+><tr id="gr_svn15_9"
+
+ onmouseover="gutterOver(9)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',9);">&nbsp;</span
+></td><td id="9"><a href="#9">9</a></td></tr
+><tr id="gr_svn15_10"
+
+ onmouseover="gutterOver(10)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',10);">&nbsp;</span
+></td><td id="10"><a href="#10">10</a></td></tr
+><tr id="gr_svn15_11"
+
+ onmouseover="gutterOver(11)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',11);">&nbsp;</span
+></td><td id="11"><a href="#11">11</a></td></tr
+><tr id="gr_svn15_12"
+
+ onmouseover="gutterOver(12)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',12);">&nbsp;</span
+></td><td id="12"><a href="#12">12</a></td></tr
+><tr id="gr_svn15_13"
+
+ onmouseover="gutterOver(13)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',13);">&nbsp;</span
+></td><td id="13"><a href="#13">13</a></td></tr
+><tr id="gr_svn15_14"
+
+ onmouseover="gutterOver(14)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',14);">&nbsp;</span
+></td><td id="14"><a href="#14">14</a></td></tr
+><tr id="gr_svn15_15"
+
+ onmouseover="gutterOver(15)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',15);">&nbsp;</span
+></td><td id="15"><a href="#15">15</a></td></tr
+><tr id="gr_svn15_16"
+
+ onmouseover="gutterOver(16)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',16);">&nbsp;</span
+></td><td id="16"><a href="#16">16</a></td></tr
+><tr id="gr_svn15_17"
+
+ onmouseover="gutterOver(17)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',17);">&nbsp;</span
+></td><td id="17"><a href="#17">17</a></td></tr
+><tr id="gr_svn15_18"
+
+ onmouseover="gutterOver(18)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',18);">&nbsp;</span
+></td><td id="18"><a href="#18">18</a></td></tr
+><tr id="gr_svn15_19"
+
+ onmouseover="gutterOver(19)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',19);">&nbsp;</span
+></td><td id="19"><a href="#19">19</a></td></tr
+><tr id="gr_svn15_20"
+
+ onmouseover="gutterOver(20)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',20);">&nbsp;</span
+></td><td id="20"><a href="#20">20</a></td></tr
+><tr id="gr_svn15_21"
+
+ onmouseover="gutterOver(21)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',21);">&nbsp;</span
+></td><td id="21"><a href="#21">21</a></td></tr
+><tr id="gr_svn15_22"
+
+ onmouseover="gutterOver(22)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',22);">&nbsp;</span
+></td><td id="22"><a href="#22">22</a></td></tr
+><tr id="gr_svn15_23"
+
+ onmouseover="gutterOver(23)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',23);">&nbsp;</span
+></td><td id="23"><a href="#23">23</a></td></tr
+><tr id="gr_svn15_24"
+
+ onmouseover="gutterOver(24)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',24);">&nbsp;</span
+></td><td id="24"><a href="#24">24</a></td></tr
+><tr id="gr_svn15_25"
+
+ onmouseover="gutterOver(25)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',25);">&nbsp;</span
+></td><td id="25"><a href="#25">25</a></td></tr
+><tr id="gr_svn15_26"
+
+ onmouseover="gutterOver(26)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',26);">&nbsp;</span
+></td><td id="26"><a href="#26">26</a></td></tr
+><tr id="gr_svn15_27"
+
+ onmouseover="gutterOver(27)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',27);">&nbsp;</span
+></td><td id="27"><a href="#27">27</a></td></tr
+><tr id="gr_svn15_28"
+
+ onmouseover="gutterOver(28)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',28);">&nbsp;</span
+></td><td id="28"><a href="#28">28</a></td></tr
+><tr id="gr_svn15_29"
+
+ onmouseover="gutterOver(29)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',29);">&nbsp;</span
+></td><td id="29"><a href="#29">29</a></td></tr
+><tr id="gr_svn15_30"
+
+ onmouseover="gutterOver(30)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',30);">&nbsp;</span
+></td><td id="30"><a href="#30">30</a></td></tr
+><tr id="gr_svn15_31"
+
+ onmouseover="gutterOver(31)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',31);">&nbsp;</span
+></td><td id="31"><a href="#31">31</a></td></tr
+><tr id="gr_svn15_32"
+
+ onmouseover="gutterOver(32)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',32);">&nbsp;</span
+></td><td id="32"><a href="#32">32</a></td></tr
+><tr id="gr_svn15_33"
+
+ onmouseover="gutterOver(33)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',33);">&nbsp;</span
+></td><td id="33"><a href="#33">33</a></td></tr
+><tr id="gr_svn15_34"
+
+ onmouseover="gutterOver(34)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',34);">&nbsp;</span
+></td><td id="34"><a href="#34">34</a></td></tr
+><tr id="gr_svn15_35"
+
+ onmouseover="gutterOver(35)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',35);">&nbsp;</span
+></td><td id="35"><a href="#35">35</a></td></tr
+><tr id="gr_svn15_36"
+
+ onmouseover="gutterOver(36)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',36);">&nbsp;</span
+></td><td id="36"><a href="#36">36</a></td></tr
+><tr id="gr_svn15_37"
+
+ onmouseover="gutterOver(37)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',37);">&nbsp;</span
+></td><td id="37"><a href="#37">37</a></td></tr
+><tr id="gr_svn15_38"
+
+ onmouseover="gutterOver(38)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',38);">&nbsp;</span
+></td><td id="38"><a href="#38">38</a></td></tr
+><tr id="gr_svn15_39"
+
+ onmouseover="gutterOver(39)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',39);">&nbsp;</span
+></td><td id="39"><a href="#39">39</a></td></tr
+><tr id="gr_svn15_40"
+
+ onmouseover="gutterOver(40)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',40);">&nbsp;</span
+></td><td id="40"><a href="#40">40</a></td></tr
+><tr id="gr_svn15_41"
+
+ onmouseover="gutterOver(41)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',41);">&nbsp;</span
+></td><td id="41"><a href="#41">41</a></td></tr
+><tr id="gr_svn15_42"
+
+ onmouseover="gutterOver(42)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',42);">&nbsp;</span
+></td><td id="42"><a href="#42">42</a></td></tr
+><tr id="gr_svn15_43"
+
+ onmouseover="gutterOver(43)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',43);">&nbsp;</span
+></td><td id="43"><a href="#43">43</a></td></tr
+><tr id="gr_svn15_44"
+
+ onmouseover="gutterOver(44)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',44);">&nbsp;</span
+></td><td id="44"><a href="#44">44</a></td></tr
+><tr id="gr_svn15_45"
+
+ onmouseover="gutterOver(45)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',45);">&nbsp;</span
+></td><td id="45"><a href="#45">45</a></td></tr
+><tr id="gr_svn15_46"
+
+ onmouseover="gutterOver(46)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',46);">&nbsp;</span
+></td><td id="46"><a href="#46">46</a></td></tr
+><tr id="gr_svn15_47"
+
+ onmouseover="gutterOver(47)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',47);">&nbsp;</span
+></td><td id="47"><a href="#47">47</a></td></tr
+><tr id="gr_svn15_48"
+
+ onmouseover="gutterOver(48)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',48);">&nbsp;</span
+></td><td id="48"><a href="#48">48</a></td></tr
+><tr id="gr_svn15_49"
+
+ onmouseover="gutterOver(49)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',49);">&nbsp;</span
+></td><td id="49"><a href="#49">49</a></td></tr
+><tr id="gr_svn15_50"
+
+ onmouseover="gutterOver(50)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',50);">&nbsp;</span
+></td><td id="50"><a href="#50">50</a></td></tr
+><tr id="gr_svn15_51"
+
+ onmouseover="gutterOver(51)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',51);">&nbsp;</span
+></td><td id="51"><a href="#51">51</a></td></tr
+><tr id="gr_svn15_52"
+
+ onmouseover="gutterOver(52)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',52);">&nbsp;</span
+></td><td id="52"><a href="#52">52</a></td></tr
+><tr id="gr_svn15_53"
+
+ onmouseover="gutterOver(53)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',53);">&nbsp;</span
+></td><td id="53"><a href="#53">53</a></td></tr
+><tr id="gr_svn15_54"
+
+ onmouseover="gutterOver(54)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',54);">&nbsp;</span
+></td><td id="54"><a href="#54">54</a></td></tr
+><tr id="gr_svn15_55"
+
+ onmouseover="gutterOver(55)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',55);">&nbsp;</span
+></td><td id="55"><a href="#55">55</a></td></tr
+><tr id="gr_svn15_56"
+
+ onmouseover="gutterOver(56)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',56);">&nbsp;</span
+></td><td id="56"><a href="#56">56</a></td></tr
+><tr id="gr_svn15_57"
+
+ onmouseover="gutterOver(57)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',57);">&nbsp;</span
+></td><td id="57"><a href="#57">57</a></td></tr
+><tr id="gr_svn15_58"
+
+ onmouseover="gutterOver(58)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',58);">&nbsp;</span
+></td><td id="58"><a href="#58">58</a></td></tr
+><tr id="gr_svn15_59"
+
+ onmouseover="gutterOver(59)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',59);">&nbsp;</span
+></td><td id="59"><a href="#59">59</a></td></tr
+><tr id="gr_svn15_60"
+
+ onmouseover="gutterOver(60)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',60);">&nbsp;</span
+></td><td id="60"><a href="#60">60</a></td></tr
+><tr id="gr_svn15_61"
+
+ onmouseover="gutterOver(61)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',61);">&nbsp;</span
+></td><td id="61"><a href="#61">61</a></td></tr
+><tr id="gr_svn15_62"
+
+ onmouseover="gutterOver(62)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',62);">&nbsp;</span
+></td><td id="62"><a href="#62">62</a></td></tr
+><tr id="gr_svn15_63"
+
+ onmouseover="gutterOver(63)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',63);">&nbsp;</span
+></td><td id="63"><a href="#63">63</a></td></tr
+><tr id="gr_svn15_64"
+
+ onmouseover="gutterOver(64)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',64);">&nbsp;</span
+></td><td id="64"><a href="#64">64</a></td></tr
+><tr id="gr_svn15_65"
+
+ onmouseover="gutterOver(65)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',65);">&nbsp;</span
+></td><td id="65"><a href="#65">65</a></td></tr
+><tr id="gr_svn15_66"
+
+ onmouseover="gutterOver(66)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',66);">&nbsp;</span
+></td><td id="66"><a href="#66">66</a></td></tr
+><tr id="gr_svn15_67"
+
+ onmouseover="gutterOver(67)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',67);">&nbsp;</span
+></td><td id="67"><a href="#67">67</a></td></tr
+><tr id="gr_svn15_68"
+
+ onmouseover="gutterOver(68)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',68);">&nbsp;</span
+></td><td id="68"><a href="#68">68</a></td></tr
+><tr id="gr_svn15_69"
+
+ onmouseover="gutterOver(69)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',69);">&nbsp;</span
+></td><td id="69"><a href="#69">69</a></td></tr
+><tr id="gr_svn15_70"
+
+ onmouseover="gutterOver(70)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',70);">&nbsp;</span
+></td><td id="70"><a href="#70">70</a></td></tr
+><tr id="gr_svn15_71"
+
+ onmouseover="gutterOver(71)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',71);">&nbsp;</span
+></td><td id="71"><a href="#71">71</a></td></tr
+><tr id="gr_svn15_72"
+
+ onmouseover="gutterOver(72)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',72);">&nbsp;</span
+></td><td id="72"><a href="#72">72</a></td></tr
+><tr id="gr_svn15_73"
+
+ onmouseover="gutterOver(73)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',73);">&nbsp;</span
+></td><td id="73"><a href="#73">73</a></td></tr
+><tr id="gr_svn15_74"
+
+ onmouseover="gutterOver(74)"
+
+><td><span title="Add comment" onclick="codereviews.startEdit('svn15',74);">&nbsp;</span
+></td><td id="74"><a href="#74">74</a></td></tr
+></table></pre>
+<pre><table width="100%"><tr class="nocursor"><td></td></tr></table></pre>
+</td>
+<td id="lines">
+<pre><table width="100%"><tr class="cursor_stop cursor_hidden"><td></td></tr></table></pre>
+<pre class="prettyprint lang-wiki"><table id="src_table_0"><tr
+id=sl_svn15_1
+
+ onmouseover="gutterOver(1)"
+
+><td class="source">#summary Realtime edited install<br></td></tr
+><tr
+id=sl_svn15_2
+
+ onmouseover="gutterOver(2)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_3
+
+ onmouseover="gutterOver(3)"
+
+><td class="source">= Introduction =<br></td></tr
+><tr
+id=sl_svn15_4
+
+ onmouseover="gutterOver(4)"
+
+><td class="source">The following notes were taken while doing a fresh install of the application. End result was a successful install<br></td></tr
+><tr
+id=sl_svn15_5
+
+ onmouseover="gutterOver(5)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_6
+
+ onmouseover="gutterOver(6)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_7
+
+ onmouseover="gutterOver(7)"
+
+><td class="source">= Details =<br></td></tr
+><tr
+id=sl_svn15_8
+
+ onmouseover="gutterOver(8)"
+
+><td class="source">1.	Download pika_gadget_v1.zip and extract<br></td></tr
+><tr
+id=sl_svn15_9
+
+ onmouseover="gutterOver(9)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_10
+
+ onmouseover="gutterOver(10)"
+
+><td class="source">2.	Open and read readme.txt<br></td></tr
+><tr
+id=sl_svn15_11
+
+ onmouseover="gutterOver(11)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_12
+
+ onmouseover="gutterOver(12)"
+
+><td class="source">3. 	Download missing install.sql script<br></td></tr
+><tr
+id=sl_svn15_13
+
+ onmouseover="gutterOver(13)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_14
+
+ onmouseover="gutterOver(14)"
+
+><td class="source">4.	Remove $$ characters from line endings<br></td></tr
+><tr
+id=sl_svn15_15
+
+ onmouseover="gutterOver(15)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_16
+
+ onmouseover="gutterOver(16)"
+
+><td class="source">5.	Remove 2 alter table lines and the end of sql script and ran them separately<br></td></tr
+><tr
+id=sl_svn15_17
+
+ onmouseover="gutterOver(17)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_18
+
+ onmouseover="gutterOver(18)"
+
+><td class="source">6.	Modified createcert.sh script by changing ST=IL to ST=”My State abbreviation” .. L=Chicago to L=”My city abbreviation”..dropped www prefix from domain and added my domain<br></td></tr
+><tr
+id=sl_svn15_19
+
+ onmouseover="gutterOver(19)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_20
+
+ onmouseover="gutterOver(20)"
+
+><td class="source">7.	Created new ssl folder and copied new rsakey to correct server location. /etc/apache2/ssl/<br></td></tr
+><tr
+id=sl_svn15_21
+
+ onmouseover="gutterOver(21)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_22
+
+ onmouseover="gutterOver(22)"
+
+><td class="source">8.	Copied google-gadgets folder to /home/google-gadgets<br></td></tr
+><tr
+id=sl_svn15_23
+
+ onmouseover="gutterOver(23)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_24
+
+ onmouseover="gutterOver(24)"
+
+><td class="source">9.	Copied Zend folder to /home/pika/app/extralib/Zend<br></td></tr
+><tr
+id=sl_svn15_25
+
+ onmouseover="gutterOver(25)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_26
+
+ onmouseover="gutterOver(26)"
+
+><td class="source">10.	Copied modified core pika files to correct folders<br></td></tr
+><tr
+id=sl_svn15_27
+
+ onmouseover="gutterOver(27)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_28
+
+ onmouseover="gutterOver(28)"
+
+><td class="source">11.	Copied new pika files to correct folders..clearsession.php and google-gadget.html and missing from pika_gadget_v1.zip package<br></td></tr
+><tr
+id=sl_svn15_29
+
+ onmouseover="gutterOver(29)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_30
+
+ onmouseover="gutterOver(30)"
+
+><td class="source">12.	Created calendars per instructions<br></td></tr
+><tr
+id=sl_svn15_31
+
+ onmouseover="gutterOver(31)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_32
+
+ onmouseover="gutterOver(32)"
+
+><td class="source">13.	Installed  .pem formatted certificate to Google apps as per instructions<br></td></tr
+><tr
+id=sl_svn15_33
+
+ onmouseover="gutterOver(33)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_34
+
+ onmouseover="gutterOver(34)"
+
+><td class="source">14.	Modified /pika/app/lib/pikaGoogleSync.php as per lines 4,5,6 of instructions<br></td></tr
+><tr
+id=sl_svn15_35
+
+ onmouseover="gutterOver(35)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_36
+
+ onmouseover="gutterOver(36)"
+
+><td class="source">15.	Modified /home/google-gadgets/pika.xml   where http://yourdomian.com/  becomes https://mydomain.com/  as per lines 7 and 8 of the instructions<br></td></tr
+><tr
+id=sl_svn15_37
+
+ onmouseover="gutterOver(37)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_38
+
+ onmouseover="gutterOver(38)"
+
+><td class="source">16.	Noted syntax on line 435 of   /home/google-gadgets/pika.xml  &lt;img src=&quot;http:////yourdomain.com/google_gadgets/images/busyLoader.gif&quot; alt=&quot;BusyLoader Image&quot;&gt;  has 4 //// don’t know effect until I test<br></td></tr
+><tr
+id=sl_svn15_39
+
+ onmouseover="gutterOver(39)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_40
+
+ onmouseover="gutterOver(40)"
+
+><td class="source">17.	Attempted to run https://yourdomian.com/pika/services/google-queue.php in browser. . Error logs show /Zend/Locale.php is missing from pika_gadget_v1.zip package. Downloaded and added Locale.php and /Zend/Locale library from the Zend Framework at  www.zend.com<br></td></tr
+><tr
+id=sl_svn15_41
+
+ onmouseover="gutterOver(41)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_42
+
+ onmouseover="gutterOver(42)"
+
+><td class="source">18.	You will get the same error for /Zend/Http/Client.php so add the Http folder from the Zend Framework chmod if necessary<br></td></tr
+><tr
+id=sl_svn15_43
+
+ onmouseover="gutterOver(43)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_44
+
+ onmouseover="gutterOver(44)"
+
+><td class="source">19.	Same error for  /Zend/Uri.php ..Add files /Zend/Uri.php and folder /Zend/Uri<br></td></tr
+><tr
+id=sl_svn15_45
+
+ onmouseover="gutterOver(45)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_46
+
+ onmouseover="gutterOver(46)"
+
+><td class="source">20.	Same error for  /Zend/Validate/Hostname.php .. folder /Zend/Validate<br></td></tr
+><tr
+id=sl_svn15_47
+
+ onmouseover="gutterOver(47)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_48
+
+ onmouseover="gutterOver(48)"
+
+><td class="source">21.	Same error for /Zend/Version.php ..Add file /Zend/version.php<br></td></tr
+><tr
+id=sl_svn15_49
+
+ onmouseover="gutterOver(49)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_50
+
+ onmouseover="gutterOver(50)"
+
+><td class="source">22.	Chmod  /home/pika/app/extralib/Zend/  to give apache access to new files if necessary<br></td></tr
+><tr
+id=sl_svn15_51
+
+ onmouseover="gutterOver(51)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_52
+
+ onmouseover="gutterOver(52)"
+
+><td class="source">23.	Attempted to run https://yourdomian.com /pika/services/google-queue.php in browser. Takes you to login for developer Apps account.  Change line 97 of /pika/app/lib/pikaGoogleSync.php  to (yourdomian.com)<br></td></tr
+><tr
+id=sl_svn15_53
+
+ onmouseover="gutterOver(53)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_54
+
+ onmouseover="gutterOver(54)"
+
+><td class="source">24.	Run https://yourdomian.com /pika/services/google-queue.php in browser. Should run OK now and show Queue is empty<br></td></tr
+><tr
+id=sl_svn15_55
+
+ onmouseover="gutterOver(55)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_56
+
+ onmouseover="gutterOver(56)"
+
+><td class="source">25.	Add tickle to case.  Run https://yourdomian.com /pika/services/google-queue.php in browser<br></td></tr
+><tr
+id=sl_svn15_57
+
+ onmouseover="gutterOver(57)"
+
+><td class="source"> <br></td></tr
+><tr
+id=sl_svn15_58
+
+ onmouseover="gutterOver(58)"
+
+><td class="source">26.	Logs show error for /Zend/Exception.php ..Add file /Zend/Exception.php<br></td></tr
+><tr
+id=sl_svn15_59
+
+ onmouseover="gutterOver(59)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_60
+
+ onmouseover="gutterOver(60)"
+
+><td class="source">27.	Add tickle to case.  Run https://yourdomian.com /pika/services/google-queue.php in browser.<br></td></tr
+><tr
+id=sl_svn15_61
+
+ onmouseover="gutterOver(61)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_62
+
+ onmouseover="gutterOver(62)"
+
+><td class="source">28.	Should run fine now unless you did not fill out Subject or Where in the tickle form<br></td></tr
+><tr
+id=sl_svn15_63
+
+ onmouseover="gutterOver(63)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_64
+
+ onmouseover="gutterOver(64)"
+
+><td class="source">29.	Modified table activities.subject and activites.location_long to allow null values. This will prevent the google-queue operation from failing if values are not present<br></td></tr
+><tr
+id=sl_svn15_65
+
+ onmouseover="gutterOver(65)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_66
+
+ onmouseover="gutterOver(66)"
+
+><td class="source">30.	Found error lines 21,22, 421 and 435 /home/google-gadgets/pika.xml  change underscore google_gadgets to hyphen google-gadgets<br></td></tr
+><tr
+id=sl_svn15_67
+
+ onmouseover="gutterOver(67)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_68
+
+ onmouseover="gutterOver(68)"
+
+><td class="source">31.	Change underscore to hyphen on  line 13 of instructions To install your Google Calendar Gadget, login to your Google account and use this link: https://www.google.com/calendar/render?gadgeturl=http://yourdomainname.com/google_gadgets/pika.xml    to  To install your Google Calendar Gadget, login to your Google account and use this link: https://www.google.com/calendar/render?gadgeturl=http://yourdomainname.com/google-gadgets/pika.xml <br></td></tr
+><tr
+id=sl_svn15_69
+
+ onmouseover="gutterOver(69)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_70
+
+ onmouseover="gutterOver(70)"
+
+><td class="source">32.	Add google gadget per new instructions<br></td></tr
+><tr
+id=sl_svn15_71
+
+ onmouseover="gutterOver(71)"
+
+><td class="source"> <br></td></tr
+><tr
+id=sl_svn15_72
+
+ onmouseover="gutterOver(72)"
+
+><td class="source">33.	For command line google-queue download new pika patch  add and modify /home/pika/app/lib/pikaGoogleSync  as needed .  Add/replace files /home/pika/services  google_ clearsession.php ,google-queue.php and gettokken.php <br></td></tr
+><tr
+id=sl_svn15_73
+
+ onmouseover="gutterOver(73)"
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn15_74
+
+ onmouseover="gutterOver(74)"
+
+><td class="source">34.	Changed line 304 pikaGoogleSync.php from: $_extprop-&gt;setAttribute(&#39;value&#39;,&quot;http://&quot; . $_SERVER[&quot;HTTP_HOST&quot;] . &quot;/pika/&quot;)   to $_extprop-&gt;setAttribute(&#39;value&#39;,&quot;https://&quot; . $_SERVER[&quot;HTTP_HOST&quot;] . &quot;/pika/&quot;) to fix Edit Tickle button in Google Gadget. Adds https to url rather than http<br></td></tr
+></table></pre>
+<pre><table width="100%"><tr class="cursor_stop cursor_hidden"><td></td></tr></table></pre>
+</td>
+</tr></table>
+
+ 
+<script type="text/javascript">
+ var lineNumUnderMouse = -1;
+ 
+ function gutterOver(num) {
+ gutterOut();
+ var newTR = document.getElementById('gr_svn15_' + num);
+ if (newTR) {
+ newTR.className = 'undermouse';
+ }
+ lineNumUnderMouse = num;
+ }
+ function gutterOut() {
+ if (lineNumUnderMouse != -1) {
+ var oldTR = document.getElementById(
+ 'gr_svn15_' + lineNumUnderMouse);
+ if (oldTR) {
+ oldTR.className = '';
+ }
+ lineNumUnderMouse = -1;
+ }
+ }
+ var numsGenState = {table_base_id: 'nums_table_'};
+ var srcGenState = {table_base_id: 'src_table_'};
+ var alignerRunning = false;
+ var startOver = false;
+ function setLineNumberHeights() {
+ if (alignerRunning) {
+ startOver = true;
+ return;
+ }
+ numsGenState.chunk_id = 0;
+ numsGenState.table = document.getElementById('nums_table_0');
+ numsGenState.row_num = 0;
+ if (!numsGenState.table) {
+ return; // Silently exit if no file is present.
+ }
+ srcGenState.chunk_id = 0;
+ srcGenState.table = document.getElementById('src_table_0');
+ srcGenState.row_num = 0;
+ alignerRunning = true;
+ continueToSetLineNumberHeights();
+ }
+ function rowGenerator(genState) {
+ if (genState.row_num < genState.table.rows.length) {
+ var currentRow = genState.table.rows[genState.row_num];
+ genState.row_num++;
+ return currentRow;
+ }
+ var newTable = document.getElementById(
+ genState.table_base_id + (genState.chunk_id + 1));
+ if (newTable) {
+ genState.chunk_id++;
+ genState.row_num = 0;
+ genState.table = newTable;
+ return genState.table.rows[0];
+ }
+ return null;
+ }
+ var MAX_ROWS_PER_PASS = 1000;
+ function continueToSetLineNumberHeights() {
+ var rowsInThisPass = 0;
+ var numRow = 1;
+ var srcRow = 1;
+ while (numRow && srcRow && rowsInThisPass < MAX_ROWS_PER_PASS) {
+ numRow = rowGenerator(numsGenState);
+ srcRow = rowGenerator(srcGenState);
+ rowsInThisPass++;
+ if (numRow && srcRow) {
+ if (numRow.offsetHeight != srcRow.offsetHeight) {
+ numRow.firstChild.style.height = srcRow.offsetHeight + 'px';
+ }
+ }
+ }
+ if (rowsInThisPass >= MAX_ROWS_PER_PASS) {
+ setTimeout(continueToSetLineNumberHeights, 10);
+ } else {
+ alignerRunning = false;
+ if (startOver) {
+ startOver = false;
+ setTimeout(setLineNumberHeights, 500);
+ }
+ }
+ }
+ function initLineNumberHeights() {
+ // Do 2 complete passes, because there can be races
+ // between this code and prettify.
+ startOver = true;
+ setTimeout(setLineNumberHeights, 250);
+ window.onresize = setLineNumberHeights;
+ }
+ initLineNumberHeights();
+</script>
+
+ 
+ 
+ <div id="log">
+ <div style="text-align:right">
+ <a class="ifCollapse" href="#" onclick="_toggleMeta('', 'p', 'lsnc-google-api', this)">Show details</a>
+ <a class="ifExpand" href="#" onclick="_toggleMeta('', 'p', 'lsnc-google-api', this)">Hide details</a>
+ </div>
+ <div class="ifExpand">
+ 
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="changelog">
+ <p>Change log</p>
+ <div>
+ <a href="/p/lsnc-google-api/source/detail?spec=svn15&amp;r=9">r9</a>
+ by msawyer@lsnc.net
+ on Jul 25, 2011
+ &nbsp; <a href="/p/lsnc-google-api/source/diff?spec=svn15&r=9&amp;format=side&amp;path=/wiki/Installation_V1_Walk_Through.wiki&amp;old_path=/wiki/Installation_V1_Walk_Through.wiki&amp;old=8">Diff</a>
+ </div>
+ <pre>Edited wiki page
+<a title="Realtime edited install" href="/p/lsnc-google-api/wiki/Installation_V1_Walk_Through">Installation_V1_Walk_Through</a> through web
+user interface.</pre>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+ var detail_url = '/p/lsnc-google-api/source/detail?r=9&spec=svn15';
+ var publish_url = '/p/lsnc-google-api/source/detail?r=9&spec=svn15#publish';
+ // describe the paths of this revision in javascript.
+ var changed_paths = [];
+ var changed_urls = [];
+ 
+ changed_paths.push('/wiki/Installation_V1_Walk_Through.wiki');
+ changed_urls.push('/p/lsnc-google-api/source/browse/wiki/Installation_V1_Walk_Through.wiki?r\x3d9\x26spec\x3dsvn15');
+ 
+ var selected_path = '/wiki/Installation_V1_Walk_Through.wiki';
+ 
+ 
+ function getCurrentPageIndex() {
+ for (var i = 0; i < changed_paths.length; i++) {
+ if (selected_path == changed_paths[i]) {
+ return i;
+ }
+ }
+ }
+ function getNextPage() {
+ var i = getCurrentPageIndex();
+ if (i < changed_paths.length - 1) {
+ return changed_urls[i + 1];
+ }
+ return null;
+ }
+ function getPreviousPage() {
+ var i = getCurrentPageIndex();
+ if (i > 0) {
+ return changed_urls[i - 1];
+ }
+ return null;
+ }
+ function gotoNextPage() {
+ var page = getNextPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoPreviousPage() {
+ var page = getPreviousPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoDetailPage() {
+ window.location = detail_url;
+ }
+ function gotoPublishPage() {
+ window.location = publish_url;
+ }
+</script>
+
+ 
+ <style type="text/css">
+ #review_nav {
+ border-top: 3px solid white;
+ padding-top: 6px;
+ margin-top: 1em;
+ }
+ #review_nav td {
+ vertical-align: middle;
+ }
+ #review_nav select {
+ margin: .5em 0;
+ }
+ </style>
+ <div id="review_nav">
+ <table><tr><td>Go to:&nbsp;</td><td>
+ <select name="files_in_rev" onchange="window.location=this.value">
+ 
+ <option value="/p/lsnc-google-api/source/browse/wiki/Installation_V1_Walk_Through.wiki?r=9&amp;spec=svn15"
+ selected="selected"
+ >...nstallation_V1_Walk_Through.wiki</option>
+ 
+ </select>
+ </td></tr></table>
+ 
+ 
+ <div id="review_instr" class="closed">
+ <a class="ifOpened" href="/p/lsnc-google-api/source/detail?r=9&spec=svn15#publish">Publish your comments</a>
+ <div class="ifClosed">Double click a line to add a comment</div>
+ </div>
+ 
+ </div>
+ 
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="older_bubble">
+ <p>Older revisions</p>
+ 
+ 
+ <div class="closed" style="margin-bottom:3px;" >
+ <img class="ifClosed" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/plus.gif" >
+ <img class="ifOpened" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/minus.gif" >
+ <a href="/p/lsnc-google-api/source/detail?spec=svn15&r=8">r8</a>
+ by msawyer@lsnc.net
+ on Jul 25, 2011
+ &nbsp; <a href="/p/lsnc-google-api/source/diff?spec=svn15&r=8&amp;format=side&amp;path=/wiki/Installation_V1_Walk_Through.wiki&amp;old_path=/wiki/Installation_V1_Walk_Through.wiki&amp;old=7">Diff</a>
+ <br>
+ <pre class="ifOpened">Edited wiki page
+<a title="Realtime edited install" href="/p/lsnc-google-api/wiki/Installation_V1_Walk_Through">Installation_V1_Walk_Through</a> through
+web user interface.</pre>
+ </div>
+ 
+ <div class="closed" style="margin-bottom:3px;" >
+ <img class="ifClosed" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/plus.gif" >
+ <img class="ifOpened" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/minus.gif" >
+ <a href="/p/lsnc-google-api/source/detail?spec=svn15&r=7">r7</a>
+ by msawyer@lsnc.net
+ on Jul 25, 2011
+ &nbsp; <a href="/p/lsnc-google-api/source/diff?spec=svn15&r=7&amp;format=side&amp;path=/wiki/Installation_V1_Walk_Through.wiki&amp;old_path=/wiki/Installation_V1_Walk_Through.wiki&amp;old=6">Diff</a>
+ <br>
+ <pre class="ifOpened">Edited wiki page
+<a title="Realtime edited install" href="/p/lsnc-google-api/wiki/Installation_V1_Walk_Through">Installation_V1_Walk_Through</a> through
+web user interface.</pre>
+ </div>
+ 
+ <div class="closed" style="margin-bottom:3px;" >
+ <img class="ifClosed" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/plus.gif" >
+ <img class="ifOpened" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/minus.gif" >
+ <a href="/p/lsnc-google-api/source/detail?spec=svn15&r=6">r6</a>
+ by msawyer@lsnc.net
+ on Jul 25, 2011
+ &nbsp; <a href="/p/lsnc-google-api/source/diff?spec=svn15&r=6&amp;format=side&amp;path=/wiki/Installation_V1_Walk_Through.wiki&amp;old_path=/wiki/Installation_V1_Walk_Through.wiki&amp;old=5">Diff</a>
+ <br>
+ <pre class="ifOpened">Edited wiki page
+<a title="Realtime edited install" href="/p/lsnc-google-api/wiki/Installation_V1_Walk_Through">Installation_V1_Walk_Through</a> through
+web user interface.</pre>
+ </div>
+ 
+ 
+ <a href="/p/lsnc-google-api/source/list?path=/wiki/Installation_V1_Walk_Through.wiki&start=9">All revisions of this file</a>
+ </div>
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="fileinfo_bubble">
+ <p>File info</p>
+ 
+ <div>Size: 4242 bytes,
+ 74 lines</div>
+ 
+ <div><a href="//lsnc-google-api.googlecode.com/svn/wiki/Installation_V1_Walk_Through.wiki">View raw file</a></div>
+ </div>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ </div>
+ </div>
+
+
+</div>
+
+</div>
+</div>
+
+<script src="http://www.gstatic.com/codesite/ph/274877064420089206/js/prettify/prettify.js"></script>
+<script type="text/javascript">prettyPrint();</script>
+
+
+<script src="http://www.gstatic.com/codesite/ph/274877064420089206/js/source_file_scripts.js"></script>
+
+ <script type="text/javascript" src="https://kibbles.googlecode.com/files/kibbles-1.3.3.comp.js"></script>
+ <script type="text/javascript">
+ var lastStop = null;
+ var initialized = false;
+ 
+ function updateCursor(next, prev) {
+ if (prev && prev.element) {
+ prev.element.className = 'cursor_stop cursor_hidden';
+ }
+ if (next && next.element) {
+ next.element.className = 'cursor_stop cursor';
+ lastStop = next.index;
+ }
+ }
+ 
+ function pubRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftDestroyed(data) {
+ updateCursorForCell(data.cellId, 'nocursor');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ function reloadCursors() {
+ kibbles.skipper.reset();
+ loadCursors();
+ if (lastStop != null) {
+ kibbles.skipper.setCurrentStop(lastStop);
+ }
+ }
+ // possibly the simplest way to insert any newly added comments
+ // is to update the class of the corresponding cursor row,
+ // then refresh the entire list of rows.
+ function updateCursorForCell(cellId, className) {
+ var cell = document.getElementById(cellId);
+ // we have to go two rows back to find the cursor location
+ var row = getPreviousElement(cell.parentNode);
+ row.className = className;
+ }
+ // returns the previous element, ignores text nodes.
+ function getPreviousElement(e) {
+ var element = e.previousSibling;
+ if (element.nodeType == 3) {
+ element = element.previousSibling;
+ }
+ if (element && element.tagName) {
+ return element;
+ }
+ }
+ function loadCursors() {
+ // register our elements with skipper
+ var elements = CR_getElements('*', 'cursor_stop');
+ var len = elements.length;
+ for (var i = 0; i < len; i++) {
+ var element = elements[i]; 
+ element.className = 'cursor_stop cursor_hidden';
+ kibbles.skipper.append(element);
+ }
+ }
+ function toggleComments() {
+ CR_toggleCommentDisplay();
+ reloadCursors();
+ }
+ function keysOnLoadHandler() {
+ // setup skipper
+ kibbles.skipper.addStopListener(
+ kibbles.skipper.LISTENER_TYPE.PRE, updateCursor);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_top', 50);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_bottom', 100);
+ // Register our keys
+ kibbles.skipper.addFwdKey("n");
+ kibbles.skipper.addRevKey("p");
+ kibbles.keys.addKeyPressListener(
+ 'u', function() { window.location = detail_url; });
+ kibbles.keys.addKeyPressListener(
+ 'r', function() { window.location = detail_url + '#publish'; });
+ 
+ kibbles.keys.addKeyPressListener('j', gotoNextPage);
+ kibbles.keys.addKeyPressListener('k', gotoPreviousPage);
+ 
+ 
+ kibbles.keys.addKeyPressListener('h', toggleComments);
+ 
+ }
+ </script>
+<script src="http://www.gstatic.com/codesite/ph/274877064420089206/js/code_review_scripts.js"></script>
+<script type="text/javascript">
+ function showPublishInstructions() {
+ var element = document.getElementById('review_instr');
+ if (element) {
+ element.className = 'opened';
+ }
+ }
+ var codereviews;
+ function revsOnLoadHandler() {
+ // register our source container with the commenting code
+ var paths = {'svn15': '/wiki/Installation_V1_Walk_Through.wiki'}
+ codereviews = CR_controller.setup(
+ {"profileUrl":["/u/@UBBfRl1WBBVGWQh8GQ%3D%3D/"],"token":"7b47841ff39e51f1b38f3b9f47e848d2","assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/274877064420089206","projectHomeUrl":"/p/lsnc-google-api","relativeBaseUrl":"","projectName":"lsnc-google-api","loggedInUserEmail":"michael.cizmar@mcplusa.com"}, '', 'svn15', paths,
+ CR_BrowseIntegrationFactory);
+ 
+ // register our source container with the commenting code
+ // in this case we're registering the container and the revison
+ // associated with the contianer which may be the primary revision
+ // or may be a previous revision against which the primary revision
+ // of the file is being compared.
+ codereviews.registerSourceContainer(document.getElementById('lines'), 'svn15');
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, showPublishInstructions);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_PUB_PLATE, pubRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, draftRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.DISCARD_DRAFT_COMMENT, draftDestroyed);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ var initialized = true;
+ reloadCursors();
+ }
+ window.onload = function() {keysOnLoadHandler(); revsOnLoadHandler();};
+
+</script>
+<script type="text/javascript" src="http://www.gstatic.com/codesite/ph/274877064420089206/js/dit_scripts.js"></script>
+
+ 
+ 
+ 
+ <script type="text/javascript" src="http://www.gstatic.com/codesite/ph/274877064420089206/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+ <script type="text/javascript" src="/js/codesite_product_dictionary_ph.pack.04102009.js"></script>
+</div> 
+<div id="footer" dir="ltr">
+ <div class="text">
+ &copy;2011 Google -
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+ 
+ 
+
+
+ 
+ </body>
+</html>
+

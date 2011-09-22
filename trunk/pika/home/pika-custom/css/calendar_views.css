@@ -1,0 +1,214 @@
+/* calendar views for Pika 4.0 */
+
+#calendar-wrapper .daily em {
+	margin: 1.0em 0;
+	}
+#calendar-wrapper .daily table,
+#calendar-wrapper #funding-table {
+	width: 650px;
+	}
+#calendar-wrapper #weekly-calendar table,
+#calendar-wrapper #funding-table table {
+	margin-top: -0.50em;
+	}	
+#calendar-wrapper h3,
+#advanced-calendar-wrapper h3 {
+	clear: left;
+	}
+#calendar-wrapper ul {
+	float: left;
+	width: auto;
+	}
+#cal_tabs li,
+.next li,
+.next li form {
+	display: inline;
+	}
+.next li a {
+	color: #333;
+	}	
+#go-to {
+	float: right;
+	padding-top: 10px;
+	width: auto;
+	}
+#cal_tabs {
+	padding: 0 20px;
+	}
+#cal_tabs a {
+	border: 2px solid #E0E0E0;
+	color: #333;
+	padding: 4px 10px 6px 10px;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#cal_tabs a:hover {
+	background: #F8FCFF;
+	border: 2px solid #82CAFA;
+	}
+#cal_tabs h3 {
+	padding-bottom: 0;
+	}	
+#calendar-wrapper .next a:hover {
+	border-bottom: 0;
+	}
+#cal-date {
+	width: 90px;
+	}			
+#calendar-wrapper table {
+	clear: left;
+	margin-top: 0.50em;
+	}
+#calendar-wrapper table th {
+	text-indent: 2px;
+	}
+#calendar-wrapper table td {
+	border: 1px solid #E0E0E0;
+	padding: 4px 6px 6px 8px;
+	vertical-align: top;
+	}
+#calendar-wrapper table td a:hover {
+	border-bottom: 0;
+	}	
+#calendar-wrapper table td i { /* "today" link container */
+	background: #F8FCFF;
+	border: 1px dotted #00F;
+	color: #00F;	
+	font-style: normal;
+	padding: 1px 3px 2px 3px;
+	text-transform: lowercase;
+	}
+#calendar-actions {
+	float: right;
+	width: auto;
+	}
+#calendar-actions ul {
+	clear: left;
+	float: left;
+	width: auto;
+	}
+#calendar-actions .actions {
+	line-height: 1.5;
+	list-style: circle;
+	list-style-position: inside;
+	}
+#day-calendar-actions #view {
+	margin-top: 0;
+	width: 200px;
+	}
+#view #view-submit {
+	margin-top: 1.0em;
+	} 		
+#funding-table {
+	float: left;
+	width: auto;
+	}
+#day-calendar-actions  {
+	float: right;
+	margin: 6px 10px 0 0;
+	width: auto;
+	}
+#day-calendar-actions ul {
+	clear: left;
+	line-height: 1.5;
+	list-style: circle;
+	list-style-position: inside;
+	margin-top: -0.50em;
+	}
+#day-calendar-actions #view {
+	list-style: none;
+	margin-top: 0;
+	}		
+#day-tables {
+	float: left;
+	width: 650px;
+	}
+#day-tables .daily {
+	clear: none;
+	}	
+#day-tables td {
+	padding-right: 4px;
+	}
+#day-tables .daily input.done-text {
+	display: none;
+	}
+h3#pending {
+	margin-top: 0;
+	}			
+.to-do {
+	clear: left;
+	}
+#log {
+	float: left;
+	margin-top: 0;
+	width: auto;		
+	}
+#log span {
+	background: #F8FCFF;
+	border: 1px solid #82CAFA;
+	padding: 0 6px 2px 6px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}	
+#ical-subscribe-wrapper	ul {
+	list-style: square;
+	list-style-position: inside;
+	}
+
+/* advanced view */
+
+#advanced-calendar-wrapper ul,
+#advanced-calendar-wrapper dl {
+	float: left;
+	padding-left: 0;
+	padding-right: 20px;
+	width: auto; 
+	}
+#advanced-calendar-wrapper #funding {
+	width: 300px;
+	}	
+#content h3 {
+	clear: both;
+	}
+#advanced-calendar-fields {
+	clear: left;
+	margin-top: -1.50em;
+	}
+#advanced-calendar-fields .user-list select {
+	height: 250px;
+	}
+#filters-02 li {
+	list-style: none;
+	}
+#filters-02 #view {
+	margin-top: 1.0em;
+	}
+#content p.user-name {
+	margin: -0.30em 0 -1.0em 0;
+	}
+.user-name strong {
+	color: #808080;
+	font-family: calibri, sans-serif;
+	font-size: 1.50em;
+	}
+#content .no-records,
+#content .total,
+#content .total-advanced-view {
+	background-color: #F8FCFF;	
+	border: 1px solid #82CAFA;
+	clear: left;
+	float: left;
+	padding: 6px 10px;
+	width: auto;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#content .no-records {
+	margin-top: 1.0em;
+	}	
+#content .total-advanced-view {
+	margin: -1.0em 0 2.0em 0;
+	}
+	

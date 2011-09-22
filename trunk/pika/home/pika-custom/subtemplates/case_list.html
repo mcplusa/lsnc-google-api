@@ -1,0 +1,163 @@
+<div id="case-list-wrapper">
+
+    <ul id="modes">
+    
+        <li><h2>Case List Mode:</h2></li>
+	
+        <li><a href="%%[base_url]%%/case_list.php?mode=open">My Open Cases</a></li>
+        
+        <li><a href="%%[base_url]%%/case_list.php?mode=closed">My Closed Cases</a></li>
+        
+        <li><a href="%%[base_url]%%/case_list.php?mode=all">All Open and Closed Cases</a></li>
+        
+        <li><a href="%%[base_url]%%/case_list.php">More Options</a></li>
+        
+    </ul>
+    
+    %%[begin:cl_form]%%
+    
+    <form name="form1" method="get" action="%%[base_url]%%/case_list.php">
+    
+        <!-- more options grid -->
+        
+        <dl>
+
+            <!-- <dt><label>Show...</label></dt> -->
+            <dd>
+                <ul>%%[show_cases vradio]%%</ul>
+            </dd>
+            
+            <dt><label>Mediation<br />
+             Filter</label></dt>
+            <dd>           
+                <ul>%%[show_mediation vradio]%%</ul>
+            </dd>
+
+        </dl>
+        
+        <dl class="case-list-options">
+
+            <dt><label for="client_name">Client Name</label></dt>
+            <dd><input type="text" name="client_name" id="client_name" value="%%[client_name]%%" tabindex="1" /></dd>
+            <dt><label for="opened_before">Opened before...</label></dt>
+		    <dd><input type="text" name="opened_before" id="opened_before" value="%%[opened_before]%%" maxlength="10" tabindex="1" /></dd>
+
+        </dl>
+        
+        <dl class="case-list-options">
+        
+            <dt><label for="user_id">Staff</label></dt>
+		    <dd>%%[user_id menu]%%</dd>
+            
+            <dt><label for="closed_before">Closed before...</label></dt>
+		    <dd><input type="text" name="closed_before" id="closed_before" value="%%[closed_before]%%" maxlength="10" tabindex="1" /></dd>
+        
+        </dl>
+        
+        <dl class="case-list-options">
+        
+            <dt><label for="office">Office</label></dt>
+		    <dd>%%[office menu]%%</dd>
+            
+            <dt><label for="opened_on_after">Opened on or after...</label></dt>
+		    <dd><input type="text" name="opened_on_after" id="opened_on_after" value="%%[opened_on_after]%%" maxlength="10" tabindex="1" /></dd>
+        
+        </dl>
+        
+        <dl class="case-list-options">
+        
+            <dt><label for="funding">Funding</label></dt>
+		    <dd>%%[funding menu]%%</dd>
+            
+            <dt><label for="closed_on_after">Closed on or after...</label></dt>
+		    <dd><input type="text" name="closed_on_after" id="closed_on_after" value="%%[closed_on_after]%%" maxlength="10" tabindex="1" /></dd>
+
+        </dl>
+        
+        <dl class="case-list-options">
+
+            <dt><label for="status">Status</label></dt>
+		    <dd>%%[status menu source=case_status]%%</dd>
+        
+            <dt>&nbsp;</dt>
+            <dd id="search-again"><input type="submit" value="Search Again" tabindex="1" /></dd>
+
+        </dl>
+        
+    </form>
+    
+<script language="JavaScript" type="text/javascript">
+<!--
+document.form1.client_name.focus();
+//-->
+</script>
+
+    %%[end:cl_form]%%
+
+    %%[begin:flex_header]%%
+
+    <!-- case list table -->
+
+    <table cellspacing="0" summary="">
+
+    <tbody>
+    
+        <tr>
+        
+            <th class="first"><a href="%%[number_url]%%">Case Number</a>%%[number_img]%%</th>
+            <th><a href="%%[client_name_url]%%">Client Name</a>%%[client_name_img]%%</th>
+            <th><a href="%%[status_url]%%">Status</a>%%[status_img]%%</th>
+            <th><a href="%%[user_id_url]%%">Staff</a>%%[user_id_img]%%</th>
+            <th><a href="%%[office_url]%%">Office</a>%%[office_img]%%</th>
+            <th><a href="%%[problem_url]%%">Code</a>%%[problem_img]%%</th>
+            <th><a href="%%[open_date_url]%%">Opened</a><!-- %%[open_date_img]%% --></th>
+            <th><a href="%%[close_date_url]%%">Closed</a>%%[close_date_img]%%</th>
+            <th><a href="%%[funding_url]%%">Funding</a>%%[funding_img]%%</th>
+	    <th class="last">&nbsp;</th>
+
+        </tr>
+        
+    %%[end:flex_header]%%
+    
+    %%[begin:flex_row]%%
+    
+        <tr class="row%%[row_class]%%">
+        
+            <td>
+
+                <a href="%%[base_url]%%/case.php?case_id=%%[case_id]%%"%%[link_target]%%>%%[number]%%</a><br />
+                <span style="color: %%[open_closed_color]%%;">%%[open_closed]%%</span>
+                
+            </td>
+            
+            <td><strong>%%[client_name]%%</strong></td>
+            <td>%%[status text source=case_status]%%</td>
+            <td>%%[user_id text]%%</td>
+            <td>%%[office text]%%</td>
+            <td>%%[problem]%%</td>
+            <td>%%[open_date]%%</td>
+            <td>%%[close_date]%%</td>
+            <td>%%[funding]%%</td>
+	    <td class="clock">
+		
+ <a href="%%[base_url]%%/activity.php?screen=compose&case_id=%%[case_id]%%&number=%%[number]%%&funding=%%[funding]%%&funding1=%%[funding1]%%&funding2=%%[funding2]%%&funding3=%%[funding3]%%&act_type=T&category=CS"><img src="%%[base_url]%%/images/stopwatch.gif" alt="Record Time"/ title="Record time on this case"></a>
+
+            </td>
+            
+        </tr>
+        
+    %%[end:flex_row]%%
+    
+    %%[begin:flex_footer]%%
+    
+    </tbody>
+    
+    </table>
+    
+    %%[end:flex_footer]%%
+
+    <p class="total">
+    %%[total_cases]%%
+    </p>
+
+</div> <!-- /case-list-wrapper -->

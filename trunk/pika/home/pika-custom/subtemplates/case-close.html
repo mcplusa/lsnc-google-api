@@ -1,0 +1,114 @@
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+<h2>Close or Reopen Case</h2>
+
+<form action="%%[base_url]%%/ops/update_case.php" method="post" name="ws"onSubmit="return Require(this,'close_code,lsc')";>
+
+    %%[lsc_rules_notice]%%
+
+    <dl>
+
+        <dt><label>Date Closed</label></dt>
+        <dd><input id="datepicker" type="text" name="close_date" value="%%[close_date]%%" maxlength="10" tabindex="1" onkeydown="pika_date(this);" onchange="return checkDate(this);"/></dd>
+
+        <dd>%%[lsc_close_code_menu]%%</dd>
+
+        <dt><label>LSC Case?</label></dt>
+        <dd>%%[lsc,yes_no]%%</dd>
+
+        <dt><label>IOLTA Only?</label></dt>
+        <dd>%%[iolta_only,yes_no]%%</dd>
+
+    </dl>
+
+    <dl id="close-options">
+
+        <dt><label>MLRO Pro Per Service</label></dt>
+        <dd>%%[mlro_pro_service,mlro_service]%% </dd>
+
+        <dd>%%[packet,yes_no,checkbox]%% <label>Packet?</label></dd>
+
+        <dd>%%[mediation_check,yes_no,checkbox]%% <label>Mediation?</label></dd>
+
+    </dl>
+
+
+
+<input type="hidden" name="screen" value="info" />
+%%[open_date,input_hidden]%%
+
+%%[case_id,input_hidden]%%
+%%[number,input_hidden]%%
+%%[office,input_hidden]%%
+    <ul id="submit-info">
+    <li><input type="submit" name="update_case" value="Save" tabindex="1" /></li>
+    </ul>
+
+</form>
+
+%%[case-info.js,javascript,parse]%%
+%%[ajax_init.js,javascript]%%
+%%[problem-server-ajax.js,javascript]%%
+
+<script type="text/javascript">
+
+
+
+function Require(obForm,szFields)
+    {
+      var fields = szFields.split(",")
+      var szMissing= new Array();
+      for (x=0;x<fields.length;x++) {
+        if (obForm.elements[fields[x]].value.length==0) {
+           szMissing[szMissing.length]=new String(fields[x]);
+        }
+      }
+      if ((szMissing.length) && (document.ws.close_date.value !="")) {
+        alert("The field"+((szMissing.length>1)?"s ":" ")+szMissing.join(",")+" must be filled in first");
+        return false
+      }
+       return hud();
+       }
+
+   function hud()
+       {
+
+         if (document.ws.office.value=="80") {
+           alert("Reminder..Do any of these need to be updated?\n\nOutcome designation(s) on the HUD tab (7a through 7e) for housing-related cases?\n\nOptional checkboxes on Seniors tab, especially Senior representation if significant intervention occurred?\n\nIncome/asset data -- any changes?\n\nCase-related documents saved in Pika (scanned if necessary)?\n\nContact info entered for other parties -- especially any adverse ones?");
+           return testiolta();
+        }
+
+         return testiolta();
+}
+function testiolta(what) {
+  if((document.ws.lsc.value =="1")&&(document.ws.iolta_only.value =="1"))
+{
+
+alert("You have selected LSC Yes and Iolta Only Yes. The case cannot be both");
+
+
+return false;
+  }
+
+  return true;
+ }
+
+
+
+
+var old_dob_length = 0;
+
+function pika_date(what)
+{
+	if (what.value.length == 2 && old_dob_length == 1)
+	{
+		what.value += '/';
+	}
+
+	if (what.value.length == 5 && old_dob_length == 4)
+	{
+		what.value += '/';
+	}
+
+	old_dob_length = what.value.length;
+}
+</script>

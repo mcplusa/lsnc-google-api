@@ -1,0 +1,37 @@
+<form action="%%[base_url]%%/system-reset_counters.php" method="post">
+
+    <h2>Reset Counters</h2>
+
+    %%[counters_list]%%
+
+    <input type="submit" name="reset" value="Reset Counters to Max #" />
+
+    %%[action,input_hidden]%%
+
+</form>
+
+%%[begin:flex_header]%%
+
+<table id="reset-counters" cellspacing="0" summary="">
+
+    <tr>
+        <th>Counter</th>
+		<th>#</th>
+		<th>Max #</th>
+	</tr>
+
+%%[end:flex_header]%%
+%%[begin:flex_row]%%
+
+    <tr>
+	    <td>%%[id]%%</td>
+		<td>%%[count]%%</td>
+		<td>%%[max_count]%%</td>
+    </tr>
+
+%%[end:flex_row]%%
+%%[begin:flex_footer]%%
+
+</table> <!-- /#reset-counters -->
+
+%%[end:flex_footer]%%

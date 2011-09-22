@@ -1,0 +1,160 @@
+%%[begin:edit_user]%%
+
+<form action="%%[base_url]%%/system-users.php" method="post" name="form1">
+<script language="javascript">
+
+function setName()
+{
+document.forms[1].full_nick_name.value = document.forms[1].nick_name.value + ' ' + document.forms[1].last_name.value;
+}
+</script>
+
+</script>
+%%[heading]%%
+
+<div id="edit-user">
+
+    <dl>
+
+        <dt><label>First Name</label></dt>
+        <dd><input class="input160" type="text" name="first_name" value="%%[first_name]%%" tabindex="1" /></dd>
+    
+        <dt><label>Middle Name</label></dt>
+        <dd><input class="input160" type="text" name="middle_name" value="%%[middle_name]%%" tabindex="1" /></dd>
+    
+        <dt><label>Last Name</label></dt>
+        <dd><input class="input160" type="text" name="last_name" value="%%[last_name]%%" onKeyUp="setName()"tabindex="1" /></dd>
+
+	  <dt><label>Nickname i.e.,(William may use Bill)</label></dt>
+        <dd><input class="input160" type="text" name="nick_name" value="%%[nick_name]%%" onKeyUp="setName()""tabindex="1" /></dd>
+        
+        <dt><label>Attorney Status</label></dt>
+        <dd>%%[attorney,attorney_status,menu_no_blank]%%</dd>
+
+	<dt><label>User office</label></dt>
+        <dd>%%[user_office,office,menu_no_blank]%%</dd>
+    
+        <!-- 
+        <dt><label>Extra Name</label></dt>
+        <dd><input class="input160" type="text" name="extra_name" value="%%[extra_name]%%" tabindex="1" /></dd>
+        -->
+    
+    </dl>
+
+    <dl>
+     
+        <dt><label>Phone</label></dt>
+        <dd><input class="input160" type="text" name="phone_notes" value="%%[phone_notes]%%" tabindex="1" /></dd>
+     
+        <dt><label>Address</label></dt>
+        <dd><input class="input160" type="text" name="address" value="%%[address]%%" tabindex="1" /></dd>
+        <dd><input class="input160" type=text name="address2" value="%%[address2]%%" tabindex="1" /></dd>
+     
+        <dt><label>City</label></dt>
+        <dd><input class="input160" type="text" name="city" value="%%[city]%%" tabindex="1" /></dd>
+     
+        <dt><label>State + ZIP</label></dt>
+        <dd><input class="input30" type="text" name="state" value="%%[state]%%" tabindex="1" />
+        <input class="input100" type="text" name="zip" value="%%[zip]%%" tabindex="1" /></dd>
+     
+        <dt><label>County</label></dt>
+        <dd><input class="input160" type="text" name="county" value="%%[county]%%" tabindex="1" /></dd>
+
+        <!-- 
+        <dt><label>Misc. Notes</label></dt>
+        <dd><input type="text" name="notes" value="%%[notes]%%" tabindex="1" /></dd>
+    -->
+
+    </dl>
+
+    <dl>
+
+        <dt><label>Position</label></dt>
+        <dd><input class="input160" type="text" name="description" value="%%[description]%%" tabindex="1" /></dd>
+
+   
+        <dt><label>Username</label></dt>
+        <dd><input class="input160" type="text" name="username" value="%%[username]%%" tabindex="1" /></dd>
+    
+        <dt><label>Password</label></dt>
+        <dd><input class="input160" type="password" name="password" value="" tabindex="1" /></dd>
+    
+        <dt><label>Email Address</label></dt>
+        <dd><input type="text" name="email" value="%%[email]%%" tabindex="1" /></dd>
+    
+    </dl>
+    
+    <dl>        
+    
+        <dt><label>User Account Enabled?</label></dt>
+        <dd>%%[enabled,yes_no,checkbox]%%</dd>
+
+	<dt><label>On Payroll?</label></dt>
+        <dd>%%[on_payroll,yes_no,checkbox]%%</dd>
+
+	<dt><label>Special Program User?</label></dt>
+        <dd>%%[sp_program,yes_no,checkbox]%%</dd>
+
+	<dt><label>Has Photo?</label></dt>
+        <dd>%%[has_photo,yes_no,checkbox]%%</dd>
+        
+        <dt><label>Security Level</label></dt>
+        <dd>%%[group_id,group_names,menu_no_blank]%%</dd>
+        
+        <dt><label>User ID</label></dt>
+        <dd><strong>%%[user_id]%%</strong></dd>
+        
+        <dt><label>Last Known Network Address</label></dt>
+        <dd><strong>%%[last_addr]%%</strong></dd>
+
+    </dl>
+
+</div> <!-- /#edit-user -->
+
+<ul class="submit">
+<input type=hidden name="user_id" value="%%[user_id]%%">
+<input type=hidden name="photo" value="<img src=%%[base_url]%%/onebox/images/%%[username]%%.png>">
+<input type=hidden name="usersite" value="%%[base_url]%%/onebox/staffurl.php?bugs=%%[first_name]%% %%[last_name]%%">
+<input type=hidden name="search_name" value="%%[first_name]%% %%[last_name]%%">
+<input type=hidden name="full_nick_name" value="%%[nick_name]%% %%[last_name]%%">
+
+
+<input type=hidden name=action value="%%[action_name]%%">
+<li><input type="submit" name="submit" value="Save" tabindex="1"></li>
+</ul>
+</form>
+
+
+%%[end:edit_user]%%
+
+%%[begin:flex_header]%%
+
+<table id="user-accounts" cellspacing="0" summary="">
+
+    <tr>
+        <th class="first">Name</th>
+		<th>Position</th>
+		<th>Email</th>
+		<th>Username</th>
+		<th>User ID</th>
+		<th class="last">Last Active</th>
+	</tr>
+
+%%[end:flex_header]%%
+%%[begin:flex_row]%%
+
+    <tr class="%%[css_class]%%">
+        <td>%%[name]%%</td>
+		<td>%%[description]%%</td>
+		<td>%%[email]%%</td>
+		<td>%%[username]%%</td>
+		<td>%%[user_id]%%</td>
+		<td>%%[last_active]%%</td>	
+	</tr>
+
+%%[end:flex_row]%%
+%%[begin:flex_footer]%%
+
+</table>
+
+%%[end:flex_footer]%%
