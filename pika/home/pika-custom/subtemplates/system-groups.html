@@ -1,0 +1,112 @@
+%%[begin:view_groups]%%
+
+<h2>Pika Security Groups</h2>
+
+<ul class="add-item">
+<li><a href="%%[base_url]%%/system-groups.php?action=add">Add New Group</a></li>
+</ul>
+
+%%[group_list]%%
+%%[end:view_groups]%%
+
+%%[begin:edit_group]%%
+
+<div id="permissions">
+
+<form action="%%[base_url]%%/system-groups.php" method="get">
+
+<h2>Group Identification</h2>
+
+<dl>
+
+    <dt><label>Group ID</label></dt>
+    <dd><input class="input160" type="text" name="group_id" value="%%[group_id]%%" /></dd>
+    
+</dl>
+
+<h2>Case Permissions</h2>
+
+<dl id="case-permissions">
+
+    <div>
+    
+        <dt><label>Read Office Records</label></dt>
+        <dd><input class="input160" type="text" name="read_office" value="%%[read_office]%%" /></dd>
+
+        <dt><label>Read All Records</label></dt>
+        <dd>%%[read_all,yes_no,radio]%%</dd>
+    
+    </div>    
+    
+    <div>
+
+        <dt><label>Edit Office Records</label></dt>
+        <dd><input class="input160" type="text" name="edit_office" value="%%[edit_office]%%"></dd>
+    
+        <dt><label>Edit All Records</label></dt>
+        <dd>%%[edit_all,yes_no,radio]%%</dd></div>
+    
+</dl>
+
+<h2 id="system-permissions">System Permissions</h2>
+
+<!-- Message Board Configuration
+%%[motd,yes_no,radio]%% -->
+
+<dl>
+
+    <dt><label>Pro Bono Attorney Management</label></dt>
+    <dd>%%[pba,yes_no,radio]%%</dd>
+    
+    <dt><label>User Account Management</label></dt>
+    <dd>%%[users,yes_no,radio]%%</dd>
+
+</dl>
+
+<ul>
+<input type="hidden" name="action" value="%%[action]%%" />
+<li><input type="submit" name="Submit" value="Save" /></li>
+</ul>
+
+</form>
+
+</div> <!-- /#permissions -->
+
+%%[end:edit_group]%%
+
+%%[begin:flex_header]%%
+<table id="security-groups" cellspacing="0" summary="">
+
+    <tr>
+	    <th class="first">Group Name</th>
+    	<th>Read by Office</th>
+	    <th>Read All</th>
+    	<th>Edit by Office</th>
+	    <th>Edit All</th>
+    	<th>User Accounts</th>
+	    <th>Pro Bono List</th>
+    	<th class="last">Message Board</th>
+    </tr>
+
+%%[end:flex_header]%%
+
+%%[begin:flex_row]%%
+
+    <tr class="%%[css_class]%%">
+	    <td><a href="%%[base_url]%%/system-groups.php?action=edit&group_id=%%[group_id]%%">%%[group_id]%%</a></td>
+    	<td>%%[read_office]%%</td>
+	    <td>%%[read_all]%%</td>
+    	<td>%%[edit_office]%%</td>
+	    <td>%%[edit_all]%%</td>
+    	<td>%%[users]%%</td>
+	    <td>%%[pba]%%</td>
+    	<td>%%[motd]%%</td>
+    </tr>
+
+%%[end:flex_row]%%
+
+%%[begin:flex_footer]%%
+
+</table>
+
+%%[end:flex_footer]%%

@@ -1,0 +1,117 @@
+<div id="search-screen">
+
+<form name="form2" method="get" action="%%[base_url]%%/search.php">
+
+    <h2>Pika Search Filters</h2>
+
+    <ul id="modes">
+    
+        <li><label>Filter Mode: </label></li>
+        <li>%%[x_mode_link]%%</li>
+        <li>%%[c_mode_link]%%</li>
+        <li>%%[p_mode_link]%%</li>
+        <li>%%[s_mode_link]%%</li>
+        <li>%%[n_mode_link]%%</li>
+        <li>%%[a_mode_link]%%</li>
+        <li>%%[d_mode_link]%%</li>
+
+    </ul>
+
+    <input type="text" name="s" size="24" value="%%[search_value]%%" />
+    <input type="hidden" name="m" value="%%[search_mode]%%" />
+    <input type="submit" value="Search Pika" />
+
+</form>
+
+<h3>%%[mode_name]%% Search Results</h3>
+
+%%[case_header]%%
+
+%%[name_header]%%
+
+%%[begin:act_header]%%
+
+<table cellspacing="0" summary="">
+
+    <tbody>
+    
+    <tr>
+	
+        <th class="first">Type</th>
+		<th>Scheduled?</th>
+		<th>Summary</th>
+		<th>Case</th>
+		<th>Staff</th>
+		<th>Hours</th>
+		<th class="last">Done?</th>
+
+    </tr>
+
+%%[end:act_header]%%
+
+%%[begin:act_row]%%
+
+    <tr class="row%%[row_class]%%">
+    
+       <!-- <td>%%[act_type text]%%</td>-->
+		<td><a href="%%[base_url]%%/activity.php?act_id=%%[act_id]%%">%%[act_type text]%%</a></td>
+		<td>%%[act_time]%%</td>
+		<td>%%[summary]%%</td>
+		<td>%%[number]%%</a></td>
+    	        <td>%%[user_id text]%%</td>
+		<td>%%[hours]%%</td>
+		<td>%%[completed text source=yes_no]%%</td>
+		
+    </tr>
+
+%%[end:act_row]%%
+
+%%[begin:act_footer]%%
+
+    </tbody>
+	
+    </table>
+
+%%[end:act_footer]%%
+
+%%[begin:doc_header]%%
+
+<table cellspacing="0" summary="">
+
+    <tbody>
+    
+    <tr>
+		
+        <th class="first">File</th>
+	    <th>Summary</th>
+		<th>Date</th>
+		<th>Case</th>
+		<th class="last">Staff</th>
+		
+    </tr>
+    
+%%[end:doc_header]%%
+
+%%[begin:doc_row]%%
+
+    <tr class="row%%[row_class]%%">
+    
+        <td><a href="%%[base_url]%%/documents.php?doc_id=%%[doc_id]%%&action=download_file">%%[doc_name]%%</a></td>
+		<td>%%[description]%%</td>
+		<td>%%[created]%%</a></td>
+		<td><a href="%%[base_url]%%/case.php?case_id=%%[case_id]%%">%%[number]%%</a></td>
+		<td>%%[user_id text]%%</td>
+
+    </tr>
+
+%%[end:doc_row]%%
+
+%%[begin:doc_footer]%%
+
+    </tbody>
+	
+</table>
+
+%%[end:doc_footer]%%
+
+</div> <!-- #search-screen -->

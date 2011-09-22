@@ -1,0 +1,92 @@
+/* reports */
+
+#report {
+	background: #FFF;
+	font-family: verdana, sans-serif;
+	font-size: 13px;	
+	}
+#report div {
+	padding: 30px;
+	}	
+#report h2 {
+	font-family: calibri, verdana, sans-serif;
+	font-size: 36px;
+	margin-top: -0.50em;
+	}	
+#report table {
+	width: auto;
+	}
+#report table th,
+#report table td {
+	padding: 6px;
+	}		
+	
+
+
+
+/* "Real-Empty" Pika Report */
+
+body#real-empty {
+	color: #333;
+	margin: 0;
+	padding: 0 10px;
+	background: white;
+	margin: 1.50em;
+	font-size: 0.75em;
+	}
+body#real-empty h2,
+body#real-empty h4 {
+	font-family: georgia, serif;
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+	}
+body#real-empty h4 {
+	font-size: 16px;
+	margin: 1.0em 0;
+	}	
+body#real-empty table {
+    clear: left;
+	margin-top: 1.0em;
+	width: auto;
+	border-collapse: collapse;
+	margin-bottom: 1.0em;
+	}
+body#real-empty table th {
+	color: white;
+	background: gray;
+	padding: 6px;
+	}
+body#real-empty table td {
+	padding: 6px;
+	border: 1px solid #D0D0D0;
+	font-size: 0.90em;	
+	}	
+body#real-empty span {
+	font-weight: bold;
+	font-family: georgia, serif;
+	color: gray;
+	}
+body#real-empty div#signature {
+	float: left;
+	display: none;
+	width: 500px;
+	}
+p.sign-off {
+	display: none;
+	margin-top: 2.0em;
+	text-align: right;
+	}
+div#custom-time p.sign-off {
+	margin: 0;
+	margin-bottom: 2.0em;
+	}
+div#report-fund01,
+div#report-pai {
+    margin-bottom: 1.50em;
+    }  
+div#report-fund02,
+div#report-fund03,
+div#report-fund04 {
+    display: none;
+    }	

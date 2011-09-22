@@ -1,0 +1,52 @@
+<div id="system-forms">
+
+    <div class="document-options">
+
+        <h2 class="alternate">Forms and Folders Manager</h2>
+
+        %%[folder_listing]%%
+
+        <iframe id="storage" src="%%[base_url]%%/documents.php?doc_type=F&display_type=edit">
+        </iframe>
+
+        <form action="%%[base_url]%%/ops/upload_document.php" name="add_folder" method="post">
+
+            <input id="folder-name" type="text" value="" name="folder_name" />
+	        <input id="add-folder" type="submit" name="add_folder" value="Add Folder" />
+    	    <input type="hidden" name="folder" value="1" />
+    	    <input type="hidden" name="parent_folder" value="" />
+        	<input type="hidden" name="doc_type" value="F" />
+	
+        </form>
+    
+        <div id="upload-files">
+            
+            <h3 id="upload">Upload a Form</h3>
+
+            <form action="%%[base_url]%%/ops/upload_document.php" name="add_document" enctype="multipart/form-data" method="post">
+
+                <dl id="select-file">
+
+                    <dt><label>Select a File to Add</label></dt>
+                    <dd><input type="file" name="doc_upload" tabindex="1" /><br />
+                    </dd>
+            
+                    <dt><label id="file-description">File Description</label></dt>
+                    <dd><textarea name="description" cols="" rows="2" tabindex="1"></textarea></dd>
+            
+                </dl>
+        
+                <input type="hidden" name="parent_folder" value="" />
+                <input type="hidden" name="doc_type" value="F" />
+	
+                <ul>
+                <li><input id="add-file" type="submit" value="Add File" tabindex="1" /></li>
+                </ul>
+	
+            </form>
+
+        </div> <!-- /#upload-files -->
+
+    </div> <!-- .document-options -->
+
+</div> <!-- /#system-forms -->

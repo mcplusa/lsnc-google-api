@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs 
+    title="Pika Mail Gadget"
+    description="Handle cases info working with mails"    
+    height="100"
+    author="Ariel Szneiberg / MC+A"
+    author_email="support@mcplusa.com"
+    author_location="Chicago, IL">
+
+    <!-- Declare feature dependencies. -->
+
+    <!-- This one is not specific to Gmail contextual gadgets. -->
+    <Require feature="dynamic-height"/>
+    <Require feature="locked-domain"/>
+
+    <!-- The next feature, Caja, is optional, and is supported for
+     use only within test domains. Uncomment the tag only for
+     non-production gadgets. -->
+    <!-- <Require feature="caja"/> -->
+
+    <!-- The next feature, google.contentmatch, is required for all
+     Gmail contextual gadgets.
+     <Param> - specify one or more comma-separated extractor IDs in
+     a param named "extractors". This line is overridden by the extractor ID
+     in the manifest, but is still expected to be present. -->
+    <Require feature="google.contentmatch">
+      <Param name="extractors">
+        google.com:HelloWorld, EmailBodyExtractor
+      </Param>
+    </Require>
+  </ModulePrefs>
+
+  <!-- Define the content type and display location. The settings
+   "html" and "card" are required for all Gmail contextual gadgets. -->
+  <Content type="html" view="card">
+    <![CDATA[
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>      
+      
+      <script>
+        $(document).ready(function () {
+          gadgets.window.adjustHeight();
+                    
+          //matches = google.contentmatch.getContentMatches();
+          //console.log(matches);
+          
+          //Button search click handler
+          $("#caseSearchBtn").click(function(){                          
+            var options = $("#allCasesListBox");
+            options.find('option').remove().end();
+            options.append($("<option />").val('0').text('Select a case'));
+            var search = $("#caseSearchText").val();
+            var url = 'http://10.10.10.47/pika/pikaGmailGadgetJsonLib.php?callback=?&mode=all&search=' + search;
+            $.getJSON(url, function(data){
+              $.each(data.cases, function(){
+                options.append($("<option />").val(this.case_id).text(this.number + '-' + this.client_name));
+              });
+            })
+            .error(
+              function(jqXHR, textStatus, errorThrown) {
+                alert(textStatus); 
+              });
+          });                                     
+          
+          //Button attach to case click handler
+          $("#attachToCase").click(function(){                          
+            var activeListboxId = $("#activeListBox").val();            
+            var caseId = $('#'+activeListboxId).val();
+            if(caseId == null || caseId == 0){            
+              alert("You have to select a case");                           
+              return;
+            }
+                          
+            var d = new Date();            
+            var matches = google.contentmatch.getContentMatches();
+            var body = matches[0].email_body;
+            var actTime = d.getHours()+ ":" + d.getMinutes() + ":" + d.getSeconds();
+            var actDate = d.getFullYear() + "-" + d.getMonth() + "-"  + d.getDate();            
+            var url = "http://10.10.10.47/pika/pikaGmailGadgetLib.php?callback=?&act_type=N&category=CS&case_id=" + caseId + "&completed=1&summary=Note Uploaded From Mail&notes=" + body + "&hours=&act_date=" + actDate + "&act_time=" + actTime;
+                                     
+             $.getJSON(url,function(data){
+              //alert(data.text);
+            })
+            .error(
+              function(jqXHR, textStatus, errorThrown) {
+                alert(textStatus); 
+                //alert(errorThrown);
+            });                                   
+          });                                                
+          
+          //Fill my cases list box
+          var options = $("#myCasesListBox");                   
+          var url = 'http://10.10.10.47/pika/pikaGmailGadgetJsonLib.php?callback=?';
+          $.getJSON(url, function(data){
+            $.each(data.cases, function(){
+              options.append($("<option />").val(this.case_id).text(this.number + '-' + this.client_name));
+            });
+          })                     
+          .error(
+            function(jqXHR, textStatus, errorThrown) {
+              alert(textStatus); 
+            });          
+        
+        });
+        
+        function loadAllCases()
+        {
+          var options = $("#allCasesListBox");
+          if($('#allCasesListBox option').length > 1)
+            return;
+          options.find('option').remove().end();
+          options.append($("<option />").val('0').text('Select a case'));          
+          var url = 'http://10.10.10.47/pika/pikaGmailGadgetJsonLib.php?callback=?&mode=all&search=';
+          $.getJSON(url, function(data){
+            $.each(data.cases, function(){
+              options.append($("<option />").val(this.case_id).text(this.number + '-' + this.client_name));
+            });
+          })
+          .error(
+            function(jqXHR, textStatus, errorThrown) {
+              alert(textStatus); 
+            });
+        }
+        
+        function desplegarGadget()
+        {
+          $("#gadget").toggle("blind", { direction: "vertical" }, 1500);
+          var gadgetTile = $("#gadgetTitle");
+          if(gadgetTile.hasClass('collapsed'))
+          {
+            gadgetTile.removeClass('collapsed');
+            gadgetTile.addClass('expanded');
+            gadgetTile.text('▼Pika - Attach to Case Notes');
+          }          
+          else if(gadgetTile.hasClass('expanded'))
+          {            
+            gadgetTile.removeClass('expanded');
+            gadgetTile.addClass('collapsed');
+            gadgetTile.text('►Pika - Attach to Case Notes');
+          }          
+        }
+          
+        function ManageTabPanelDisplay() {
+          //Id's of the div's that will be affected when tabs are clicked.
+          var idlist = new Array('myCasesFocus','allCasesFocus','myCasesReady','allCasesReady','myCasesContent','allCasesContent');
+
+          // No other customizations are necessary.
+          if(arguments.length < 1){ return; }
+          for(var i = 0; i < idlist.length; i++) {
+            var block = false;
+              for(var ii = 0; ii < arguments.length; ii++) {
+                if(idlist[i] == arguments[ii]) {
+                  block = true;
+                  break;
+                }    
+              }
+            if(block) { document.getElementById(idlist[i]).style.display = "block"; }
+            else { document.getElementById(idlist[i]).style.display = "none"; }
+          }  
+        }
+        
+        function ActivePanel(listBox){        
+          alert(listBox);
+          $("#activeListBox").val(listBox);
+        }
+        
+      </script>        
+
+      <style type="text/css">
+
+      span.title{
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 12px;
+      text-transform: uppercase;
+      }
+
+      .tab { 
+        font-family: verdana,sans-serif; 
+        font-size: 14px;
+        width: auto;
+        white-space: nowrap;
+        text-align: center;
+        border-style: solid;
+        border-color: black;
+        border-left-width: 1px;
+        border-right-width: 1px;
+        border-top-width: 1px;
+        border-bottom-width: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        cursor: pointer;
+      }
+
+      .tabhold { 
+        background-color: white;
+        color: black;
+      }
+
+      .tabfocus { 
+        background-color: black;
+        color: white;
+      }
+
+      .tabcontent { 
+        font-family: sans-serif; 
+        font-size: 14px;
+        width: 400px;
+        height: 275px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        padding-top: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      </style>
+
+      <html>
+      <span class="title collapsed" id="gadgetTitle" onclick='desplegarGadget(0);setTimeout("gadgets.window.adjustHeight()",2000);'>►Pika - Attach to Case Notes</span>  
+      <div id="gadget" style="display:none;">  
+        </br>
+        
+        <input type="hidden" id="activeListBox" value="myCasesListBox"/>
+        
+        <input type="text" id="caseSearchText"/>
+        <input type="button" id="caseSearchBtn" value="Search"/>
+        </br></br>
+
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <div id="myCasesFocus" class="tab tabfocus" style="display:block;">My Active Cases</div>
+              <div id="myCasesReady" class="tab tabhold" style="display:none;">
+                <span onclick="ManageTabPanelDisplay('myCasesFocus','allCasesReady','myCasesContent');ActivePanel('myCasesListBox');">My Active Cases</span>
+              </div>
+            </td>      
+            <td>
+              <div id="allCasesFocus" class="tab tabfocus" style="display:none;">All Active Cases</div>
+              <div id="allCasesReady" class="tab tabhold" style="display:block;">  
+                <span onclick="ManageTabPanelDisplay('myCasesReady','allCasesFocus','allCasesContent');ActivePanel('allCasesListBox');loadAllCases();">All Active Cases</span>
+              </div>
+            </td>      
+            <td width="180px"></td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <div id="myCasesContent" class="tabcontent" style="display:block;">
+                <p style="margin-top:0px">Here my active cases listbox</p>        
+                <select multiple="multiple" id="myCasesListBox">
+                  <option value="0">Select a case</option>
+                </select>
+              </div>
+              <div id="allCasesContent" class="tabcontent" style="display:none;">
+                <p style="margin-top:0px">Here all active cases listbox</p>  
+                <select multiple="multiple" id="allCasesListBox">
+                  <option value="0">Find cases by number</option>
+                </select>                
+              </div>
+            </td>
+          </tr>
+        </table> 
+        </br>
+            
+        <input type="checkbox" id="saveAttachments">
+        <label for="saveAttachments">Save Attachments to Case</label>
+        <br/><br/>
+        
+        <input type="button" id="attachToCase" value="Attach to Case"/>
+        <input type="button" id="editAndAttachToCase" value="Edit and Attach to Case"/>  
+        </br>
+        
+      </div>
+      </html>
+    ]]>
+  </Content>
+</Module>

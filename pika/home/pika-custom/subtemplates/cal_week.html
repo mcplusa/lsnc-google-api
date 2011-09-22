@@ -1,0 +1,61 @@
+<div id="calendar-wrapper">
+
+    <h2>Calendar Views</h2>
+
+    <!-- navigation / tabs bar -->
+
+	<ul  class="next">
+    <li><a href="cal_week.php?cal_date=%%[prev_week]%%&screen=%%[screen]%%&user_id=%%[user_id]%%">&laquo; Previous Week</a></li>
+    </ul>
+
+    %%[cal_tabs]%%
+
+    <ul class="next">
+    <li><a href="cal_week.php?cal_date=%%[next_week]%%&screen=%%[screen]%%&user_id=%%[user_id]%%">Next Week &raquo;</a></li>
+    </ul>
+    
+    <form id="go-to" action="cal_week.php" method="get">
+
+        <label>Go to date:</label> 
+        <input id="cal-date" type="text" name="cal_date" maxlength="10" tabindex="1" />
+	    <input type="submit" value="Go" />
+        
+    </form>
+
+    <h3>Week-Interval Calendar</h3>
+    
+    <div id="weekly-calendar">
+    %%[calendar_table]%%
+    </div>
+
+    <div id="funding-table">
+
+        <h3>Week-Interval Funding | Time Summary</h3>
+        
+        %%[funding_table]%%
+
+    </div> <!-- /funding-table -->
+    
+    <!-- calendar actions -->
+    
+    <div id="calendar-actions">        
+	
+        <form action="cal_week.php" method="get">
+	
+            <ul id="view">
+
+         <!--       <li><label>View Other Calendar</label></li>
+        	    <li>%%[user_id menu]%%</li>
+                <input type="hidden" name="act_date" value="%%[cal_date]%%" />
+    	        <input type="hidden" name="screen" value="%%[screen]%%" />
+                <li id="view-submit"><input type="submit" value="View" tabindex="1" /></li> -->
+    
+            </ul>
+
+        </form>
+
+    </div> <!-- /calendar-actions -->
+
+</div> <!-- /calendar-wrapper -->
+
+<script type="text/javascript" language="JavaScript" src="%%[base_url]%%/js/popUp.js"></script>

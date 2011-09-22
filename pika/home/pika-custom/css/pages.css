@@ -1,0 +1,759 @@
+/* other pages for Pika 4.0 */
+
+
+/* activity screens = time slips, ticklers, OSRs etc. */
+
+#time-slip {
+	width: 800px;
+	}
+#time-slip #funds {
+	/*width: 315px;*/
+	}
+#activity input,
+#activity select,
+#activity textarea {
+	max-width: 300px;
+	}
+#activity dl {
+	float: left;
+	padding-right: 20px;
+	width: auto;
+	}
+#activity #owner {
+	margin-top: 6px;
+	}	
+#activity #ts-checks,
+#activity #ts-checks-02,
+#activity #funds,
+#activity #funds-osr,
+#intake-side {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	float: left;
+	margin-top: 32px;
+	padding: 6px 10px;
+	width: auto;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#activity #ts-checks-02 {
+	float: right;
+	margin: -140px 50px 0 0;
+	}	
+#activity #ts-checks {
+	margin-bottom: 60px;
+	}	
+#activity #funds {
+	margin-top: 0;
+	}		
+#activity textarea {
+	height: 1.50em;
+	margin: 0;
+	}
+#activity #notes {
+	height: 14em;
+	}	
+.date input,
+#work-date input,
+#hours-worked input,
+#act-time input,
+#start,
+#start input,
+#current,
+#elapsed_mins,
+#end input,
+#osr01 input,
+#main-content dd #datepicker,
+#main-content dd #datepicker02,
+#main-content dd #datepicker03,
+#main-content #work-date input,
+#main-content #hours-worked input,
+#main-content #act-time input {
+	width: 90px;
+	}
+#timer {
+	background: #FFF;
+	padding: 1.0em 20px;
+	}
+#timer #case-record-select select {
+	width: 300px;
+	}	
+#pop-timer h2 {
+	font-family: calibri, sans-serif;
+	font-size: 2.20em;
+	font-weight: bold;
+	}
+#timer #ts-checks {
+	margin-top: 25px;
+	}
+select#problem,
+select#om_code {
+	width: 300px;
+	}	
+#osr02 textarea {
+	max-height: 40px;
+	}
+#osr02 #staff {
+	margin-top: -7px;
+	}
+#osr02 #user_id {
+	display: block;
+	margin-bottom: 10px;
+	}
+#activity #user_id {
+	display: block;
+	}
+
+/* case list mode */
+
+#case-list-wrapper {
+	margin-top: -1.0em;
+	}
+#modes li {
+	display: inline;
+	margin-right: 6px;
+	}
+#modes li h2 {
+	display: inline;
+	}	
+#modes li a {
+	border: 1px solid #E0E0E0;
+	color: #333;
+	padding: 4px 10px 6px 10px;
+	vertical-align: 2px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#modes li a:hover {
+	background: #F8FCFF;
+	border: 1px solid #00F;
+	color: #00F;
+	}
+#case-list-wrapper dl {
+	float: left;
+	margin: 0 20px 0 0;
+	width: auto;
+	}
+#case-list-wrapper dd ul {
+	margin-top: 0;
+	}	
+#case-list-wrapper .case-list-options input {
+	width: 130px;
+	}
+#case-list-wrapper .case-list-options select {
+	width: 140px;
+	}
+.case-list-options #search-again {
+	margin-top: -1px;
+	text-align: right;
+	}
+.case-list-options #search-again input {
+	width: auto;
+	}			
+#case-list-wrapper th a {
+	color: #FFF;
+	}
+#case-list-wrapper th a:hover {
+	color: #FFFFA0; /* soft yellow */	
+	}
+#case-list-wrapper table {
+	margin-top: 0;
+	}
+#case-list-wrapper table td.clock img {
+	padding-top: 1px;
+	}
+#case-list-wrapper table td.clock a {
+	border: 0;
+	}
+#case-list-wrapper #intake-list {
+	margin-top: 2.0em;
+	}					
+
+/* intake workflow */
+
+#intake-side {
+	float: right;
+	margin-top: -16px;
+	padding: 0 14px 6px 14px;
+	width: 200px;	
+	}
+#intake-side #contact-name {
+	margin-top: 8px;	
+	}
+#main-content .plradio {
+	margin-left: 10px;
+	}
+#doc-number ul, 
+#doc-number div {
+	float: left;
+	margin-top: 0;
+	width: auto;
+	}
+#doc-number div {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	margin-left: 30px;
+	padding: 8px 11px 8px 10px;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}	
+#notes,
+#intake-notes {
+	clear: left;
+	}
+#notes textarea,
+#intake-notes textarea {
+	width: 600px;
+	}
+#notes #contact-notes {
+	height: 12em;
+	}
+#calc_age {
+	margin-left: 6px;
+	}
+#calc_age span {
+	font-size: 11px;
+	}
+#main-content #age input {
+	width: 30px;
+	}				
+#household,
+#wage,
+#send-decline {
+	float: left;
+	margin-right: 20px;	
+	text-align: right;
+	width: auto;
+	}
+#household {
+	width: 110px;
+	}	
+#household input {
+	width: 30px;
+	}
+#household ul,
+#wage ul {
+	margin-top: 0;
+	}
+#household li,
+#wage li {
+	margin-bottom: 3px;
+	}		
+#wage input {
+	width: 60px;
+	}
+#send-decline {
+	text-align: left;
+	}
+#send-decline input,
+#organization {
+	vertical-align: top;
+	}
+.eligibility-grid {
+	clear: left;
+	float: left;
+	margin-top: 0;	
+	width: auto;
+	}
+.eligibility-grid th {
+	text-align: center;
+	}
+.eligibility-grid td {
+	border: 0;
+	padding: 2px 2px 0 0;
+	}
+.eligibility-grid .amount {
+	font-weight: bold;
+	padding-left: 4px;
+	}
+.eligibility-grid .amount input {
+	text-align: right;
+	width: 70px;
+	}
+.total-row td {
+	font-family: calibri, sans-serif;
+	font-size: 16px;
+	text-align: right;	
+	}
+.total-row td input,
+#percentage {
+	border: 2px solid #D0D0D0;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#percentage {
+	text-align: right;
+	}	
+#income-grid {
+	margin-right: 20px;
+	}	
+#asset-grid {
+	clear: none;
+	float: left;
+	width: auto;
+	}
+#main-content #poverty {
+	clear: left;
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	float: left;
+	/*overflow: auto;*/
+	margin-bottom: 1.0em;
+	padding: 0 6px 2px 6px;
+	width: auto;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#main-content #poverty dl {
+	float: left;
+	margin: -4px 6px 4px 6px;
+	width: auto;
+	}
+#main-content #poverty dd {
+	margin-top: -10px;
+	}	
+#main-content #poverty select {
+	margin-top: 3px;
+	/*width: 300px;*/
+	}
+#main-content #prospects {
+	/*display: none;*/ /* delete or comment out this line to display */
+	margin: 0;
+	margin-left: 20px;
+	width: 140px;
+	}
+#main-content #prospects input {
+	width: auto;
+	}	
+#main-content #prospects label {
+	/*white-space: nowrap;*/
+	}		
+#main-content #intake-notes {
+	margin: 0;
+	}
+
+	
+/* contact and case details */
+
+#main-content #dob input,
+#main-content #suffix input {
+	width: 90px;
+	}
+#main-content #ssn input {
+	width: 110px;
+	}
+#main-content #phone-note input,
+#main-content #email input {
+	width: 125px;
+	}	
+#main-content dl .area-code {
+	width: 30px;
+	}
+#main-content dl .phone-number {
+	width: 80px;
+	}
+#main-content dl .zip {
+	width: 84px;
+	}
+#main-content dl .county {
+	width: 114px;
+	}
+#main-content .address input {
+	width: 213px;
+	}
+#main-content dl .city {
+	width: 168px;
+	}
+#main-content dl .state {
+	width: 30px;
+	}
+#main-content dl .rural {
+	width: 30px;
+	visibility:hidden;
+	
+	}
+#main-content dl #organization {
+	width: auto;
+	}
+#main-content #notes textarea {
+	margin-bottom: 0;
+	}		
+#contact-info-status {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	float: left;
+	margin: -1px 0 2.0em 0;
+	padding-left: 16px;
+	width: 405px;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;	
+	}
+#ethnicity h3 {
+	clear: left;
+	}
+#ethnicity div {
+	float: left;
+	margin: -1.0em 30px 0 0;
+	width: auto;
+	}
+#ethnicity div input {
+	vertical-align: top;
+	}
+h3#case-list {
+	clear: left;
+	}
+#submit-contact {
+	clear: both;	
+	}
+#side-column {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	float: right;
+	margin-top: 62px;
+	padding: 0 10px 10px 10px;
+	width: 200px;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#side-column h3 {
+	margin: 0.25em 0 0 0;
+	}
+#side-column ul {
+	list-style: circle;
+	margin: 0;
+	margin-left: 18px;
+	}
+#side-column #alias-list ul {
+	list-style: none;
+	margin: 0 0 0.50em 10px;
+	}
+#side-column #alias-list #no-alias {
+	margin-top: 0.50em;
+	margin-left: 0;
+	}		
+p#caution {
+	margin-bottom: 0.50em;
+	}
+#add-alias dl {
+	float: left;
+	width: auto;
+	}
+#add-alias #alias-contact {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	float: left;
+	margin-right: 30px;
+	padding: 6px 10px;
+	width: auto;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#alias-contact dt {
+	font-weight: bold;
+	}
+					
+/* menu listings */
+
+#menu-list {
+	margin-top: 0;
+	}
+#menu-list td {
+	border-bottom: 0;
+	line-height: 1.6;
+	vertical-align: top;
+	}
+#menu-list ul {
+	margin: 0 30px 0 0;
+	}	
+#menu-list a {
+	font-size: 1.10em;
+	}
+	
+/* pro bono attorneys */
+/* prospective client search */	
+
+#add-pba dl {
+	float: left;
+	padding-right: 20px;
+	width: auto;
+	}
+#search-filters,
+#intake-search-filters,
+#pb-search-filters {
+	background-color: #F8FCFF;
+	border: 1px solid #82CAFA;
+	float: left;
+	margin: 1.0em 0;
+	padding: 5px 10px 8px 10px;
+	width: auto;
+	/*  */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#search-filters,
+#intake-search-filters {
+	padding-top: 10px;
+	width: 650px;
+	}
+#intake-search-filters {
+	padding-top: 4px;
+	}
+#pb-search-filters {
+	margin: 0;
+	width: 630px;	
+	}	
+#search-filters table,
+#intake-search-filters table,
+#pb-search-filters table {
+	margin: 0;
+	}
+#search-filters td,
+#intake-search-filters td,
+#pb-search-filters td {
+	border: 0;	
+	}
+#search-filters td label,
+#intake-search-filters td label,
+#pb-search-filters td label {
+	display: block;
+	}
+#pb-search-filters #pb-filters #county input,
+#pb-search-filters #pb-filters #language input {
+	width: 100px;
+	}
+#pb-search-filters #pb-filters input {
+	width: 160px;
+	}
+#filter-button input,
+#prospective-submit input {
+	margin-left: 10px;
+	width: 80px;
+	}
+#prospective-submit input {
+	margin-bottom: 4px;
+	width: 140px;
+	}				
+	
+/* reports */
+
+dl.report {
+	float: left;
+	margin-right: 20px;
+	width: auto;
+	}
+dl.report select#funding {
+	width: 300px;
+	}	
+.report .check input {
+	vertical-align: top;
+	}
+#mega-report label {
+	font-family: calibri, verdana, sans-serif;
+	font-size: 17px;
+	white-space: nowrap;
+	}
+.mega-report {
+	float: left;
+	margin: 0;
+	margin: 0 20px 1.0em 0;	
+	width: auto;
+	}
+.mega-report #parameters {
+	text-indent: 6px; 
+	padding: 0;
+	}
+.mega-report td {
+	border: 0;
+	padding-bottom: 2px;
+	}	
+.mega-report select {
+	width: 180px;
+	}
+.mega-report iframe {
+	border: 2px solid #82CAFA;
+	height: 14em;
+	margin: 0;
+	width: 240px;
+	}
+.mega-report td ul li span {
+	font-size: 11px;
+	}
+#mega-report ul,
+#mega-report #only-staff {
+	clear: left;
+	}
+#mega-report #field-order dd select {
+	border: 2px solid #82CAFA;
+	width: 200px;
+	}
+
+
+	
+	
+	
+#conflict-report {
+	background: #FFF;
+	padding: 24px 30px 30px 30px;
+	}
+#conflict-report div {
+
+	}	
+#conflict-report h2 {
+	font-family: calibri, verdana, sans-serif;
+	font-size: 22px;
+	font-weight: bold;
+	}	
+#conflict-report div table {
+	font-family: verdana, sans-serif;
+	font-size: 13px;
+	margin-top: 0;
+	width: 800px;
+	}		
+	
+
+/* reports list page */
+
+#all-reports-list li {
+	list-style: circle;
+	margin-left: 20px;
+	}
+#reports #all-reports-list li {
+	margin-left: 0px;
+	}
+
+/* reset counters */		
+
+#reset-counters {
+	width: 33%;
+	}
+	
+/* search screens */	
+
+#search-screen h2 {
+	margin: 0;
+	margin-bottom: 0.50em;
+	}
+#search-screen #modes {
+	margin-bottom: 1.50em;
+	}
+#search-screen #modes label {
+	font-family: calibri, verdana, sans-serif;
+	font-size: 20px;
+	}	
+#search-screen #modes li b {
+	border: 2px solid #C0C0C0;
+	color: #333;
+	font-family: calibri, verdana, sans-serif;
+	font-size: 18px;
+	padding: 4px 8px 6px 8px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	}
+#search-screen input[type="text"] {
+	width: 240px;
+	}
+#search-screen table {
+	margin-top: -0.50em;
+	}
+#search-screen table th a {
+	color: #FFF;
+	}
+#search-screen table th a:hover {
+	color: #FFFFA0; /* soft yellow */
+	}
+#search-contacts-screen h3 {
+	clear: both;	
+	}
+#search-contacts-screen table {
+	margin-top: -0.50em;
+	}
+
+#search-contacts-screen #pager {
+	margin: 1.0em auto;
+	}				
+
+/* security levels */
+
+#permissions li {
+	list-style: none;
+	}
+#security-groups {
+	margin-top: 0;
+	}
+#security-groups th,
+#security-groups td {
+	text-align: center;
+	}	
+#case-permissions div {
+	float: left;
+	margin: 0 30px 1.0em 0;
+	width: auto;
+	}
+#system-permissions {
+	clear: left;
+	}		
+
+/* site map */
+
+#sitemap-wrapper div {
+	float: left;
+	margin-right: 30px;
+	width: auto;
+	}
+#sitemap-wrapper h2 {
+	margin: 0;
+	}	
+#sitemap-wrapper a {
+	color: #333;
+	}	
+#sitemap-wrapper #reports {
+	width: 212px;
+	}
+#sitemap-wrapper ul {
+	margin-left: 20px;
+	margin-top: 0;
+	}
+#sitemap-wrapper li {
+	list-style: circle;
+	}		
+#sitemap-wrapper #reports {
+	clear: left;
+	}
+	
+/* site settings */	
+
+.settings {
+	float: left;
+	margin-right: 30px;
+	width: 30%;
+	}
+	
+/* user accounts */	
+
+#edit-user dl {
+	float: left;
+	padding-right: 20px;
+	width: auto;
+	}
+#user-accounts {
+	margin-top: 0;
+	width: 100%;
+	}
+
+/* menu listings */	
+
+#content #menu-listing h3 {
+	font-size: 1.70em;
+	margin-top: -3px;	
+	}
+#content #menu-listing li {
+	list-style: circle;
+	}
+	

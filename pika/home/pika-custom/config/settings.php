@@ -1,0 +1,27 @@
+<?php
+$plSettings = array (
+'db_type' => 'mysql',
+//'db_host' => 'localhost',
+'db_host' => '10.10.10.47',
+'db_name' => 'pikatig',
+'db_user' => 'pikauser',
+'db_password' => 'pikapassword',
+'cookie_prefix' => 'LCNS Pika',
+'enable_system' => '1',
+'enable_compression' => '1',
+'enable_benchmark' => '0',
+'enable_html_tidy' => '0',
+'autonumber_on_new_case' => '1',
+'owner_name' => 'MC+A',
+'admin_email' => 'Richard.Loerzel@mcplusa.com',
+'act_interval' => '15',
+'base_url' => '/pika',
+'base_directory' => 'C:\Users\Richard.Loerzel\workspace\pika\home\pika',
+//'base_directory' => '/var/www/pika',
+'xchg_directory' => '',
+'xchg_url' => '',
+'time_zone' => 'America/Chicago',
+'time_zone_offset' => '-06',
+'docs_directory' => '',
+);
+?>

@@ -1,0 +1,36 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="%%[base_url]%%-custom/css/hub.css" />
+<link rel="stylesheet" type="text/css" media="print" href="%%[base_url]%%-custom/css/reports-print.css" />
+</head>
+<body id="report">
+
+    <div>    
+    
+        <h2>%%[title]%%</h2>
+
+        %%[begin:full_table]%%
+
+        <h4>%%[table_title]%%</h4>
+
+        <table cellspacing="0">
+
+            %%[table_header]%%
+
+            %%[table_body]%%
+
+        </table>
+
+        %%[row_count]%%
+
+        %%[sql]%%
+
+        %%[end:full_table]%%
+
+        %%[report_footer]%%
+
+    </div>
+
+</body>
+
+</html>

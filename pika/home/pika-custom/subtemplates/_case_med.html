@@ -1,0 +1,157 @@
+
+<script type="text/javascript" src="/pika/js/validation.js"></script>
+
+<!-- FORM element closes at bottom of template -->
+			
+<form action="%%[base_url]%%/ops/update_case.php" method="post" name="ws";>
+
+
+<h3>Section 1: Second Party Information. Answer questions accordingly.</h3>
+<hr size="1" width="560" align="left"  color="#993300" />
+
+	<br>Name of Second Party:</br>
+	<br><input type="text" name="med_2partyname"  value="%%[med_2partyname]%%" size="40" />
+	<br>Address: <br />
+	<input  type="text" name="med_2partyaddress"  value="%%[med_2partyaddress]%%"  size="40" />
+			
+	<br>City, State, Zip: <br />
+	<input  type="text" name="med_2partycity"  value="%%[med_2partycity]%%" size="11" />
+	<input  type="text" name="med_2partystate"  value="%%[med_2partystate]%%" size="10" /> 
+	<input  type="text" name="med_2partyzip"  value="%%[med_2partyzip]%%" size="10" /> 
+			
+			
+	<br>Phone:<br />
+	<input  type="text" name="med_2partyareacode"  value="%%[med_2partyareacode]%%" size="4" maxlength="3"/> 
+	<input  type="text" name="med_2partyphone"  value="%%[med_2partyphone]%%" size="31" maxlength="10"/>
+			
+			
+	<br>Cell:<br />
+	<input  type="text" name="med_2partymobile"  value="%%[med_2partymobile]%%" size="40" maxlength="18"/>
+			
+			
+	<br>Phone Ref:<br />
+	<input  type="text" name="med_2partyphoneref"  value="%%[med_2partyphoneref]%%" size="40" maxlength="40>
+			
+			<hr size="1" width="355" align="left"  color="#993300" /> <br>
+
+	<br> %%[med_2partysenior,yes_no,checkbox]%% Senior 
+	%%[med_2partyfamily,yes_no,checkbox]%% Family Member
+	%%[med_2partybusinessmerch,yes_no,checkbox]%% Business/Merchant </br>
+
+	<h3>Section 2: Dispute Information</h3>
+	
+	<hr size="1" width="500" align="left"  color="#993300" />
+		Type Of Dispute<br />
+       		%%[med_dispute,med_dispute]%%
+	
+	<br>Primary Mediator<br />
+		%%[med_user_id,user_id]%%<br />
+		Secondary Mediator<br />
+		%%[med_user_id2,user_id]%%<br />
+
+	<div class="case-notes">
+        	<a href="#case-notes-top">Case Notes</a><br />
+        	<textarea name="med_notes" rows="4" tabindex="1">%%[med_notes]%%</textarea><br />
+	</div> <!-- "case-notes" closing DIV -->
+	Letter to Second party was:
+	%%[med_2partysent,yes_no,checkbox]%% Sent 
+	%%[med_2partyacknow,yes_no,checkbox]%% Acknowledged
+
+	<h3>Section 3: Outcome </h3>
+	<hr size="1" width="500" align="left"  color="#993300" />
+	<!--<div id="case-info03a"/>
+        </div> -->
+        Date Completed <br>
+        <input type="text" name="med_closed" value="%%[med_closed]%%" maxlength="10" 			    	    tabindex="1"onkeydown="pika_date(this);" onchange="return checkDate(this);" />
+        <a id="enter-today" onclick="set_close()" href="#dc" tabindex="1">[Today]</a>
+        <a id="clear-date" onclick="set_reopen()" href="#dc" tabindex="1">[Clear Date]</a>
+
+	<br>Outcome:<br />
+		%%[med_outcome,med_outcome]%%
+
+	<br> %%[med_agreeattached,yes_no,checkbox]%% Settlment Agreement Attached ? <br>
+	%%[med_outmediaprogram,yes_no,checkbox]%% Mediation was referred to an outside Mediation Program ? <br>
+	%%[med_surveysent,yes_no,checkbox]%% Survey has been Sent ? </br>
+
+
+
+			
+		
+
+
+    <input type="hidden" name="screen" value="med"/>
+    <input type="hidden" name="case_id" value="%%[case_id]%%"/>
+    <input type="hidden" name="office" value="%%[office]%%"/>
+    <input type="hidden" name="mediation_check" value="1"/>
+    <div id="case-info-submit">
+
+<input id="save-seniors" class="button" type="submit" value="Save" name="update_case" tabindex="1" accesskey="s" title="Save" onmouseover="this.className='button button-hover'" onmouseout="this.className='button'" />
+   
+</form>
+
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+<!--
+
+
+
+function Require(obForm,szFields)
+    {
+      var fields = szFields.split(",")
+      var szMissing= new Array();
+      for (x=0;x<fields.length;x++) {
+        if (obForm.elements[fields[x]].value.length==0) {
+           szMissing[szMissing.length]=new String(fields[x]);
+        }
+      }
+      if ((szMissing.length)&&(document.ws.office.value!=="80")&&(document.ws.office.value!=="10")) {
+        alert("The field"+((szMissing.length>1)?"s ":" ")+szMissing.join(",")+" must be filled in first");
+        return false
+      }
+      return true;
+    }
+
+
+//-->
+</script>
+
+<!-- Scripts -->
+<script type="text/javascript">
+var ac_autotab_on = 1;
+
+var old_dob_length = 0;
+
+function pika_date(what)
+{
+	if (what.value.length == 2 && old_dob_length == 1)
+	{
+		what.value += '/';
+	}
+
+	if (what.value.length == 5 && old_dob_length == 4)
+	{
+		what.value += '/';
+	}
+
+	old_dob_length = what.value.length;
+}
+
+var ac_autotab_on = 1;
+
+
+function set_close()
+{
+    document.ws.med_closed.value = "%%[current_date]%%";
+    return false;
+}
+
+function set_reopen()
+{
+    document.ws.med_closed.value = "";
+    return false;
+}
+//-->
+</script>
+

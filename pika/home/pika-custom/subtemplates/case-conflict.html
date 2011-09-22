@@ -1,0 +1,74 @@
+%%[begin:flex_header]%%
+
+<div id="case-conflicts">
+
+<table id="search-list" cellspacing="0" summary="">
+
+    <tbody>
+    <tr>
+    
+        <th class="first">Issue</th>
+        <th>Case No.</th>
+		<th>LSC Code</th>
+		<th class="last">Status</th>
+        
+    </tr>
+    
+%%[end:flex_header]%%
+
+%%[begin:flex_row]%%
+
+    <tr class="%%[css_class]%%">
+
+        <td>
+
+            <ul>
+            <li><a href="%%[base_url]%%/contact.php?contact_id=%%[contact_id]%%">%%[conflict_name]%%</a> 
+        was a(n) %%[role]%%</li>
+            <li><strong>DOB:</strong> %%[birth_date]%%</li>
+            <li><strong>SSN:</strong> %%[ssn']%%</li>
+            <li><strong>Address:</strong> %%[address]%%</li>
+            </ul>
+
+        </td>
+        
+        <td>
+        <a href="%%[base_url]%%/case.php?case_id=%%[case_id]%%">%%[number]%%</a>
+        </td>
+        
+        <td>
+        %%[problem]%%
+        </td>
+        
+        <td>
+        %%[status text source=case_status]%%
+        </td>
+        
+    </tr>
+    
+%%[end:flex_row]%%
+
+%%[begin:flex_footer]%%
+
+    </tbody>
+
+</table>
+
+%%[end:flex_footer]%%
+
+<form action="%%[base_url]%%/ops/update_case.php" method="post" name="ws">
+
+    <h4>Does this case have conflicts?</h4>
+
+    %%[conflicts,yes_no]%%
+
+    <input type="hidden" name="case_id" value="%%[case_id]%%" />
+    <input type="hidden" name="screen" value="conflict" />
+
+    <ul id="submit-info-03">
+    <li><input type="submit" value="Save" tabindex="1" /></li>
+    </ul>
+
+</form>
+
+</div> <!-- /#case-conflicts -->

@@ -1,0 +1,161 @@
+<!-- flags -->
+
+<div id="warning-flags">
+%%[flags]%%
+</div>
+
+<!-- side column -->
+
+<div id="side-column">
+
+    <h3>Case Summary</h3>
+
+    <ul class="no-style">
+    <li>%%[status text source=case_status]%%</li>
+    <li>%%[lsc_problem_text]%%</li>
+    </ul>
+    
+    %%[begin:client]%%
+
+    <dl class="case-contact">
+    <dt><a href="%%[base_url]%%/contact.php?contact_id=%%[contact_id]%%&case_id=%%[case_id]%%&number=%%[number]%%&relation_code=%%[relation_code]%%">%%[client_name]%%</a></dt>
+    <dd>Primary Client</dd>
+    </dl>
+    
+    <dl>
+	<dt>Address</dt>
+    <dd>%%[client_address]%%</dd>
+    </dl>
+    
+    <dl>
+	<dt>Phone</dt>
+    <dd>%%[client_phone]%%</dd>
+    <dd> %%[phone_notes]%%</dd>
+    </dl>
+    
+    <dl>
+	<dt>Notes</dt>
+    <dd>%%[notes]%%</dd>
+    </dl>
+    
+    <dl>
+	<dt>Language</dt>
+    <dd>%%[language,language,text]%%</dd>
+    </dl>
+    
+    <dl>
+	<dt>DOB</dt>
+    <dd>%%[birth_date]%%</dd>
+    </dl>
+    
+<script LANGUAGE="JavaScript" type="text/javascript">
+    var client_name = "%%[client_name]%%";
+</script>
+
+    <ul>
+    <li><a onClick="return confirm('Are you sure you want to remove ' + client_name + 'from this case?');" href="%%[base_url]%%/ops/delete_conflict.php?conflict_id=%%[conflict_id]%%&case_id=%%[case_id]%%">Remove above person from case record</a></li>
+    </ul>
+
+    %%[end:client]%%
+			
+    %%[begin:contacts]%%
+
+    <dl class="case-contact">
+	<dt><a href='%%[base_url]%%/contact.php?contact_id=%%[contact_id]%%&case_id=%%[case_id]%%&number=%%[number]%%&relation_code=%%[relation_code]%%'>%%[full_name]%%</a></dt>
+    <dd>%%[role]%%</dd>
+    <dd>%%[full_phone]%%</dd>
+    <dd>%%[phone_notes]%%</dd>
+    </dl>
+    
+<script LANGUAGE="JavaScript" type="text/javascript">
+    var full_name%%[contact_id]%% = "%%[full_name]%%";
+</script>
+
+    <ul>
+    <li><a onClick="return confirm('Are you sure you want to remove ' + full_name%%[contact_id]%% + ' from this case?');" href="%%[base_url]%%/ops/delete_conflict.php?conflict_id=%%[conflict_id]%%&case_id=%%[case_id]%%">Remove above person from case record</a></li>
+    </ul>
+
+    %%[end:contacts]%%
+
+    <h3>Actions</h3>
+
+    <ul>
+    <li><a href="%%[base_url]%%/timer.php?case_id=%%[case_id]%%&funding=%%[funding]%%&number=%%[number]%%" onclick="popUp({url:this.href,name:'popUpTimer'});return false;">Popup Timer</a></li>
+    <li><a href="%%[base_url]%%/activity.php?screen=compose&case_id=%%[case_id]%%&funding=%%[funding]%%&number=%%[number]%%&act_type=K">Add New Tickler</a></li>
+    <li><a href="%%[base_url]%%/ops/duplicate_case.php?case_id=%%[case_id]%%">Duplicate This Case</a></li>
+    </ul>
+
+    <form action="%%[base_url]%%/case_contact.php" method="get">
+
+        <h3>Add to this case:</h3>
+
+        <dl>
+    	
+            <dt></dt>
+            <dd>%%[relation_code,relation_codes,menu_no_blank]%%</dd>
+        
+            <dt><label>First</label></dt>
+            <dd><input type="text" name="first_name" tabindex="1" /></dd>
+        
+            <dt><label>Middle</label></dt>
+            <dd><input type="text" name="middle_name" tabindex="1" /></dd>
+        
+            <dt><label>Last | Org. Name</label></dt>
+            <dd><input type="text" name="last_name" tabindex="1" /></dd>
+        
+            <dt><label>Jr., Sr., etc.</label></dt>
+            <dd id="suffix"><input type="text" name="extra_name" tabindex="1" /></dd>
+        
+            <dt><label>DOB</label></dt>
+            <dd id="dob"><input type="text" name="birth_date" maxlength="25" tabindex="1" /></dd>
+        
+            <dt><label>SSN</label></dt>
+            <dd id="ssn"><input type="text" name="ssn" onkeyup="pika_ssn(this);" value="" maxlength="11" size="20" tabindex="1"/></dd>
+
+        </dl>
+    
+        <input type="hidden" name="case_id" value="%%[case_id]%%"/>
+        <input type="hidden" name="number" value="%%[number]%%"/>
+    
+        <p id="add">
+        <input type="submit" value="Add" tabindex="1"/ ></li>
+        </p>
+    
+    </form>
+
+</div> <!-- /#side-column -->
+
+<!-- main content -->
+
+<div id="main-content">
+
+    <ul id="case-tabs">
+    %%[case_tabs]%%%%[case_tabs2]%%
+    </ul>
+    
+    %%[case_screen]%%
+    
+</div> <!-- /#main-content -->
+
+
+<script type="text/javascript" language="JavaScript" src="%%[base_url]%%/js/popUp.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+
+var old_ssn_length = 0;
+
+function pika_ssn(what)
+{
+	if (what.value.length == 3 && old_ssn_length == 2)
+	{
+		what.value += '-';
+	}
+	
+	if (what.value.length == 6 && old_ssn_length == 5)
+	{
+		what.value += '-';
+	}
+
+	old_ssn_length = what.value.length;
+}
+
+//--></script>

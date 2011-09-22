@@ -1,0 +1,125 @@
+<div id="system-forms">
+
+    <div class="document-options">
+
+        <form action="%%[base_url]%%/ops/docgen.php" method="post" name="docgen">
+
+            <h2 class="alternate">Document Assembly</h2>
+
+            <iframe src="%%[base_url]%%/documents.php?doc_type=F&display_type=select">
+            </iframe>
+			
+        	<input type="hidden" name="form_id" value="" />
+    
+            <dl>
+
+                <dt><label>Form Recipient</label></dt>
+                <dd>%%[recipient menu source=contactlist]%%</dd>
+            
+                <dt><label>Client Name</label></dt>
+                <dd>%%[client menu source=clientlist]%%</dd>
+            
+            </dl>
+            
+            <dl>
+        
+                <dt><label>Opposing Party</label></dt>
+                <dd>%%[opposing menu source=opposinglist]%%</dd>
+            
+                <dt><label>Opposing Counsel</label></dt>
+                <dd>%%[opp_counsel menu source=oppcounsellist]%%</dd>
+            
+            </dl>
+        
+            <dl>
+
+                <dd><input type="checkbox" id="autosave" name="autosave" />&nbsp;<label for="autosave">Save a copy in Document Storage</label></dd>
+
+            </dl>
+        
+            <input type="hidden" name="case_id" value="%%[case_id]%%" />
+            <input type="hidden" name="debug" value="0" />        
+
+            <ul>
+            <li><input id="create-new-doc" type="submit" value="Create New Document" tabindex="1" onclick="if(isEmpty(form_id)) { alert('Please select a form.'); return false;}" /></li>
+            </ul>
+
+        </form>
+
+    </div> <!-- /.document-options -->
+
+    <div class="document-options">
+
+        <h2 id="doc-storage" class="alternate">Document Storage</h2>
+    
+        <iframe id="storage-docs" src="%%[base_url]%%/documents.php?doc_type=C&display_type=edit&case_id=%%[case_id]%%">
+    </iframe>
+    
+        <form action="%%[base_url]%%/ops/upload_document.php" name="add_folder" method="post">
+    
+            <input id="folder-name" type="text" value="" name="folder_name" />
+            <input id="add-folder" type="submit" name="add_folder" value="Add Folder" />        
+
+		    <input type="hidden" name="folder" value="1" />
+    		<input type="hidden" name="parent_folder" value="" />
+	    	<input type="hidden" name="doc_type" value="C" />
+		    <input type="hidden" name="case_id" value="%%[case_id]%%" />
+        
+        </form>
+    
+        <div id="upload-files">
+            
+            <h3 id="upload">Upload a File</h3>
+
+            <form action="%%[base_url]%%/ops/upload_document.php" name="add_document" enctype="multipart/form-data" method="post">
+
+                <dl id="select-file">
+
+                    <dt><label>Select a File to Add</label></dt>
+                    <dd><input type="file" name="doc_upload" tabindex="1" /><br />
+                    </dd>
+            
+                    <dt><label id="file-description">File Description</label></dt>
+                    <dd><textarea name="description" cols="" rows="2" tabindex="1"></textarea></dd>
+            
+                </dl>
+        
+                <input type="hidden" name="parent_folder" value="" />
+                <input type="hidden" name="doc_type" value="F" />
+	
+                <ul>
+                <li><input id="add-file" type="submit" value="Add File" tabindex="1" /></li>
+                </ul>
+	
+            </form>
+
+        </div> <!-- /#upload-files -->
+
+    </div> <!-- /.document-options -->
+
+</div> <!-- /#system-forms -->
+
+<h2 class="alternate">Case Intake Report</h2>
+
+<form id="intake-report" action="%%[base_url]%%/legacy_report.php?report=case_print&dummy=dummy.pdf" method="post" name="case_intake" target="_blank">
+
+    <input type="hidden" name="report" value="case_print" />
+    <input type="hidden" name="case_id" value="%%[case_id]%%" />
+
+    <input type="checkbox" name="info" value="1" checked class="plcheck" tabindex="1" /> <label>Case Info</label> 
+    <input type="checkbox" name="notes" value="1" checked class="plcheck" tabindex="1" /> <label>Case Notes</label> 
+    <input type="checkbox" name="hrhpage" value="1" unchecked class="plcheck" tabindex="1" /><label>HRH Info</label> 
+    <input type="checkbox" name="seniorspage" value="1" unchecked class="plcheck" tabindex="1" /><label>Seniors Info</label> 	
+    <input id="generate-report" type="submit" value="Generate Report" tabindex="1" />
+
+</form>
+
+
+<script type="text/javascript">
+function isEmpty(field) {
+   if ((field.value.length==0) || (field.value==null)) {
+      return true;
+   } else { return false; }
+}
+//-->
+</script>

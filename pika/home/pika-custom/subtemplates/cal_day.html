@@ -1,0 +1,130 @@
+<script LANGUAGE="JavaScript" type="text/javascript">
+function checkAll()
+{
+	var i = %%[i_value]%%;
+	
+	for (j = 0; j < i; j++)
+	{
+		k = (j * 2);
+		eval("document.act_update_bulk.elements[" + k + "].checked = true;");
+	}
+}
+
+function uncheckAll()
+{
+	var i = %%[i_value]%%;
+	
+	for (j = 0; j < i; j++)
+	{
+		k = (j * 2);
+		eval("document.act_update_bulk.elements[" + k + "].checked = false;");
+	}
+}
+</script>
+
+<div id="calendar-wrapper">
+
+    <h2>Calendar Views</h2>
+
+    <!-- navigation / tabs bar -->
+
+    <ul  class="next">
+    <li><a href="cal_day.php?cal_date=%%[prev_date]%%&user_id=%%[user_id]%%">&laquo; Previous Day</a></li>
+    </ul>
+    
+    %%[cal_tabs]%%
+    
+    <ul class="next">
+    <li><a href="cal_day.php?cal_date=%%[next_date]%%&user_id=%%[user_id]%%">Next Day &raquo;</a></li>
+    </ul>
+    
+    <form id="go-to" action="cal_day.php" method="get">
+
+        <label>Go to date:</label> 
+        <input id="cal-date" type="text" name="cal_date" maxlength="10" tabindex="1" />
+        <input type="submit" value="Go" />
+
+    </form>
+    
+    <!-- calendar actions -->
+    
+    <div id="day-calendar-actions">
+
+        <h3>Actions</h3>
+    
+        <form action="cal_day.php" method="get">
+	
+            <ul class="actions">
+
+				<li><a href='activity.php?screen=compose&act_date=%%[cal_date]%%&act_type=T'>New Time Slip</a></li>
+                <li><a href="%%[base_url]%%/timer.php" onclick="popUp({url:this.href,name:'popUpTimer'});return false;">New Pop-up Timer</a></li>
+			
+			</ul>
+			
+			
+			<ul class="actions">
+
+                <li><a href='activity.php?screen=compose&completed=0&act_date=%%[cal_date]%%'>New Calendar Item</a></li>
+                <li><a href="activity.php?screen=compose&act_date=%%[cal_date]%%&act_type=K">New Tickler Item</a></li>                
+                <li><a href='activity.php?screen=compose&act_date=%%[cal_date]%%&act_type=L'>New LSC OSR Data</a></li>
+                <li><a href='ical-subscribe.php'>Subscribe to Calendar (iCal)</a></li>
+		
+            </ul>
+            
+            <ul id="view">
+            
+          <!--      <li><label>View Other Calendar</label></li>
+                <li>%%[user_id menu]%%</li>
+                <input type="hidden" name="act_date" value="%%[cal_date]%%" />
+                <li id="view-submit"><input type="submit" value="View" tabindex="1" /></li> -->
+
+            </ul>	
+     	
+        </form>
+
+    </div> <!-- /day-calendar-actions -->        
+
+            
+
+    <form id="day-tables" action="dataops.php" method="post" name="act_update_bulk">
+
+            <div class="daily">%%[overdue_table]%%</div>
+
+            <h3 id="pending">Today's Pending Items</h3>
+                    
+            <div class="daily">%%[pending_table]%%</div>
+
+            <input type="hidden" name="act_date" value="%%[cal_date]%%" />
+            <input type="hidden" name="action" value="update_activity_bulk" />
+
+            <ul>
+            <li><input type="submit" value="Update" /> 
+            [ <a href="javascript:checkAll()">Check All</a> ]
+            [ <a href="javascript:uncheckAll()">Check None</a> ]</li>
+            </ul>
+                
+    </form>
+	
+
+	<div id="log">
+    
+        <h3>Completed Today <span>%%[pretty_cal_date]%%</span> <span>%%[total_hours]%% total hours</span></h3>
+
+        <div class="daily">%%[completed_table]%%</div>
+
+        <div id="funding-table">
+
+            <h3>Daily Funding | Time Summary</h3>
+        
+            %%[funding_table]%%
+
+        </div> <!-- /funding-table -->
+
+    </div> <!-- /log -->
+	
+	
+                
+</div> <!-- /calendar-wrapper -->
+
+
+<script type="text/javascript" language="JavaScript" src="%%[base_url]%%/js/popUp.js"></script>
