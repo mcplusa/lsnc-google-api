@@ -1,4 +1,6 @@
 <script type="text/javascript" src="/pika/js/validation.js"></script>
+<script type="text/javascript" src="/pika/js/accordion.js"></script>
+
 <form action="%%[base_url]%%/dataops.php" name="ea" method="post"onSubmit="return testfields(this)";>
 
 <h2 class="alternate-03">Case Notes</h2>
@@ -102,12 +104,10 @@ document.ea.summary.focus();
 
     </p>
 
-    <p>
-
-        <span class="summary">%%[summary]%%</span>
-        %%[notes]%%
-
-    </p>
+        <span class="summary accordion">%%[summary]%%</span>
+        <div>
+        	%%[notes]%%
+        </div>
 
     <hr />
 

@@ -113,7 +113,6 @@ $_REQUEST['notes'] = isset($plain)? $plain : $html;
 $_REQUEST['act_type'] = 'N';
 $_REQUEST['category'] = 'CS';  
 $_REQUEST['completed'] = '1';
-$_REQUEST['summary'] = 'Note Uploaded From Mail';  
 $_REQUEST['hours'] = '0';  
 $_REQUEST['act_date'] = $noteDate;
 $_REQUEST['act_time'] = $noteTime;
@@ -143,7 +142,7 @@ if($saveAttachments){
 }
 
 
-$alertMsg = 'Pika note successfully created';
+$alertMsg = 'Pika case note created';
 $alertMsg .=$_REQUEST['save_attachments']?" and attachments uploaded to case.":".";
   
 $returnHtml ='
