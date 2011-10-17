@@ -26,7 +26,7 @@
      in the manifest, but is still expected to be present. -->
     <Require feature="google.contentmatch">
       <Param name="extractors">
-        google.com:MessageIDExtractor
+        google.com:MessageIDExtractor, google.com:SubjectExtractor
       </Param>
     </Require>
   </ModulePrefs>
@@ -34,23 +34,34 @@
   <!-- Define the content type and display location. The settings "html" and "card" are required for all Gmail contextual gadgets. -->
   <Content type="html" view="card">
     <![CDATA[
-      <script type="text/javascript" src="http://lsnc.mcplusa-dev.com/google-gadgets-v3/js/jquery-1.5.1.min.js"></script>
-      <script type="text/javascript" src="http://lsnc.mcplusa-dev.com/google-gadgets-v3/js/jquery-ui-1.8.14.custom.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
       
       <script>
-        $(document).ready(function () {
+        $(document).ready(function () {        
           gadgets.window.adjustHeight();
+          
+          ActivePanel('myCasesListBox');
                     
           //matches = google.contentmatch.getContentMatches();
           //console.log(matches);
+                   
           
           //Button search click handler
-          $("#caseSearchBtn").click(function(){                          
-            var options = $("#allCasesListBox");
+          $("#caseSearchBtn").click(function(){
+            
+            var options = $("#" + $("#activeListBox").val());
+            //alert(options);
+            
+            var mode;
+            if(options == "myCasesListBox")mode = "myCases";
+            else if(options == "allCasesListBox")mode = "all";
+            //var options = $("#allCasesListBox");
+            
             options.find('option').remove().end();
-            options.append($("<option />").val('0').text('Select a case'));
-            var search = $("#caseSearchText").val();
-            var url = 'http://lsnc.mcplusa-dev.com/pika/pikaGmailGadgetJsonLib.php?callback=?&mode=all&search=' + search;
+            options.append($("<option style='width:290px;' />").val('0').text('Select a case'));
+            var search = $("#caseSearchText").val();            
+            var url = 'http://lsnc.mcplusa-dev.com/pika/pikaGmailGadgetJsonLib.php?callback=?&mode=' + mode + '&search=' + search;
             $.getJSON(url, function(data){
               $.each(data.cases, function(){
                 options.append($("<option />").val(this.case_id).text(this.number + '-' + this.client_name));
@@ -72,8 +83,9 @@
             var save_attachments = getSaveAttachments();            
             
             var matches = google.contentmatch.getContentMatches();
-            var xgmmsgid = matches[0].message_id;                        
-            var url = "http://lsnc.mcplusa-dev.com/pika/createNoteFromMail.php?case_id=" + caseId + "&xgmmsgid=" + xgmmsgid + "&save_attachments=" + save_attachments;
+            var xgmmsgid = matches[0].message_id;
+            var summary = matches[1].subject;
+            var url = "http://lsnc.mcplusa-dev.com/pika/createNoteFromMail.php?case_id=" + caseId + "&xgmmsgid=" + xgmmsgid + "&save_attachments=" + save_attachments + "&summary=" + summary;
 
             pika_popup(url);            
             /*
@@ -95,10 +107,11 @@
             if(caseId == 0){
               return;            
             }
-            var save_attachments = getSaveAttachments();                        
+            var save_attachments = getSaveAttachments();
             var matches = google.contentmatch.getContentMatches();
-            var xgmmsgid = matches[0].message_id;                        
-            var url = "http://lsnc.mcplusa-dev.com/pika/createTemporaryGoogleDoc.php?case_id=" + caseId + "&xgmmsgid=" + xgmmsgid + "&save_attachments=" + save_attachments;
+            var xgmmsgid = matches[0].message_id;
+            var summary = matches[1].subject;
+            var url = "http://lsnc.mcplusa-dev.com/pika/createTemporaryGoogleDoc.php?case_id=" + caseId + "&xgmmsgid=" + xgmmsgid + "&save_attachments=" + save_attachments + "&summary=" + summary;
             pika_popup(url);            
           });                
           
@@ -115,19 +128,10 @@
               alert(textStatus); 
             });          
         
-        });
-        
-        
-        function messageInfoResponse(obj) {  
-          //obj.text contains the text of the page that was requested  
-          var str = obj.text;
-          alert(str);
-          //var html =  str.substr(0,400);  
-          //document.getElementById('content_div').innerHTML = html;
-        };
+        });                       
 
        	function pika_popup(url) {
-          window.open (url,"LSNCPika","width=900,height=800,status=1,scrollbars=1");	
+          window.open (url,"LSNCPika","width=880, height=800, status=0, scrollbars=0, toolbar=0, location=0, menubar=0, directories=0, resizable=0");	
         }
         
         function getSelectedCaseId()
@@ -140,6 +144,7 @@
           }
           return caseId;
         }
+        
         function getSaveAttachments()
         {
           var save_attachments = "0";
@@ -177,19 +182,19 @@
         
         function desplegarGadget()
         {
-          $("#gadget").toggle("blind", { direction: "vertical" }, 1500);
+          $("#gadget").toggle();
           var gadgetTile = $("#gadgetTitle");
           if(gadgetTile.hasClass('collapsed'))
           {
             gadgetTile.removeClass('collapsed');
             gadgetTile.addClass('expanded');
-            gadgetTile.text('▼Pikaaaa - Attach to Case Notes');
+            gadgetTile.text('▼STAGING Pika - Attach to Case Notes');
           }          
           else if(gadgetTile.hasClass('expanded'))
           {            
             gadgetTile.removeClass('expanded');
             gadgetTile.addClass('collapsed');
-            gadgetTile.text('►Pikaaaa - Attach to Case Notes');
+            gadgetTile.text('►STAGING Pika - Attach to Case Notes');
           }          
         }
           
@@ -269,7 +274,7 @@
       </style>
 
       <html>
-      <span class="title collapsed" id="gadgetTitle" onclick='desplegarGadget(0);setTimeout("gadgets.window.adjustHeight()",2000);'>►Pikaaaa - Attach to Case Notes</span>  
+      <span class="title collapsed" id="gadgetTitle" onclick='desplegarGadget(0);setTimeout("gadgets.window.adjustHeight()",2000);'>►STAGING Pika - Attach to Case Notes</span>  
       <div id="gadget" style="display:none;">  
         </br>
         
@@ -277,7 +282,7 @@
         
         <input style="width:200px;" type="text" id="caseSearchText"/>
         <input type="button" id="caseSearchBtn" value="Search all cases"/>
-        </br></br>
+        </br></br>                       
 
         <table border="0" cellpadding="0" cellspacing="0">
           <tr>
@@ -318,8 +323,12 @@
         
         <input type="button" id="attachToCase" value="Attach to Case"/>
         <input type="button" id="editAndAttachToCase" value="Edit and Attach to Case"/>  
-        </br>
-        
+        <br/><br/>
+        <img src="http://c31005.r5.cf1.rackcdn.com/mcplusa_logo_transparent_100X25.png" alt="MC+A" />
+        <br/>
+        <br/>
+        <small><a href="#" onclick="window.open('http://www.gnu.org/licenses/gpl.html');return false;">License: GNU GPL v3</a></small>
+                
       </div>
       </html>
     ]]>
