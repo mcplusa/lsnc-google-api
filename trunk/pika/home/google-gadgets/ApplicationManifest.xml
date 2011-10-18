@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?> 	
+<ApplicationManifest xmlns="http://schemas.google.com/ApplicationManifest/2009"> 	
+<!-- Name and description pulled from message bundles --> 	
+<Name>Pika Gmail Gadget STAGING</Name> 	
+<Description>Description</Description> 	
+	
+<!-- EXTRACTOR --> 		
+<Extension id="MessageIDExtractor" type="contextExtractor"> 	
+<Name>Message ID Extractor</Name> 	
+<Url>google.com:MessageIDExtractor</Url> 	
+<Param name="message_id" value=".*"/> 	
+<Triggers ref="HWGadget"/> 	
+<Scope ref="emailMessage_ID"/> 	
+<Container name="mail"/> 	
+</Extension> 	
+
+<Extension id="SubjectExtractor" type="contextExtractor">
+  <Name>Subject Extractor</Name>
+  <Url>google.com:SubjectExtractor</Url>
+  <Param name="subject" value=".*"/> 	
+  <Triggers ref="HWGadget"/>
+  <Scope ref="emailSubject"/>
+  <Container name="mail"/>
+</Extension>
+	
+<!-- GADGET --> 	
+<Extension id="HWGadget" type="gadget"> 	
+<Name>Pika Gmail Gadget STAGING</Name> 	
+<Url>http://lsnc.mcplusa-dev.com/google-gadgets-v3/pika_gmail_context.xml</Url> 	
+<Container name="mail"/> 	
+</Extension> 	
+	
+<!-- SCOPE --> 	
+<Scope id="emailMessage_ID"> 	
+<Url>tag:google.com,2010:auth/contextual/extractor/MESSAGE_ID</Url> 	
+<Reason>This application searches for the Message ID field of an email.</Reason> 	
+</Scope> 	
+
+<Scope id="emailSubject">
+  <Url>tag:google.com,2010:auth/contextual/extractor/SUBJECT</Url>
+  <Reason>This application searches for the Subject of an email.</Reason>
+</Scope>
+	
+	
+</ApplicationManifest>
