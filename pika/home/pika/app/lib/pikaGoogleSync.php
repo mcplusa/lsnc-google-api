@@ -65,7 +65,7 @@ class pikaGoogleSync extends pikaActivity {
 	private $TOKENPATH = "/var/www/keys/request_token.json";
 	private $TEMP_PATH = "/var/www/temp/";	  
 	
-	/*
+    /*
 	private $RSAKEY = "C:\\Projects\\LSNCGA\\pika\\home\\keys\\mcplusa_rsakey.pem";
 	private $TOKENPATH = "C:\\Projects\\LSNCGA\\pika\\home\\keys\\request_token.json";
 	private $TEMP_PATH = "C:\\temp\\";	
@@ -658,17 +658,22 @@ class pikaGoogleSync extends pikaActivity {
 			 */ 					
 			 
 			if (empty($this->_gdocs)) {
-				$this->_gdocs = new Zend_Gdata_Docs($this->_client);		
+			    //error_log('Get gdocs');
+				$this->_gdocs = new Zend_Gdata_Docs($this->_client);
+				//error_log('Done');		
 			}	
 			
-			if (empty($this->_docsfeed))	{			
-				$this->_docsfeed = $this->_gdocs->getFeed('https://docs.google.com/feeds/documents/private/full/-/folder');			
+			if (empty($this->_docsfeed))	{
+			    //error_log('get docs feed');			
+				$this->_docsfeed = $this->_gdocs->getFeed('https://docs.google.com/feeds/documents/private/full/-/folder');
+				//error_log('Done');			
 			}	
 			
 			$collection_uri = null;
 			$root_uri = null;
 				
 			// check for existing folder with a name matching the folder_name
+			//error_log('Get the specified folder');
 			foreach($this->_docsfeed as $folder) {					
 				if ( $folder->title->getText() === $data['folder_name']) {
 					$collection_uri = $folder->id->getText();		
@@ -685,13 +690,16 @@ class pikaGoogleSync extends pikaActivity {
 					}
 				}
 			}
+			//error_log('Done');
 			
 			// create the root "My Cases" folder
 			if ($root_uri === null) {
+			    //error_log('if root uri null ==> create my cases');
 				$root_folder = $this->_gdocs->createFolder($this->ROOTFOLDERNAME);
 				$root_uri = $root_folder->id->getText() . "/contents";
 				//add root folder to global feed list
-				$this->_docsfeed[]=$root_folder;				
+				$this->_docsfeed[]=$root_folder;
+				//error_log('Done');				
 			}
 			
 			// get the resource_id of the root folder for Zend_Gdata_Docs::createFolder() 
@@ -699,22 +707,28 @@ class pikaGoogleSync extends pikaActivity {
 			
 			// create new folder under the root folder
 			if ($collection_uri === null) {					
+			    //error_log('if collection uri null ==> create foolder under root');
 				$new_folder = $this->_gdocs->createFolder($data['folder_name'],$parent_id);
 				//add new folder to global feed list
 				$this->_docsfeed[]=$new_folder;
 				$collection_uri = $new_folder->id->getText();
+				//error_log('Done');
 			}		
 			
-			$acl_root_uri = str_replace("documents","default",str_replace("/contents","",$root_uri)) . "/acl";		
-			$doc_acl=$this->updateACL($acl_root_uri, $data);			
+			$acl_root_uri = str_replace("documents","default",str_replace("/contents","",$root_uri)) . "/acl";
+			//error_log('Update ACL');		
+			//$doc_acl=$this->updateACL($acl_root_uri, $data);
+			//error_log('Done');			
 			
 			// remove root folder resource id from collection uri for modifying the ACL
 			$acl_collection_uri = str_replace("/$parent_id","",str_replace("documents","default",str_replace("/contents","",$collection_uri))) . "/acl";
 
-			$doc_acl=$this->updateACL($acl_collection_uri, $data);		
+			//error_log('update ACL');
+			//$doc_acl=$this->updateACL($acl_collection_uri, $data);
+			//error_log('Done');
+					
 			return str_replace("/contents","",$collection_uri);	
 		} catch (Zend_Gdata_App_Exception $e) {
-		    echo '</br></br>';
 		    echo $e->getMessage();
 		    echo '</br></br>';		    
 			echo "\n>>>> ERROR getCollectionId. Can't change folder permissions yet. Rerunning script should fix this.<<<<\n";
@@ -725,45 +739,56 @@ class pikaGoogleSync extends pikaActivity {
 	
 	public function uploadDoc($data) 
 	{
-		try {	
-			
+		try {		      		  	
 			if (empty($this->_gdocs)) {
-				$this->_gdocs = new Zend_Gdata_Docs($this->_client);		
+			    //error_log('Get gdocs');
+				$this->_gdocs = new Zend_Gdata_Docs($this->_client);
+				//error_log('Done');		
 			}
 					
-			// get destination folder uri	 
-			$data['collection_uri'] = $this->getCollectionId($data);		
+			// get destination folder uri
+			//error_log('Get collection Id');	 
+			$data['collection_uri'] = $this->getCollectionId($data);
+			//error_log('Done getCollectionId');		
 				
 			// write temp file to upload
+			//error_log('Write file to disk');
 			$pikafile = $this->TEMP_PATH . $data['doc_name'];
 			if(!($uncompressedData = gzuncompress(stripslashes($data['doc_data']))))
 			{
 				$uncompressedData = $data['doc_data'];
 			}		
-    		file_put_contents( $pikafile, $uncompressedData);    			    	
+    		file_put_contents( $pikafile, $uncompressedData);
+    		//error_log('Done');    			    	
 						
  			// DELETE the previous version of the file	
  			// WARNING: REVISIONS MADE IN GOOGLE DOCS WILL BE OVERWRITTEN 	 			
-			if (!empty($data['document_uri'])) {				
-				$result=$this->deleteDoc($data);		    	
+			if (!empty($data['document_uri'])) {
+			    //error_log('Delete data if exist file');				
+				$result=$this->deleteDoc($data);	
+				//error_log('Done');	    	
 			}		
-			
-			// generate a full content->src URI for uploading the file into a case folder
-			$upload_collection_uri = str_replace("documents","default",$data['collection_uri']) . "/contents?v=3";
-			if(isset($data['convert'])){
-				$upload_collection_uri.='&convert=true';						
+						
+			// generate a full content->src URI for uploading the file into a case folder			
+			$data['collection_uri'] = str_replace("documents","default",$data['collection_uri']) . "/contents?v=3";
+			if(isset($data['convert'])){			    
+				$data['collection_uri'].='&convert=true';						
 			}		
-			else {
-				$upload_collection_uri.='&convert=false'; 
+			else {			    
+				$data['collection_uri'].='&convert=false'; 
 			}
+						
 			
-			$document = $this->_gdocs->uploadFile($pikafile,$data['doc_name'],$data['mime_type'],$upload_collection_uri);		
-		
+			//error_log('Upload the file');
+			$document = $this->_gdocs->uploadFile($pikafile,$data['doc_name'],$data['mime_type'],$data['collection_uri']);		
+		    //error_log('Done');
+		    
 			//strip off docs uri (i.e."http://docs.google.com/feeds/documents/") uri to get resource id
 			$data['document_uri'] = str_replace("http://docs.google.com/feeds/id/","",$document->id->getText());			
 			
+			
 			//add general uri (i.e. "//docs.google.com/feeds/default/") for ACL modifications
-			$doc_acl=$this->updateACL("http://docs.google.com/feeds/default/private/full/$data[document_uri]/acl",$data);
+			//$doc_acl=$this->updateACL("http://docs.google.com/feeds/default/private/full/$data[document_uri]/acl",$data);
 			
 			// remove temp file. if you comment-out this line, copies will remain in the $TEMP_PATH directory
 			unlink($pikafile);
@@ -940,8 +965,12 @@ class pikaGoogleSync extends pikaActivity {
        */
       $this->_protocol = new Zend_Mail_Protocol_Imap('imap.gmail.com', '993', true);    
       $authenticateParams = array('XOAUTH', $initClientRequestEncoded);
-      $this->_protocol->requestAndResponse('AUTHENTICATE', $authenticateParams);  
+      error_log("Send auth request");
+      $this->_protocol->requestAndResponse('AUTHENTICATE', $authenticateParams);
+      error_log("Got auth response");
+      error_log("Instanciate Mail Storage");
       $this->_storage = new Zend_Mail_Storage_Imap($this->_protocol);
+      error_log("Mail Storage Instanciated");
 	}
 	
   public function hex2dec($hex_string)
