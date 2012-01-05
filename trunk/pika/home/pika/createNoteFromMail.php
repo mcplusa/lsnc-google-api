@@ -1,15 +1,4 @@
 <?php
-/*
-if((count($_REQUEST))==0)die("Can't create pika note.<br/>Trying again should fix this.");
-
-session_start();
-require_once ('./app/lib/pikaImapOAuth.php');
-require_once ('pika_cms.php');
-
-$imapOauth = new pikaImapOAuth();
-$imapOauth->connect();
-*/
-
 session_start();       
 $auth = '';
 $auth_array = array();
@@ -48,68 +37,31 @@ $obj->connect();
 
 $user = new pikaUser($auth_row['user_id']);
 $email = $user->getValue('email');
-
-$obj->conectImapProtocol($email);
-
-//Get the msg id usin the X-GM-MSGID
-//$imapOauth->_protocol->examine();
-$obj->_protocol->examine();
-$xg_gm_msidg = /*$imapOauth*/$obj->hex2dec($_REQUEST['xgmmsgid']);  
-$response = /*$imapOauth*/$obj->_protocol->requestAndResponse("UID SEARCH X-GM-MSGID " . $xg_gm_msidg);
-if(is_null($response) || $response==false || !isset($response[0][1]))
-{
-	echo 'Did not find the message.<br/>';
-	return;
-}  	    
-$msgid = $response[0][1];      
-
-//Get the message with the obtained id
-$number = /*$imapOauth*/$obj->_storage->getNumberByUniqueId($msgid);
-$msg = /*$imapOauth*/$obj->_storage->getMessage($number);     
-
-
+$xgmmsgid = $_REQUEST['xgmmsgid'];
 $saveAttachments = $_REQUEST['save_attachments'];
-if($saveAttachments)
-{
-	$attachments = array(); 
-}
+$entireConversation = $_REQUEST['entire_conversation'];
+$subject = 'Summary';
 
-//Iterate message parts and get attachments, text/plain and/or text/html
-foreach (new RecursiveIteratorIterator($msg) as $part) {
-  //If part contains content-disposition header then it's an attachment part  
-  if($part->headerExists("content-disposition") && strtok($part->contentDisposition, ';') == 'attachment')
-  {
-    if($saveAttachments)
-    {	  
-      //Get the attacment file name
-      $fileName = strtok('=');
-      $fileName = strtok('"');
-      str_replace("\"", "", $fileName);
-      $fileType = strtok($part->contentType, ';');
-      $fileContent = base64_decode($part->getContent());
-      $fileSize = strlen($fileContent);                	    	 
-      //Get the attachement and decode
-      $attachments[] = array("file_name" => $fileName, "file_type" => $fileType, "file_content" => $fileContent, "file_size" => $fileSize);	                
-    }      	
-  }
-  else 
-  {
-    if(strtok($part->contentType, ';') == 'text/plain'){
-      $plain = $part->getContent();      
-    }	
-    elseif(strtok($part->contentType, ';') == 'text/html'){                    
-      $html = $part->getContent();      	       
-    }      	    
-  }
-}                     
-   
+$pikaImap = $obj->conectImapProtocol($email);
+$messages = $pikaImap->getMsgsByXGMMSGID($xgmmsgid, $entireConversation, $saveAttachments, $subject);
+$pikaImap->logout();
+
+if($messages == false) die(ERRORPAGE);
+
+$content = '';
+if($entireConversation)
+  for($i=0;$i<count($messages);$i++)$content.='Message '.($i+1).':'.PHP_EOL.$messages[$i][0].PHP_EOL.PHP_EOL;
+else 
+  $content = 'Message 1:'.PHP_EOL.$messages[0].PHP_EOL.PHP_EOL;
+
 $date = getdate();
 $noteDate = $date['year'] . "-" . $date['mon'] . "-" . $date['mday'];  
 $noteTime = $date['hours'] . ":" . $date['minutes'] . ":" . $date['seconds'];
 
 //$_REQUEST['notes'] = isset($html)? $html : $plain;  
-$_REQUEST['notes'] = isset($plain)? $plain : $html;
-
+$_REQUEST['notes'] = $content;
+$_REQUEST['summary'] = $subject;
+$_POST['summary'] = $subject;
 $_REQUEST['act_type'] = 'N';
 $_REQUEST['category'] = 'CS';  
 $_REQUEST['completed'] = '1';
@@ -126,21 +78,22 @@ $pk->newActivity($a);
 
 if($saveAttachments){
   require_once ('pika-danio.php');    
-  require_once('./app/lib/pikaDocument.php');  
-  
-  
-  pika_init();  
-  
-  foreach ($attachments as $key => $value) {    
-    $doc = new pikaDocument();           
-    $doc->uploadDocFromContent($value['file_content'], $value['file_name'], $value['file_type'], $value['file_size'], "", 0, "C", $_REQUEST['case_id']);    
-    //Save the attachment
-    /*$fh = fopen("C:/".$key.'.txt', 'w');
-    fwrite($fh, $value);    
-    fclose($fh);*/
-  }
+  require_once('./app/lib/pikaDocument.php');     
+  pika_init();    
+  if($entireConversation)   
+    for($i=0;$i<count($messages);$i++)
+    {
+      foreach ($messages[$i][1] as $key => $value) {    
+        $doc = new pikaDocument();           
+        $doc->uploadDocFromContent($value['file_content'], $value['file_name'], $value['file_type'], $value['file_size'], "", 0, "C", $_REQUEST['case_id']);    
+      }    
+    }
+  else
+    foreach ($messages[1] as $key => $value) {    
+      $doc = new pikaDocument();           
+      $doc->uploadDocFromContent($value['file_content'], $value['file_name'], $value['file_type'], $value['file_size'], "", 0, "C", $_REQUEST['case_id']);    
+    } 
 }
-
 
 $alertMsg = 'Pika case note created';
 $alertMsg .=$_REQUEST['save_attachments']?" and attachments uploaded to case.":".";

@@ -1,253 +1,100 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+		<title>Pika: %%[page_title]%%</title>
+		<link href="%%[base_url]%%/css/screen.css.php" rel="stylesheet"
+		 type="text/css" />
+		<!-- header --><!-- %%[header]%% -->
+		%%[rss]%%
+		<link rel="icon" href="%%[base_url]%%/favicon.ico" />
+		<link rel="shortcut icon" href="%%[base_url]%%/favicon.ico" />
+	</head>
+	<body>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<title>%%[page_title]%%</title>
-<link rel="shortcut icon" href="/favicon.ico" />
-<!-- css hub -->
-<link rel="stylesheet" href="%%[base_url]%%-custom/css/hub.css" type="text/css" media="screen" />
-<!-- css print  -->
-<link rel="stylesheet" href="%%[base_url]%%-custom/css/print.css" type="text/css" media="print" />
-<!--[if IE]>
-<link rel="stylesheet" href="%%[base_url]%%-custom/css/ie.css" type="text/css" media="screen" />
-<![endif]-->
-<!-- jQuery scripts -->
-<link type="text/css" href="%%[base_url]%%/jquery/css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>	 
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/jquery-1.5.2.min.js"></script>	  
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/ui.core.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/ui.datepicker.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/pika-datepicker.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/jquery.hoverIntent.min.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/hover-mega.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/calendar_toggle.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/opensocial-jquery.min.js"></script>
-<script type="text/javascript" src="%%[base_url]%%/jquery/js/jquery.validate.js"></script>
-<!-- /jQuery -->
-</head>
+		<div id="header_wrapper">
+		<table id="header">
+			<tr valign="top">
+				<td>
+					<a href="%%[base_url]%%/">
+						<img src="%%[base_url]%%/images/icon.png"
+						 height="48" width="48" />
+					</a>
+				</td>
+				<td class="nowrap" width="50%">
+					<p id="site_name">
+						<a href="%%[base_url]%%/">%%[org_name]%%<!-- org_name --></a>
+					</p>
+					
+					<p id="software_label">
+						%%[nav]%%
+					</p>
+				</td>
+				<td width="50%">
+					<form name="sform" method="get" 
+					action="%%[base_url]%%/search.php" id="sform">
+					<div id="searchbox">
+						<input name="s" size="29" value="" accesskey="f"
+						class="search_text" type="text" />
+						<input name="search_submit"	value="Search" 
+						type="submit" />
+					</div>
+						<p id="auth_label">
+						You are logged in as <a href="%%[base_url]%%/prefs.php">
+						%%[user_handle]%%<!-- username --></a>.
+						</p>
+					</form>
+				</td>
+			</tr>
+		</table>
+					<p id="shortcuts">
+						<a href="%%[base_url]%%/site_map.php" accesskey="m">Site <strong>M</strong>ap</a> |
+						<a href="%%[base_url]%%/case_list.php?mode=open" accesskey="l">Case <strong>L</strong>ist</a>&nbsp;|
+						<a href="%%[base_url]%%/addressbook.php" accesskey="d">A<strong>d</strong>dress Book</a>&nbsp;|
+						<a href="%%[base_url]%%/cal_day.php" accesskey="c"><strong>C</strong>alendar</a>&nbsp;|
+						<a href="%%[base_url]%%/intake2.php" accesskey="i"><strong>I</strong>ntake</a>&nbsp;|
+						<a href="%%[base_url]%%/activity.php?screen=compose&act_type=T" accesskey="t"><strong>T</strong>ime Slip</a>&nbsp;|
+						<a href="%%[base_url]%%/reports/" accesskey="r"><strong>R</strong>eports</a>&nbsp;|
+						<a href="mailto:%%[admin_email]%%" accesskey="p">Su<strong>p</strong>port</a>
+					</p>
+		</div>
+		
+		<table id="main">
+			<tr>
+				<td>
+					<!-- <img src="%%[base_url]%%/images/blank.gif" height="1" width="1" align="left" alt=""/> -->
+					<!-- begin page content -->
+					%%[content]%%
+					<!-- end page content -->
+				</td>
+			</tr>
+		</table>
 
-<body>
 
-<!-- top-menu -->
+		<div id="footer">
 
-<div id="top-menu">
-    
-    <ul id="nav">
-    
-        <li><a href="%%[base_url]%%/portal/" title="Go to LSNC Portal home page.">LSNC Portal</a></li>
-        
-        <!-- Pika -->
-        
-        <li class="mega"><a class="cursor" href="%%[base_url]%%/site_map.php">Pika...</a>
-            
-            <div id="drop-wrapper01" class="drop-wrapper">
+		<p id="ql">
+			<a href="%%[base_url]%%/site_map.php" accesskey="m">Site <strong>M</strong>ap</a> |
+			<a href="%%[base_url]%%/case_list.php?mode=open" accesskey="l">Case <strong>L</strong>ist</a>&nbsp;|
+			<a href="%%[base_url]%%/addressbook.php" accesskey="d">A<strong>d</strong>dress Book</a>&nbsp;|
+			<a href="%%[base_url]%%/cal_day.php" accesskey="c"><strong>C</strong>alendar</a>&nbsp;|
+			<a href="%%[base_url]%%/intake2.php" accesskey="i"><strong>I</strong>ntake</a>&nbsp;|
+			<a href="%%[base_url]%%/activity.php?screen=compose&act_type=T" accesskey="t"><strong>T</strong>ime Slip</a>&nbsp;|
+			<a href="%%[base_url]%%/reports/" accesskey="r"><strong>R</strong>eports</a>&nbsp;|
+			<a href="mailto:%%[admin_email]%%" accesskey="p">Su<strong>p</strong>port</a>
+		</p>
+		</form>
 
-                <div id="add-pika">
-                    <h5>Add New...</h5>
-                    <ul>
-                        <li><a href="%%[base_url]%%/intake2.php/">Client Intake</a></li>
-                        <li><a href="%%[base_url]%%/activity.php?screen=compose&amp;act_type=L">OSR Data</a></li>
-                        <li><a href="%%[base_url]%%/activity.php?screen=compose&amp;act_type=T">Time Slip</a></li>
-                        <li><a href="%%[base_url]%%/timer.php" onclick="popUp({url:this.href,name:'popUpTimer'});return false;"target="_blank">Pop-up Timer</a></li>
+		<p id="copyright">
+			&copy; 2007 Pika Software, LLC 
+			<a href="http://pikasoftware.com/">www.pikasoftware.com</a>
+		</p>
+		
+		</div>
 
 
 
 
-                        <li><a href="%%[base_url]%%/activity.php?screen=compose&amp;completed=0">Calendar Item</a></li>
-
-                        <li><a href="%%[base_url]%%/activity.php?screen=compose&amp;act_type=K">Tickler Item</a></li>
-                    </ul>
-                </div> <!-- /#add-Pika -->
-
-                <div id="my-pika">
-                    <h5>Pika Records</h5>
-                    <ul>
-                        
-                        <li><a href="%%[base_url]%%/case_list.php?mode=open">My Open Cases</a></li>
-                        <li><a href="%%[base_url]%%/case_list.php?mode=closed">My Closed Cases</a></li>                                            
-                        <li><a href="%%[base_url]%%/intakes.php/">Incomplete Intakes</a></li>
-                        <li><a href="%%[base_url]%%/case_list.php">All Open Cases</a></li>
-                        <li><a href="%%[base_url]%%/cal_adv.php?action=1&act_type=T&sort_order=DESC">My Time Slips</a></li>
-                        <li><a href="%%[base_url]%%/cal_day.php">My Day Calendar</a></li>
-                        <li><a href="%%[base_url]%%/cal_week.php">My Week Calendar</a></li>
-                        <li><a href="%%[base_url]%%/cal_adv.php">Advanced Calendar</a></li>
-                    </ul>
-                
-                </div> <!-- /#my-pika -->                
-
-                <div id="more-pika">
-
-                    <h5>More Options</h5>
-                    <ul>
-                        <li><a href="%%[base_url]%%/legacy_report.php?report=timecodes">Pay-period Report</a></li>
-
-                        <li><a href="%%[base_url]%%/reports/">All Pika Reports</a></li>
-                        <li><a href="%%[base_url]%%/search.php">Pika Search Filters</a></li>
-                        <li><a href="%%[base_url]%%/addressbook.php">Search Contacts</a></li>
-                        <li><a href="%%[base_url]%%/site_map.php">Sitemap</a></li>
-                    </ul>
-
-                </div> <!-- /#more-pika -->
-            
-            </div></li> <!-- /.drop-wrapper /li -->
-
-        <li><a href="https://mail.google.com/hosted/lsnc.net/" title="Your LSNC Gmail account.">Gmail</a></li>
-        
-        <li><a href="https://www.google.com/calendar/hosted/lsnc.net/" title="Your LSNC Google Calendars.">GCalendar</a></li>
-        
-        <li><a href="https://docs.google.com/a/lsnc.net/" title="Create and share files with Google Docs, Presentations and Spreadsheets.">GDocs</a></li>
-
-        <!-- SPN -->
-        
-        <li class="mega"><a class="cursor" href="https://sites.google.com/a/lsnc.net/spn/">GSites | SPN...</a>
-            
-            <div id="drop-wrapper02" class="drop-wrapper">
-
-                <div id="finance">
-                    <h5>Finance | Personnel</h5>
-                    <ul>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/finance-department-human-resources">Finance Department</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/development-fundraising">Development Office</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/finance-department-human-resources/employee-manual">Employee Manual</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/finance-department-human-resources/lsnc-core-program">LSNC Core Program</a></li>        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/finance-department-human-resources/lsnc-special-programs">LSNC Special Programs</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/finance-department-human-resources/lsnc-holidays">LSNC Holidays</a></li>    
-                    </ul>
-                </div> <!-- /#finance -->
-
-                <div id="office">
-                    <h5>Office Resources</h5>
-                    <ul>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/lsnc-forms/admin-forms">Admin Forms</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/lsnc-forms/case-forms">Case Forms</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/admin-office-management/admin-manual">Admin Manual</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/admin-office-management/lsnc-county-service-areas">County Service Areas</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/admin-office-management/language-access">Language Access</a></li>
-                    </ul>
-                </div> <!-- /#office-management -->                
-
-                <div id="resources">
-
-                    <h5>Program Resources</h5>
-                    <ul>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/advocate-practice-training">Advocate Resources</a></li>
-						<li><a href="https://sites.google.com/a/lsnc.net/spn/home/legal-services-regulations-policies">LSC | LSNC Policies</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/mcle-resources">MCLE Resources</a></li>
-                        <li><a href="https://sites.google.com/a/lsnc.net/spn/home/technology-resources">Tech Resources</a></li>
-						<li><a href="https://sites.google.com/a/lsnc.net/spn/home/password-protected-accounts/westlaw-passwords">Westlaw Passwords</a></li>
-						<li class="more"><a href="https://sites.google.com/a/lsnc.net/spn/">More...</a></li>                        
-                    </ul>
-
-                </div> <!-- /#resources -->
-            
-            </div></li> <!-- /.drop-wrapper /li -->
-
-        <!-- LSNC Web -->
-        
-        <li class="mega"><a class="cursor" href="http://www.lsnc.net/">LSNC Web...</a>
-        
-            <div id="drop-wrapper03" class="drop-wrapper">
-        
-                <div id="lsnc-web">
-
-                    <h5>LSNC Program Sites</h5>
-                        <ul>
-                        <li><a href="http://www.lsnc.net/">LSNC.net</a></li>
-                        <li><a href="http://www.lsnc.info/">LSNC.info</a></li>
-                        <li><a href="http://www.hrh.org/">Health Rights Hotline</a></li>
-                        <li><a href="http://www.hicapservices.net/">HICAP Services</a></li>
-                        <li><a href="http://www.osnc.net/">Ombudsman Services</a></li>
-                        <li><a href="http://www.seniorlegalhotline.org/">Senior Legal Hotline</a></li>
-                        <li><a href="http://www.vlsp.org/">Voluntary Legal Services</a></li>
-                        </ul>
-
-                </div> <!-- /#lsnc-web -->
-                
-                <div id="project-web">
-
-                    <h5>Special Project Sites</h5>
-                        <ul>
-                        <li><a href="http://www.foodstampguide.org/">California Food Stamp Guide</a></li>
-                        <li><a href="http://www.lsnc.net/cases/">Cases @ LSNC.net</a></li>
-                        <li><a href="http://www.lsnc.net/regs/">Regs @ LSNC.net</a></li>
-                        <li><a href="http://lsnc.net/equity/">Race Equity Project</a></li>
-                        </ul>
-
-                </div> <!-- /#project-web -->
-            
-            </div></li> <!-- /.drop-wrapper /li -->
-        
-        <li><a href="https://next.westlaw.com/">WestlawNext</a></li>
-        
-        <li id="help"><a href="mailto:gizmos@lsnc.net" title="Need help? Send an email to Team Gizmo  and tell 'em what you need!">?</a></li>
-        
-        <li id="upload"><a href="https://sites.google.com/a/lsnc.net/shared-document-repository/" title="Upload a file or add a web link to the Shared Document Repository.">Upload &raquo; SDR</a></li>
-    
-    </ul> <!-- /#nav -->        
-    
-</div> <!-- /#top-menu -->
-
-<!-- header -->
-
-<div id="header-wrapper">
-
-    <div id="header">
-    
-        <div id="logo">
-
-            <h1><a href="%%[base_url]%%/site_map.php" title="Go to the Pika Site Map page"><img src="%%[base_url]%%/images/custom/pika_logo.png" alt="" /><span>Pika</span> 4.0</a></h1>
-            
-            <div id="breadcrumb">
-            %%[nav]%%
-            </div>
-
-        </div> <!-- /#logo -->
-        
-        <div id="search">
-        
-            <form id="search-form" name="sform" method="get" action="%%[base_url]%%/search.php">
-
-                <div id="search-box">
-                
-                    <input id="search-text" name="s" size="29" value="" accesskey="" type="text" />
-                    <input id="search-submit" name="search_submit"	value="Search Pika" type="submit" />
-
-                </div> <!-- /#search-box -->
-
-               <p id="user-label">
-					You are logged in as <a href="%%[base_url]%%/prefs.php"> %%[user_handle]%%<!-- username --></a>.
-                </p>
-            </form> <!-- /#search-form -->
-
-        </div> <!-- /#search -->
-        
-    </div> <!-- /#header -->
-
-</div> <!-- /#header-wrapper -->
-
-<!-- content -->
-
-<div id="content-wrapper">
-
-    <div id="content">
-
-        %%[content]%%
-    
-    </div> <!-- /#content -->
-
-</div> <!-- /#content-wrapper -->
-
-<!-- footer -->
-
-<div id="footer">
-
-    <p>
-    Team Gizmo, at your service
-    </p>
-    		
-</div> <!-- /footer -->
-	
-</body>
-
+	</body>
 </html>
