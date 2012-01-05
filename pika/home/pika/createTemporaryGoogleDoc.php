@@ -1,8 +1,5 @@
 <?php
 
-/*print_r($_REQUEST);*/
-
-
 session_start();
         
 $auth = '';
@@ -38,61 +35,60 @@ foreach($_REQUEST as $key => $value)
 	}		
 }
 
+$fromMail = !isset($_REQUEST['doc_data']);
 
+
+//error_log('Instanciate pikaGoogleSync');
 $obj = new pikaGoogleSync();
-
+//error_log('Instanciated pikaGoogleSync');
 $obj->connect();
+//error_log('Connected pikaGoogleSync');
 
+$subject = 'Summary';
 
-$user = new pikaUser($auth_row['user_id']);
-$email = $user->getValue('email');
-
-$obj->conectImapProtocol($email);
-
-
-//Get the msg id usin the X-GM-MSGID
-
-$obj->_protocol->examine();
-$xg_gm_msidg = $obj->hex2dec($_REQUEST['xgmmsgid']);  
-$response = $obj->_protocol->requestAndResponse("UID SEARCH X-GM-MSGID " . $xg_gm_msidg);
-if(is_null($response) || $response==false || !isset($response[0][1]))
+//if from mail then get the email content
+if($fromMail)
 {
-	echo 'Could not fin the message<br/>';
-	return;
-}  	    
-$msgid = $response[0][1];      
+  $user = new pikaUser($auth_row['user_id']);
+  $email = $user->getValue('email');
+  $xgmmsgid = $_REQUEST['xgmmsgid'];
+  $entireConversation = $_REQUEST['entire_conversation'];
+  
+  $pikaImap = $obj->conectImapProtocol($email);
+  $messages = $pikaImap->getMsgsByXGMMSGID($xgmmsgid, $entireConversation, false, $subject);
+  $pikaImap->logout();
 
-//Get the message with the obtained id
-$number = $obj->_storage->getNumberByUniqueId($msgid);
-$msg = $obj->_storage->getMessage($number);     
-
-//Iterate message parts and get text/plain and/or text/html
-
-$summary = $msg->subject;
-foreach (new RecursiveIteratorIterator($msg) as $part) {
-  if(!$part->headerExists("content-disposition"))
-  {
-    if(strtok($part->contentType, ';') == 'text/plain'){
-      $plain = $part->getContent();      
-    }	
-    elseif(strtok($part->contentType, ';') == 'text/html'){                    
-      $html = $part->getContent();      	       
-    }      	    
-  }
+  if($messages == false) die(ERRORPAGE);
+  
+  $content = '';
+  if($entireConversation)
+    for($i=0;$i<count($messages);$i++)$content.='Message '.($i+1).':'.PHP_EOL.$messages[$i][0].PHP_EOL.PHP_EOL;
+  else 
+    $content = 'Message 1:'.PHP_EOL.$messages[0].PHP_EOL.PHP_EOL;  
+}
+else
+{
+  //echo $_POST['doc_data'].'<br>';
+  $_REQUEST['doc_data'] = str_replace('<br>', PHP_EOL, $_REQUEST['doc_data']);
+  $_POST['doc_data'] = $_REQUEST['doc_data'];  
 }
 
           
 //$_REQUEST['doc_data'] = isset($html)? $html : $plain;
-$_REQUEST['doc_data'] = isset($plain)? $plain : $html;
+if($fromMail)$_REQUEST['doc_data'] = $content;
 $_REQUEST['doc_name'] = "test.txt";
 $_REQUEST['folder_name'] = "temp_docs";
-$_REQUEST['convert'] = 1;
 $_REQUEST['mime_type'] = "text/plain";
+$_REQUEST['folder_name'] = 'Editing Docs';
 
-
+//error_log('Upload google doc');
 $googleDoc = $obj->uploadDoc($_REQUEST);
+//error_log('google doc uploaded');
+//error_log('get google document id');
+//$documentId = str_replace("https://docs.google.com/feeds/id/document%3A","",$googleDoc['document_uri']);
+$documentId = str_replace("file%3A","",$googleDoc['document_uri']);
+//error_log('got google document id');
 
-$documentId = str_replace("https://docs.google.com/feeds/id/document%3A","",$googleDoc['document_uri']);
 //change to your apps domain
 $editDocumentUrl = 'https://docs.google.com/a/mcplusa-dev.com/document/d/'.$documentId.'/edit?hl=en_US';
 
@@ -100,15 +96,22 @@ $html ='<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs
       	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>            
       	<script>
         	$(document).ready(function () {        		
-				$("#attachToCase").click(function(){
-					var save_attachments = getSaveAttachments();					
-            		var url = "/pika/createNoteFromGoogleDoc.php?case_id='.$_REQUEST['case_id'].'&document_id='.$documentId.'&save_attachments=" + save_attachments + "&xgmmsgid='.$_REQUEST['xgmmsgid'].'&summary='.$summary.'";		                            
-            		window.open(url);
-            		window.close();            
+						$("#attachToCase").click(function(){';
+if($fromMail)
+{
+      $html.='var save_attachments = getSaveAttachments();					
+							var url = "/pika/createNoteFromGoogleDoc.php?case_id='.$_REQUEST['case_id'].'&document_id='.$documentId.'&save_attachments=" + save_attachments + "&xgmmsgid='.$_REQUEST['xgmmsgid'].'&entire_conversation='.$entireConversation.'&summary='.$subject.'";';
+}
+else
+{
+      $html.='var url = "/pika/createNoteFromGoogleDoc.php?case_id='.$_REQUEST['case_id'].'&document_id='.$documentId.'&summary='.$_REQUEST['summary'].'";';
+}
+      $html.='window.open(url);
+            	window.close();            
       			});
-      		});
+      		});';
 
-			function deleteTemporaryGoogleDoc()
+$html.='function deleteTemporaryGoogleDoc()
 			{
     		  var url = "/pika/deleteGoogleDoc.php?document_id='.$documentId.'";		                            
               window.open(url);
@@ -116,22 +119,25 @@ $html ='<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs
 			}
 			
 			function getSaveAttachments()
-            {
-              var save_attachments = "0";
-              if($("#saveAttachments").is(":checked")){
-                save_attachments = "1";
-              }
-              return save_attachments;
-            }
+      {
+        var save_attachments = "0";
+        if($("#saveAttachments").is(":checked")){
+          save_attachments = "1";
+        }
+        return save_attachments;
+      }
 	  	</script>	  	
 	  	<iframe src="' . $editDocumentUrl . '" width="860px" height="600px">
 	  	</iframe>
 	  	</br></br>
-       	<input type="button" style="width: 160px; font-weight: bold; font-size: 16px;" id="attachToCase" value="Attach to Case"/> 
-       	<a onClick="deleteTemporaryGoogleDoc(); return false;" href="#">Cancel</a>       	
-		<label for="saveAttachments" style="float:right;">Save Attachments to Case</label>
-		<input style="float:right;" type="checkbox" id="saveAttachments"';        
-$html.=($_REQUEST['save_attachments'])?'checked="checked">':'>';
+     	<input type="button" id="attachToCase" value="Attach to Case"/> 
+     	<input type="button" onClick="deleteTemporaryGoogleDoc(); return false;" id="cancelAttachToCase" value="Cancel"/>';
+if($fromMail)
+{
+  $html.='<label for="saveAttachments" style="float:right;">Save Attachments to Case</label>
+				 <input style="float:right;" type="checkbox" id="saveAttachments"';
+  $html.=($_REQUEST['save_attachments'])?'checked="checked">':'>';
+}
 	   	   
-        echo $html;	   	  
+    echo $html;	   	  
 ?>

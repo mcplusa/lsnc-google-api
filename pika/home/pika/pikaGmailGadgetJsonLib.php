@@ -54,5 +54,7 @@ while ($row = mysql_fetch_assoc($result))
 //Get the callback
 $callback = $_REQUEST['callback'];
 
+
+header('Content-type: application/json');
 echo $callback."(".json_encode(array('cases'=>$cases)).")";
 //echo json_encode(array('cases'=>$cases));

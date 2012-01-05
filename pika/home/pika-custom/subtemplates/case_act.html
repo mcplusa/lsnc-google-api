@@ -1,126 +1,92 @@
-<script type="text/javascript" src="/pika/js/validation.js"></script>
-<script type="text/javascript" src="/pika/js/accordion.js"></script>
+<form action="%%[base_url]%%/dataops.php" name="ea" method="post">
 
-<form action="%%[base_url]%%/dataops.php" name="ea" method="post"onSubmit="return testfields(this)";>
+<h2 class="hdt">Add New Case Notes</h2>
 
-<h2 class="alternate-03">Case Notes</h2>
+<input type="hidden" name="act_id" value="%%[act_id]%%"/>
+<input type="hidden" name="screen" value="act"/>
+<input type="hidden" name="act_url" value="%%[act_url]%%"/>
+<input type="hidden" name="close_act" value="1"/>
+<input type="hidden" name="act_type" value="N"/>
+<input type="hidden" name="completed" value="1"/>
+<input type="hidden" name="case_id" value="%%[case_id]%%"/>
+<input type="hidden" name="action" value="%%[action_name]%%"/>
+<input type="hidden" name="act_time" value="%%[act_time]%%"/>
 
-<input type="hidden" name="act_id" value="%%[act_id]%%" />
-<input type="hidden" name="screen" value="act" />
-<input type="hidden" name="act_url" value="%%[act_url]%%" />
-<input type="hidden" name="close_act" value="1" />
-<input type="hidden" name="act_type" value="N" />
-<input type="hidden" name="completed" value="1" />
-<input type="hidden" name="case_id" value="%%[case_id]%%" />
-<input type="hidden" name="action" value="%%[action_name]%%" />
-<input type="hidden" name="act_time" value="%%[act_time]%%" />
-<input type="hidden" name="category" value="CS" />
-<div id="activity">
+<table summary="" class="nopad">
+	<tr valign="top"> 
+		<td colspan="3">
+			<p>
+			Summary (public):<br/>
+			<textarea name="summary" rows="1" cols="48" tabindex="1" style="height: 1.5em;">%%[summary]%%</textarea><br/>
+			Notes (private):<br/>
+			<textarea name="notes" rows="10" cols="48" tabindex="1">%%[notes]%%</textarea><br/>
+			<img src="%%[base_url]%%/images/point.gif"> <a href="javascript:toggleBox('demodiv',1);">Text Highlighting</a>
+			%%[textFormat]%%
+		</td>
+		<td rowspan="2">
+			<p class="side">
+			Hours:<br/>
+			<input type=text name="hours" value="%%[hours]%%" maxlength="6" tabindex="1"/><br/>
+			Date:<br/>
+			<input type="text" name="act_date" value="%%[act_date]%%" maxlength="10" tabindex="1"/><br/>
+			Type of Activity:<br/>
+			%%[category,category]%%<br/>
+			Funding Source 1:<br/>
+			%%[funding,funding]%%<br/>
+			Funding Source 2:<br/>
+			%%[funding1,funding]%%<br/>
+			Funding Source 3:<br/>
+			%%[funding2,funding]%%<br/>
+			Funding Source 4:<br/>
+			%%[funding3,funding]%%<br/>
+			Staff:<br/>
+			%%[user_id menu]%%<br/>
+			%%[paitime,yes_no,checkbox]%% PAI Time?<br />
+    			%%[senior_cc,yes_no,checkbox]%% Client Contact?<br />
+			%%[senior_ce,yes_no,checkbox]%% Client Education?<br />
+			</p>
+	    </td>
+	</tr>
+</table>
 
-    <dl id="case-notes" class="top">
-
-        <dt><label>Summary | Title</label></dt>
-        <dd><textarea name="summary" rows="" cols="" tabindex="1">%%[summary]%%</textarea></dd>
-
-        <dt><label>Notes</label></dt>
-        <dd class="notes"><textarea name="notes" rows="" cols="" tabindex="1">%%[notes]%%</textarea></dd>
-
-    </dl>
-
-    <dl class="top">
-
-        <dt><label>Staff</label></dt>
-        <dd>%%[user_id menu]%%</dd>
-
-        <dt><label>Date</label></dt>
-        <dd id="work-date"><input id="datepicker" type="text" name="act_date" value="%%[act_date]%%"maxlength="10" tabindex="1"  onkeydown="pika_date(this);" onchange="return checkDate(this);"/></dd>
-
-        <dt><label>Hours Worked</label><dt>
-        <dd id="hours-worked"><input type="text" name="hours" value="%%[hours]%%" maxlength="6" tabindex="1" /></dd>
-        <dt><label>Start Time</label><dt>
-        <dd id="act-time"><input type="text" name="act_time" value="%%[act_time]%%" maxlength="6" tabindex="1" /></dd>
-    </dl>
-
-    <ul id="ts-checks-02">
-        <li>%%[paitime,yes_no,checkbox]%% <label>PAI Time?</label></li>
-        <li>%%[senior_cc,yes_no,checkbox]%% <label>Client Contact?</label></li>
-        <li>%%[senior_ce,yes_no,checkbox]%% <label>Client Education?</label></li>
-    </ul>
-
-    <dl id="funds">
-
-        <dt><label>Funding 01</label></dt>
-        <dd>%%[funding,funding]%%</dd>
-
-        <dt><label>Funding 02</label></dt>
-        <dd>%%[funding1,funding]%%</dd>
-
-        <dt><label>Funding 03</label></dt>
-        <dd>%%[funding2,funding]%%</dd>
-
-        <dt><label>Funding 04</label></dt>
-        <dd>%%[funding3,funding]%%</dd>
-
-    </dl>
-
-    <ul id="save-case-note">
-    <li><input type="submit" value="Save" tabindex="1"/></li>
-    </ul>
-
+<p>
+	<input type="submit" value="Save" tabindex="1" class="save" accesskey="s"/>
+</p>
 </form>
-
-</div> <!-- /#activity -->
 
 <script language="JavaScript" type="text/javascript"><!--
 document.ea.summary.focus();
 //--></script>
 
 %%[begin:notes_header]%%
-
-<div id="case-notes-for">
-
-    <h2>Case Notes ... %%[number]%%</h2>
-
-    %%[end:notes_header]%%
-
-    %%[begin:notes_order]%%
-
-    <ul id="reverse-order">
-    <li>
-    <a href="%%[base_url]%%/case.php?case_id=%%[case_id]%%&screen=act&order=%%[next_order]%%">Reverse order of case notes</a></li>
-    </ul>
-
-    %%[end:notes_order]%%
-    %%[begin:flex_row]%%
-
-    <p>
-
-    	<strong class="case-act-type">%%[type_desc]%% - %%[user_id text source=act_user_id]%%
-        %%[pba_id text source=act_pba_id]%%</strong>
-
-        <br />
-
-        <span>[%%[act_timestamp]%%]&nbsp;&nbsp;[%%[hours]%% hours]<span>&nbsp;&nbsp;[<a href="%%[base_url]%%/activity.php?act_id=%%[act_id]%%&screen=edit&case_id=%%[case_id]%%">Edit this record</a>]
-
-    </p>
-
-        <span class="summary accordion">%%[summary]%%</span>
-        <div>
-        	%%[notes]%%
-        </div>
-
-    <hr />
-
-    %%[end:flex_row]%%
-
-    %%[begin:notes_footer]%%
-
-    <p class="total">
-	Total of <strong>%%[hours_worked]%%</strong> %%[hours_label]%% completed on this case
-    </p>
-
-</div> <!-- /#case-notes-for -->
-
+<h2>Case Notes for %%[number]%%</h2>
+%%[end:notes_header]%%
+%%[begin:notes_order]%%
+<p>
+	<img src="%%[base_url]%%/images/point.gif" alt="Arrow"/>&nbsp;
+	<a href="%%[base_url]%%/case.php?case_id=%%[case_id]%%&screen=act&order=%%[next_order]%%" class="small">Reverse Order of Case Notes</a>
+</p>
+%%[end:notes_order]%%
+%%[begin:flex_row]%%
+<p>
+	<strong>%%[type_desc]%%</strong>&nbsp;-&nbsp;%%[user_id text source=act_user_id]%%%%[pba_id text source=act_pba_id]%%<br/>
+	<span class="small">
+	%%[act_timestamp]%% &nbsp; | &nbsp; %%[hours]%% hours &nbsp; | &nbsp; 
+	<a href="%%[base_url]%%/activity.php?act_id=%%[act_id]%%&screen=edit&case_id=%%[case_id]%%" class="small">Edit this record</a>
+	</span>
+<p>
+<blockquote>
+	<span style="font-family: georgia, times, serif; font-size: 14px;">
+	%%[summary]%%%%[notes]%%
+	</span>
+</blockquote>
+<div style="border-top: 1px solid #999999;"></div>
+<br/>
+%%[end:flex_row]%%
+%%[begin:notes_footer]%%
+<p>
+	Total of <strong>%%[hours_worked]%%</strong> %%[hours_label]%% completed on this case.
+</p>
 %%[end:notes_footer]%%
 
 
@@ -135,35 +101,6 @@ function toggleBox(szDivID, iState) // 1 visible, 0 hidden
    (iState ? "visible" : "hidden");
 }
 // -->
-
-var old_dob_length = 0;
-
-function pika_date(what)
-{
-	if (what.value.length == 2 && old_dob_length == 1)
-	{
-		what.value += '/';
-	}
-
-	if (what.value.length == 5 && old_dob_length == 4)
-	{
-		what.value += '/';
-	}
-
-	old_dob_length = what.value.length;
-}
-
-var ac_autotab_on = 1;
-
-function testfields(what) {
-  if((document.ea.funding.value=="") || (document.ea.act_date.value=="") || (document.ea.user_id.value=="")){
-
-alert("The following fields are required to save this record,Funding code, Staff, and Date");
-return false;
-  }
-  return true;
- }
-
 </script>
 
 
@@ -175,7 +112,7 @@ function no_op()
 	return;
 }
 
-function AddTag(tag)
+function AddTag(tag) 
 {
 	document.ea.notes.value=document.ea.notes.value+tag;
 	document.ea.notes.focus();
@@ -186,9 +123,9 @@ function set_fund(val)
 {
 	if (document.ea.funding.value == "")
 	{
-		document.ea.funding.value = val;
+		document.ea.funding.value = val;	
 	}
-
+	
 	else
 	if (document.ea.funding.value != val)
 	{
@@ -197,9 +134,8 @@ function set_fund(val)
 			document.ea.funding.value = val;
 		}
 	}
-
+	
 	return;
 }
-
 
 //--></script>
