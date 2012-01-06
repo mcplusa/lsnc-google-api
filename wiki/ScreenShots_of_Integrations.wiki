@@ -8,4 +8,4 @@ Below are some screenshots of the currently four integrations between Pika and G
 
 = Details =
 
-<wiki:gadget url="http://lsnc-google-api.googlecode.com/svn/trunk/docs/screenshot.xml?v=2" height="200" border="0" /> 
+<wiki:gadget url="http://lsnc-google-api.googlecode.com/svn/trunk/docs/screenshot.xml?v=3" height="200" border="0" /> 
