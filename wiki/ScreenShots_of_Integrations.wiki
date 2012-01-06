@@ -3,9 +3,6 @@
 
 = Introduction =
 
-Below are some screenshots of the currently four integrations between Pika and Google Apps.
+Below is a link to a Google presentation with some screenshot of the integrations.
 
-
-= Details =
-
-<wiki:gadget url="http://lsnc-google-api.googlecode.com/svn/trunk/docs/screenshot.xml?v=3" height="200" border="0" /> 
+[https://docs.google.com/presentation/pub?id=1UL1mjK-HN0qPSvc5AgND7m1ZmPZoaG30oH3rYeejd3g&start=false&loop=false&delayms=3000]
