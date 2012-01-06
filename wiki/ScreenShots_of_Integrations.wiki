@@ -1,11 +1,11 @@
-#summary One-sentence summary of this page.
+#summary Slideshow of screenshot of integrations.
 #labels Featured
 
 = Introduction =
 
-Below is a Google presentation showing some of the integrations.
+Below are some screenshots of the currently four integrations between Pika and Google Apps.
 
 
 = Details =
 
-<iframe src="https://docs.google.com/presentation/embed?id=1UL1mjK-HN0qPSvc5AgND7m1ZmPZoaG30oH3rYeejd3g&start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<wiki:gadget url="http://lsnc-google-api.googlecode.com/svn/trunk/docs/screenshot.xml?v=2" height="200" border="0" /> 
